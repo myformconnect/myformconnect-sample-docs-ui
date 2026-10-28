@@ -1,0 +1,475 @@
+---
+import Icon from './Icon.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  href?: string;
+  icon?: string;
+  pairedIcon?: boolean;
+  variant?: 'featured' | 'integration' | 'compact';
+  badge?: string;
+  badgeType?: 'active' | 'soon' | 'new' | 'core' | 'popular';
+  actionText?: string;
+}
+
+const {
+  title,
+  description,
+  href,
+  icon = 'code',
+  pairedIcon = false,
+  variant = 'integration',
+  badge,
+  badgeType = 'soon',
+  actionText = 'View guide'
+} = Astro.props;
+
+const isLink = href && href !== '#' && href !== '';
+const Tag = isLink ? 'a' : 'div';
+---
+
+<Tag
+  href={isLink ? href : undefined}
+  class={`mfc-card variant-${variant} ${isLink ? 'is-link' : 'is-preview-card'}`}
+  data-title={title}
+  tabindex={isLink ? undefined : 0}
+  role={isLink ? undefined : 'button'}
+  aria-label={isLink ? `${title} - ${actionText}` : `${title} - preview card`}
+>
+  <div class="mfc-card-top">
+    {pairedIcon ? (
+      <div class="mfc-paired-wrapper" title={`${title} + MyFormCapture`}>
+        <div class="mfc-card-icon-wrapper" data-icon={icon}>
+          <slot name="icon">
+            <Icon name={icon} width="22" height="22" />
+          </slot>
+        </div>
+        <span class="mfc-paired-plus">+</span>
+        <div class="mfc-paired-mfc" title="MyFormCapture">
+          <Icon name="mfc" width="18" height="18" />
+        </div>
+      </div>
+    ) : (
+      <div class="mfc-card-icon-wrapper" data-icon={icon}>
+        <slot name="icon">
+          <Icon name={icon} />
+        </slot>
+      </div>
+    )}
+
+    {badge && (
+      <span class={`mfc-card-badge badge-${badgeType}`}>
+        {badge}
+      </span>
+    )}
+  </div>
+
+  <div class="mfc-card-body">
+    <h3 class="mfc-card-title">{title}</h3>
+    <p class="mfc-card-desc">{description}</p>
+  </div>
+
+  <div class="mfc-card-footer">
+    <span class="mfc-card-btn">
+      <span>{actionText}</span>
+      <Icon name="arrow-right" class="mfc-arrow-icon" width="13" height="13" strokeWidth="2.5" />
+    </span>
+  </div>
+</Tag>
+
+<style>
+  .mfc-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    padding: 1.15rem 1.15rem 1rem;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.2s ease;
+    position: relative;
+    box-sizing: border-box;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .mfc-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -3px rgba(37, 99, 235, 0.09), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border-color: #93c5fd;
+  }
+
+  .mfc-card:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+  }
+
+  /* Variant: Featured Cards */
+  .mfc-card.variant-featured {
+    background: #ffffff;
+    border-color: #e2e8f0;
+    box-shadow: 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  }
+
+  .mfc-card.variant-featured:hover {
+    border-color: #93c5fd;
+    box-shadow: 0 8px 20px -3px rgba(37, 99, 235, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  }
+
+  .mfc-card.variant-featured .mfc-card-icon-wrapper {
+    width: 2.15rem;
+    height: 2.15rem;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+  }
+
+  .mfc-card.variant-featured .mfc-card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  /* Variant: Compact Cards (Deployment, secondary tools) */
+  .mfc-card.variant-compact .mfc-card-icon-wrapper {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.35rem;
+  }
+
+  .mfc-card.variant-compact .mfc-card-title {
+    font-size: 0.92rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .mfc-card.variant-compact .mfc-card-desc {
+    font-size: 14px;
+    line-height: 1.38;
+  }
+
+  .mfc-card.variant-compact .mfc-card-footer {
+    padding-top: 0;
+    margin-top: auto;
+  }
+
+  /* Top header inside card */
+  .mfc-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.25rem;
+    flex-shrink: 0;
+  }
+
+  .mfc-card-icon-wrapper {
+    width: 2.15rem;
+    height: 2.15rem;
+    border-radius: 0.45rem;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  /* Icon sizing inside wrapper (use :global to reliably match child Icon component SVGs and images) */
+  .mfc-card-icon-wrapper :global(svg),
+  .mfc-card-icon-wrapper :global(img) {
+    width: 20px;
+    height: 20px;
+    max-width: 20px;
+    max-height: 20px;
+    display: block;
+    object-fit: contain;
+    /* Default unhovered: unified theme-based blue shade for brand/colored SVGs */
+    filter: grayscale(100%) sepia(85%) hue-rotate(185deg) saturate(380%) brightness(0.92);
+    /* Notice: do NOT transition filter so it never animates through intermediate orange hue angles */
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Feature / stroke icons are natively SVG vector theme blue and should NEVER have a sepia filter */
+  .mfc-card-icon-wrapper[data-icon="domain"] :global(svg),
+  .mfc-card-icon-wrapper[data-icon="sliders"] :global(svg),
+  .mfc-card-icon-wrapper[data-icon="loader"] :global(svg),
+  .mfc-card-icon-wrapper[data-icon="calendar"] :global(svg),
+  .mfc-card-icon-wrapper[data-icon="ai"] :global(svg),
+  .mfc-card-icon-wrapper[data-icon="bot"] :global(svg),
+  .mfc-card-icon-wrapper[data-icon="upload"] :global(svg),
+  .mfc-card-icon-wrapper[data-icon="table"] :global(svg),
+  .mfc-card-icon-wrapper[data-icon="shield"] :global(svg),
+  .mfc-card-icon-wrapper[data-icon="mail"] :global(svg),
+  .mfc-card-icon-wrapper[data-icon="api"] :global(svg),
+  .mfc-card-icon-wrapper[data-icon="webhook"] :global(svg),
+  .mfc-card-icon-wrapper[data-icon="static"] :global(svg),
+  .mfc-card-icon-wrapper[data-icon="rocket"] :global(svg),
+  .mfc-card-icon-wrapper[data-icon="code"] :global(svg) {
+    filter: none !important;
+    color: #2563eb;
+  }
+
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="domain"] :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="sliders"] :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="loader"] :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="calendar"] :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="ai"] :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="bot"] :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="upload"] :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="table"] :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="shield"] :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="mail"] :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="api"] :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="webhook"] :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="static"] :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="rocket"] :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper[data-icon="code"] :global(svg) {
+    color: #1d4ed8;
+  }
+
+  /* Hover state: reveals full vibrant colorful brand colors */
+  .mfc-card:hover .mfc-card-icon-wrapper,
+  .mfc-card:focus-visible .mfc-card-icon-wrapper {
+    background: #ffffff;
+    border-color: #bfdbfe;
+    box-shadow: 0 4px 12px -2px rgba(37, 99, 235, 0.16);
+    transform: scale(1.06);
+  }
+
+  .mfc-card:hover .mfc-card-icon-wrapper :global(svg),
+  .mfc-card:hover .mfc-card-icon-wrapper :global(img),
+  .mfc-card:focus-visible .mfc-card-icon-wrapper :global(svg),
+  .mfc-card:focus-visible .mfc-card-icon-wrapper :global(img) {
+    filter: none;
+    transform: scale(1.06);
+  }
+
+  /* Paired icon: Framework logo + Plus + MyFormCapture brand mark */
+  .mfc-paired-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 0.2rem 0.45rem 0.2rem 0.25rem;
+    border-radius: 0.5rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .mfc-card:hover .mfc-paired-wrapper {
+    border-color: #bfdbfe;
+    background: #eff6ff;
+  }
+
+  .mfc-paired-wrapper .mfc-card-icon-wrapper {
+    width: 2rem;
+    height: 2rem;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .mfc-card:hover .mfc-paired-wrapper .mfc-card-icon-wrapper {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .mfc-paired-plus {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #94a3b8;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .mfc-paired-mfc {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Keep MFC brand logo constant clean brand blue */
+  .mfc-paired-mfc svg,
+  .mfc-paired-mfc img {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    object-fit: contain;
+    display: block;
+    filter: none !important;
+  }
+
+  /* Status Badges */
+  .mfc-card-badge {
+    font-size: 0.675rem;
+    font-weight: 600;
+    padding: 0.15rem 0.45rem;
+    border-radius: 9999px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .badge-active {
+    background: #dbeafe;
+    color: #1d4ed8;
+  }
+
+  .badge-core {
+    background: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #bfdbfe;
+  }
+
+  .badge-popular {
+    background: #fef3c7;
+    color: #b45309;
+  }
+
+  .badge-new {
+    background: #dcfce7;
+    color: #15803d;
+  }
+
+  .badge-soon {
+    background: #f1f5f9;
+    color: #64748b;
+  }
+
+  /* Card Body */
+  .mfc-card-body {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 0.45rem 0 0.35rem;
+    min-height: 0;
+    overflow: hidden;
+  }
+
+  .mfc-card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.2rem 0;
+    line-height: 1.25;
+    flex-shrink: 0;
+  }
+
+  .mfc-card-desc {
+    font-size: 14px;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.38;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Card Footer */
+  .mfc-card-footer {
+    display: flex;
+    align-items: center;
+    padding-top: 0;
+    border-top: none;
+    margin-top: auto;
+    flex-shrink: 0;
+  }
+
+  .mfc-card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.775rem;
+    font-weight: 600;
+    color: #2563eb;
+    padding: 0.25rem 0.65rem;
+    border-radius: 0.35rem;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mfc-arrow-icon {
+    transition: transform 0.2s ease;
+  }
+
+  .mfc-card:hover .mfc-card-btn {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+    gap: 0.55rem;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.22);
+  }
+
+  .mfc-card:hover .mfc-arrow-icon {
+    transform: translateX(2px);
+  }
+</style>
+
+<script>
+  let toastTimer: any;
+
+  function ensureToast() {
+    let toast = document.getElementById('mfcToast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'mfcToast';
+      toast.className = 'mfc-toast';
+      toast.setAttribute('role', 'status');
+      toast.setAttribute('aria-live', 'polite');
+      toast.innerHTML = `
+        <span class="mfc-toast-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>
+        </span>
+        <span id="mfcToastText">Documentation preview — guide coming soon</span>
+      `;
+      document.body.appendChild(toast);
+    }
+    return toast;
+  }
+
+  function showToast(message: string) {
+    const toast = ensureToast();
+    const textEl = toast.querySelector('#mfcToastText');
+    if (textEl) {
+      textEl.textContent = message;
+    }
+    toast.classList.add('is-visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('is-visible');
+    }, 2800);
+  }
+
+  document.querySelectorAll('.is-preview-card').forEach((card) => {
+    const clickHandler = (e: Event) => {
+      e.preventDefault();
+      const title = card.getAttribute('data-title') || 'This guide';
+      showToast(`${title} is part of our upcoming documentation preview release.`);
+    };
+
+    card.addEventListener('click', clickHandler);
+    card.addEventListener('keydown', (e: any) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        clickHandler(e);
+      }
+    });
+  });
+</script>

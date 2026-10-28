@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 260" width="100%" height="auto">
+  <defs>
+    <filter id="menuShadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-opacity="0.08" flood-color="#0f172a"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect x="15" y="15" width="750" height="230" rx="12" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Left Sidebar (Wix Editor Bar) -->
+  <rect x="15" y="15" width="56" height="230" rx="12" fill="#111827"/>
+  <rect x="50" y="15" width="21" height="230" fill="#111827"/> <!-- smooth seam -->
+  
+  <!-- Add Elements Button Highlighted -->
+  <rect x="23" y="27" width="40" height="40" rx="8" fill="#2563eb"/>
+  <path d="M 43 37 L 43 57 M 33 47 L 53 47" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+
+  <!-- Secondary Icon Dots -->
+  <circle cx="43" cy="88" r="4" fill="#4b5563"/>
+  <circle cx="43" cy="116" r="4" fill="#4b5563"/>
+  <circle cx="43" cy="144" r="4" fill="#4b5563"/>
+  <circle cx="43" cy="172" r="4" fill="#4b5563"/>
+
+  <!-- Category Flyout Column (Wix Menu Category) -->
+  <rect x="71" y="15" width="180" height="230" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="88" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Add Elements</text>
+  
+  <text x="88" y="78" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">Text</text>
+  <text x="88" y="108" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">Image</text>
+  <text x="88" y="138" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">Button</text>
+
+  <!-- Embed Category (Active) -->
+  <rect x="71" y="154" width="180" height="34" fill="#eff6ff"/>
+  <text x="88" y="176" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" font-weight="700" fill="#2563eb">Embed</text>
+  <path d="M 235 171 L 241 176 L 235 181" fill="none" stroke="#2563eb" stroke-width="1.8" stroke-linecap="round"/>
+
+  <text x="88" y="214" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" fill="#64748b">Input &amp; Forms</text>
+
+  <!-- Embed Detail Flyout -->
+  <rect x="251" y="15" width="230" height="230" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="272" y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#0f172a">Embed Items</text>
+
+  <!-- Embed code Item Box (Target) -->
+  <rect x="267" y="62" width="200" height="66" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8" filter="url(#menuShadow)"/>
+  <!-- Code Icon -->
+  <rect x="281" y="76" width="36" height="36" rx="6" fill="#2563eb"/>
+  <path d="M 295 91 L 290 95 L 295 99 M 303 91 L 308 95 L 303 99" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <text x="326" y="89" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12.5" font-weight="700" fill="#0f172a">Embed code</text>
+  <text x="326" y="106" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" fill="#64748b">Add HTML or widgets</text>
+
+  <!-- Another item (Embed site) -->
+  <rect x="267" y="140" width="200" height="56" rx="8" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+  <text x="326" y="167" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="600" fill="#334155">Embed site</text>
+  <text x="326" y="184" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" fill="#94a3b8">Display external site</text>
+
+  <!-- Explanation Step Card on Right -->
+  <rect x="500" y="35" width="245" height="185" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="1"/>
+  <text x="520" y="65" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="13" font-weight="700" fill="#1e40af">Steps to Add on Wix:</text>
+  
+  <circle cx="530" cy="95" r="9" fill="#2563eb"/>
+  <text x="530" y="99" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">1</text>
+  <text x="548" y="99" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#334155">Click <tspan font-weight="600">+ Add Elements</tspan></text>
+
+  <circle cx="530" cy="130" r="9" fill="#2563eb"/>
+  <text x="530" y="134" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">2</text>
+  <text x="548" y="134" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#334155">Select <tspan font-weight="600">Embed</tspan></text>
+
+  <circle cx="530" cy="165" r="9" fill="#2563eb"/>
+  <text x="530" y="169" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">3</text>
+  <text x="548" y="169" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11.5" fill="#334155">Drag <tspan font-weight="600" fill="#2563eb">Embed code</tspan> to page</text>
+</svg>

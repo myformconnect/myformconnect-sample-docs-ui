@@ -1,0 +1,117 @@
+---
+// SupportBanner component for MyFormCapture docs
+---
+
+<div class="mfc-support-banner" id="support">
+  <div class="mfc-support-content">
+    <div class="mfc-support-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+      </svg>
+    </div>
+    <div class="mfc-support-text">
+      <h3 class="mfc-support-heading">Need a hand with your integration?</h3>
+      <p class="mfc-support-subtext">Our team is here to assist with custom endpoints, webhook setups, and frontend frameworks.</p>
+    </div>
+  </div>
+  <div class="mfc-support-actions">
+    <button type="button" class="mfc-support-btn" id="mfcContactSupportBtn">
+      Contact Support
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="5" y1="12" x2="19" y2="12"></line>
+        <polyline points="12 5 19 12 12 19"></polyline>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  // Simple non-navigating interaction feedback for prototype
+  const supportBtn = document.getElementById('mfcContactSupportBtn');
+  if (supportBtn) {
+    supportBtn.addEventListener('click', () => {
+      const originalText = supportBtn.innerHTML;
+      supportBtn.textContent = 'Support email: dev@myformcapture.com';
+      supportBtn.style.backgroundColor = '#1e40af';
+      setTimeout(() => {
+        supportBtn.innerHTML = originalText;
+        supportBtn.style.backgroundColor = '';
+      }, 3000);
+    });
+  }
+</script>
+
+<style>
+  .mfc-support-banner {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, #f0f7ff 0%, #f8fafc 100%);
+    border: 1px solid #bfdbfe;
+    border-radius: 0.65rem;
+    margin: 2rem 0 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .mfc-support-banner {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .mfc-support-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .mfc-support-icon {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.5rem;
+    background: #dbeafe;
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .mfc-support-heading {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin: 0 0 0.25rem 0;
+  }
+
+  .mfc-support-subtext {
+    font-size: 0.875rem;
+    color: #475569;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .mfc-support-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #2563eb;
+    color: #ffffff;
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 0.625rem 1.25rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 1px 2px rgba(37, 99, 235, 0.2);
+  }
+
+  .mfc-support-btn:hover {
+    background-color: #1d4ed8;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+  }
+</style>

@@ -1,0 +1,1155 @@
+/* ==========================================================================
+   MyFormCapture Documentation Theme Styles
+   Lightweight, professional design system using plain CSS custom properties
+   ========================================================================== */
+
+/* Inter Variable font — loaded from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* JetBrains Mono — loaded from Google Fonts for all code elements */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+/* Font-face for Inter var if variable font is supported */
+:root {
+  --mfc-font-sans: 'Inter var', 'Inter', ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* JetBrains Mono for all code blocks, file trees, inline code, and kbd shortcuts */
+  --mfc-font-mono: 'JetBrains Mono', monospace;
+}
+
+:root {
+  /* Brand Tokens */
+  --mfc-primary: #2563eb;
+  --mfc-primary-hover: #1d4ed8;
+  --mfc-primary-light: #eff6ff;
+  --mfc-primary-border: #bfdbfe;
+
+  --mfc-navy-dark: #0f172a;
+  --mfc-navy-text: #172554;
+  --mfc-body-text: #334155;
+  --mfc-muted-text: #64748b;
+
+  --mfc-bg-white: #ffffff;
+  --mfc-bg-light: #f8fafc;
+  --mfc-bg-alt: #f1f5f9;
+
+  --mfc-border-subtle: #e2e8f0;
+  --mfc-border-medium: #cbd5e1;
+
+  --mfc-radius-sm: 0.375rem;
+  --mfc-radius-md: 0.625rem;
+  --mfc-radius-lg: 0.75rem;
+
+  --mfc-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --mfc-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --mfc-shadow-card: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+  --mfc-shadow-hover: 0 10px 25px -5px rgba(37, 99, 235, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+
+  /* Starlight overrides */
+  --sl-color-accent-low: #eff6ff;
+  --sl-color-accent: #2563eb;
+  --sl-color-accent-high: #1d4ed8;
+  --sl-color-white: #0f172a;
+  --sl-color-gray-1: #1e293b;
+  --sl-color-gray-2: #334155;
+  --sl-color-gray-3: #64748b;
+  --sl-color-gray-4: #94a3b8;
+  --sl-color-gray-5: #cbd5e1;
+  --sl-color-gray-6: #e2e8f0;
+  --sl-color-black: #ffffff;
+
+  --sl-color-bg: #ffffff;
+  --sl-color-bg-nav: #ffffff;
+  --sl-color-bg-sidebar: #f8fafc;
+  --sl-color-hairline: #e2e8f0;
+  --sl-color-hairline-shade: #e2e8f0;
+  --sl-color-hairline-light: #f1f5f9;
+
+  --sl-nav-height: 4rem;
+  --sl-content-width: 56rem;
+  --sl-sidebar-width: 17.5rem;
+
+  /* Global font scale slightly reduced */
+  --sl-text-2xs: 0.7rem;
+  --sl-text-xs: 0.775rem;
+  --sl-text-sm: 0.825rem;
+  --sl-text-base: 0.925rem;
+  --sl-text-body: 0.925rem;
+  --sl-text-body-sm: 0.825rem;
+}
+
+/* Inter variable font rendering */
+body {
+  font-family: var(--mfc-font-sans);
+  color: var(--mfc-body-text);
+  background-color: var(--mfc-bg-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11'; /* Inter optical variants */
+}
+
+/* Propagate Inter + mono stack to all Starlight elements */
+:root {
+  --sl-font: var(--mfc-font-sans) !important;
+  --sl-font-mono: var(--mfc-font-mono) !important;
+}
+
+/* Inline code in docs (backtick code) */
+.sl-markdown-content code:not(pre code) {
+  font-family: var(--mfc-font-mono) !important;
+  font-size: 0.85em;
+  background: #f1f5f9;
+  color: #0969da;
+  padding: 0.2em 0.45em;
+  border-radius: 0.375rem;
+  border: 1px solid #d0d7de;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+/* ==========================================================================
+   Expressive Code & Markdown Code Blocks (Dark Developer Theme)
+   ========================================================================== */
+:root,
+:root:not([data-theme='dark']),
+:root[data-theme='light'] {
+  --ec-codeBg: #0d1117 !important;
+  --ec-codeFg: #e6edf3 !important;
+  --ec-codeSelBg: #264f78 !important;
+  --ec-brdCol: #30363d !important;
+  --ec-frm-edBg: #0d1117 !important;
+  --ec-frm-trmBg: #0d1117 !important;
+  --ec-frm-edTabBarBg: #161b22 !important;
+  --ec-frm-edActTabBg: #0d1117 !important;
+  --ec-frm-edActTabFg: #f0f6fc !important;
+  --ec-frm-edActTabBrdCol: #30363d !important;
+  --ec-frm-edTabBarBrdCol: #30363d !important;
+  --ec-frm-edTabBarBrdBtmCol: #30363d !important;
+  --ec-frm-trmTtbBg: #161b22 !important;
+  --ec-frm-trmTtbFg: #c9d1d9 !important;
+  --ec-frm-trmTtbBrdBtmCol: #30363d !important;
+  --ec-sbThumbCol: #30363d !important;
+  --ec-sbThumbHoverCol: #8b949e !important;
+}
+
+.expressive-code,
+.expressive-code .frame,
+.expressive-code pre,
+.sl-markdown-content pre {
+  background-color: #0d1117 !important;
+  color: #e6edf3 !important;
+  border-color: #30363d !important;
+  font-family: var(--mfc-font-mono) !important;
+}
+
+.expressive-code figure.frame {
+  background-color: #0d1117 !important;
+  border: 1px solid #30363d !important;
+  border-radius: 0.625rem !important;
+  overflow: hidden !important;
+  margin: 1.5rem 0 !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08) !important;
+}
+
+.expressive-code .frame .header,
+.expressive-code figcaption.header {
+  background-color: #161b22 !important;
+  border-bottom: 1px solid #30363d !important;
+  color: #8b949e !important;
+}
+
+.expressive-code pre {
+  background-color: #0d1117 !important;
+  padding: 1rem 1.25rem !important;
+  max-height: 28rem !important;
+  overflow: auto !important;
+  scrollbar-width: thin;
+  scrollbar-color: #30363d #161b22;
+}
+
+.expressive-code pre > code {
+  background-color: transparent !important;
+  color: #e6edf3 !important;
+  font-family: var(--mfc-font-mono) !important;
+}
+
+.expressive-code .ec-line .code span {
+  color: var(--0, #e6edf3);
+}
+
+.sl-markdown-content pre::-webkit-scrollbar,
+.expressive-code pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.sl-markdown-content pre::-webkit-scrollbar-track,
+.expressive-code pre::-webkit-scrollbar-track {
+  background: #161b22;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.sl-markdown-content pre::-webkit-scrollbar-thumb,
+.expressive-code pre::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 4px;
+  border: 2px solid #161b22;
+}
+
+.sl-markdown-content pre::-webkit-scrollbar-thumb:hover,
+.expressive-code pre::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* ==========================================================================
+   Starlight Layout Customizations
+   ========================================================================== */
+
+/* Fix header container height & border */
+header.header {
+  height: var(--sl-nav-height) !important;
+  background-color: #ffffff !important;
+  border-bottom: 1px solid var(--mfc-border-subtle) !important;
+  padding: 0 !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* Sidebar styling */
+.sidebar-pane {
+  background-color: var(--mfc-bg-light) !important;
+  border-inline-end: 1px solid var(--mfc-border-subtle) !important;
+}
+
+.sidebar-content {
+  padding-top: 1.5rem !important;
+}
+
+/* Sidebar group headers */
+.sidebar-content .top-level > li > details > summary,
+.sidebar-content .top-level > li > .group-label {
+  font-size: clamp(0.725rem, 0.7rem + 0.08vw, 0.775rem) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--mfc-muted-text) !important;
+  margin-bottom: 0.45rem !important;
+}
+
+/* Sidebar navigation links */
+.sidebar-content a {
+  font-size: clamp(0.815rem, 0.8rem + 0.1vw, 0.865rem) !important;
+  line-height: 1.5 !important;
+  color: #475569 !important;
+  padding: 0.45rem 0.75rem !important;
+  border-radius: var(--mfc-radius-sm) !important;
+  transition: all 0.15s ease !important;
+}
+
+.sidebar-content a:hover {
+  color: var(--mfc-navy-dark) !important;
+  background-color: #e2e8f0 !important;
+}
+
+/* Active sidebar link highlighted in blue */
+.sidebar-content a[aria-current="page"],
+.sidebar-content a.is-current {
+  color: var(--mfc-primary) !important;
+  background-color: #eff6ff !important;
+  font-weight: 600 !important;
+  border-inline-start: 3px solid var(--mfc-primary) !important;
+}
+
+/* Badges in sidebar */
+.sidebar-content .sl-badge {
+  font-size: 0.72rem !important;
+  padding: 0.15rem 0.45rem !important;
+  border-radius: 9999px !important;
+}
+
+/* Content area adjustments */
+.main-frame {
+  background-color: #ffffff;
+}
+
+/* Pages without TOC (like Homepage): ensure pane stretches full width */
+html:not([data-has-toc]) .main-pane {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100% !important;
+}
+
+html:not([data-has-toc]):not(:has(.mfc-hero-section)) .sl-container {
+  max-width: var(--sl-content-width, 56rem) !important;
+  margin-inline: auto !important;
+  width: 100% !important;
+}
+
+/* Homepage Hero: full remaining width, no outer padding, flush from top navbar */
+body:has(.mfc-hero-section) .main-pane,
+html body:has(.mfc-hero-section) .main-pane {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body:has(.mfc-hero-section) main,
+html body:has(.mfc-hero-section) main,
+main:has(.mfc-hero-section) {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Hide default duplicate title container on homepage/welcome page */
+body:has(.mfc-hero-section) main > .content-panel:first-of-type,
+html body:has(.mfc-hero-section) main > .content-panel:first-of-type,
+main:has(.mfc-hero-section) > .content-panel:first-of-type {
+  display: none !important;
+}
+
+/* Homepage content-panel: zero padding so hero stretches full remaining width edge-to-edge */
+body:has(.mfc-hero-section) main > .content-panel,
+html body:has(.mfc-hero-section) main > .content-panel,
+main:has(.mfc-hero-section) > .content-panel {
+  padding: 0 !important;
+  margin: 0 !important;
+  border-top: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+body:has(.mfc-hero-section) .sl-container,
+html body:has(.mfc-hero-section) .sl-container,
+main:has(.mfc-hero-section) .sl-container {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body:has(.mfc-hero-section) .sl-markdown-content,
+html body:has(.mfc-hero-section) .sl-markdown-content,
+main:has(.mfc-hero-section) .sl-markdown-content {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Sections below the hero retain proper max-width and padding so they align comfortably */
+body:has(.mfc-hero-section) .mfc-section,
+body:has(.mfc-hero-section) .mfc-support-banner,
+html body:has(.mfc-hero-section) .mfc-section,
+html body:has(.mfc-hero-section) .mfc-support-banner,
+main:has(.mfc-hero-section) .mfc-section,
+main:has(.mfc-hero-section) .mfc-support-banner {
+  max-width: 76rem !important;
+  margin-inline: auto !important;
+  padding-inline: 2.5rem !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 1024px) {
+  body:has(.mfc-hero-section) .mfc-section,
+  body:has(.mfc-hero-section) .mfc-support-banner,
+  html body:has(.mfc-hero-section) .mfc-section,
+  html body:has(.mfc-hero-section) .mfc-support-banner,
+  main:has(.mfc-hero-section) .mfc-section,
+  main:has(.mfc-hero-section) .mfc-support-banner {
+    padding-inline: 3rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  body:has(.mfc-hero-section) .mfc-section,
+  body:has(.mfc-hero-section) .mfc-support-banner,
+  html body:has(.mfc-hero-section) .mfc-section,
+  html body:has(.mfc-hero-section) .mfc-support-banner,
+  main:has(.mfc-hero-section) .mfc-section,
+  main:has(.mfc-hero-section) .mfc-support-banner {
+    padding-inline: 1.25rem !important;
+  }
+}
+
+/* Base content-panel padding for regular guide pages (only when NOT on hero page) */
+html:not(:has(.mfc-hero-section)) .content-panel {
+  padding: 2.25rem 2rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 1024px) {
+  html:not(:has(.mfc-hero-section)) .content-panel {
+    padding: 2.5rem 3rem !important;
+  }
+  html body:has(.mfc-hero-section) main > .content-panel {
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  html:not(:has(.mfc-hero-section)) .content-panel {
+    padding: 1.5rem 1.25rem !important;
+  }
+  html body:has(.mfc-hero-section) main > .content-panel {
+    padding: 0 !important;
+  }
+}
+
+/* ==========================================================================
+   Documentation Pages with Table of Contents ("On this page" Right Sidebar)
+   ========================================================================== */
+
+@media (min-width: 60rem) {
+  /* Flex container row layout */
+  html[data-has-toc] .lg\:sl-flex {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  /* Right Sidebar ("On this page") always visible on the right */
+  html[data-has-toc] .right-sidebar-container {
+    display: block !important;
+    order: 2 !important;
+    width: 16rem !important;
+    min-width: 16rem !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+  }
+
+  html[data-has-toc] .right-sidebar {
+    display: block !important;
+    position: fixed !important;
+    top: var(--sl-nav-height) !important;
+    right: 0 !important;
+    width: 16rem !important;
+    height: calc(100vh - var(--sl-nav-height)) !important;
+    padding: 2rem 1.25rem 2.5rem 1.5rem !important;
+    border-inline-start: 1px solid var(--mfc-border-subtle) !important;
+    background: #ffffff !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+    z-index: 10 !important;
+  }
+
+  html[data-has-toc] .right-sidebar-panel {
+    display: block !important;
+    padding: 0 !important;
+  }
+
+  html[data-has-toc] .right-sidebar-panel .sl-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Main content pane sized beside right sidebar */
+  html[data-has-toc] .main-pane {
+    order: 1 !important;
+    flex: 1 1 auto !important;
+    width: calc(100% - 16rem) !important;
+    max-width: calc(100% - 16rem) !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  html[data-has-toc] .main-pane .content-panel:first-of-type {
+    padding: 2.25rem 2.5rem 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  html[data-has-toc] .main-pane .content-panel + .content-panel {
+    border-top: none !important;
+    padding: 0 2.5rem 3.5rem !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  html[data-has-toc] .main-pane .sl-container {
+    max-width: 50rem !important;
+    margin-inline: 0 auto !important;
+    width: 100% !important;
+  }
+}
+
+/* "On this page" TOC Heading and Navigation Links */
+.right-sidebar-panel h2#starlight__on-this-page {
+  font-size: 0.775rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: #64748b !important;
+  margin: 0 0 0.85rem 0 !important;
+  padding: 0 !important;
+  border-bottom: none !important;
+}
+
+.right-sidebar-panel ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.2rem !important;
+  border-inline-start: 1.5px solid #e2e8f0 !important;
+}
+
+.right-sidebar-panel li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.right-sidebar-panel a {
+  display: block !important;
+  font-size: 0.825rem !important;
+  line-height: 1.45 !important;
+  color: #64748b !important;
+  text-decoration: none !important;
+  padding: 0.35rem 0.75rem !important;
+  border-inline-start: 2px solid transparent !important;
+  margin-inline-start: -1.5px !important;
+  transition: all 0.15s ease !important;
+  border-radius: 0 0.375rem 0.375rem 0 !important;
+}
+
+.right-sidebar-panel a:hover {
+  color: #0f172a !important;
+  background-color: #f8fafc !important;
+}
+
+/* Active heading state updated dynamically on scroll */
+.right-sidebar-panel a[aria-current="true"] {
+  color: #2563eb !important;
+  font-weight: 600 !important;
+  border-inline-start: 2px solid #2563eb !important;
+  background-color: #eff6ff !important;
+}
+
+.right-sidebar-panel a[aria-current="true"] span {
+  color: #2563eb !important;
+}
+
+/* Normal documentation body typography (slightly reduced for clean reading) */
+.sl-markdown-content {
+  font-size: clamp(0.925rem, 0.9rem + 0.1vw, 0.965rem);
+  line-height: 1.65;
+  color: var(--mfc-body-text);
+  width: 100%;
+}
+
+.sl-markdown-content h1 {
+  font-size: clamp(1.8rem, 1.65rem + 0.5vw, 2.2rem);
+  font-weight: 800;
+  color: var(--mfc-navy-dark);
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  margin-bottom: 0.85rem;
+}
+
+.sl-markdown-content h2:not(.mfc-section-title) {
+  font-size: clamp(1.22rem, 1.15rem + 0.3vw, 1.45rem);
+  font-weight: 700;
+  color: var(--mfc-navy-dark);
+  letter-spacing: -0.02em;
+  margin-top: 2.25rem;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid var(--mfc-border-subtle);
+  padding-bottom: 0.45rem;
+}
+
+.sl-markdown-content h3 {
+  font-size: clamp(1rem, 0.95rem + 0.15vw, 1.125rem);
+  font-weight: 600;
+  color: var(--mfc-navy-dark);
+  margin-top: 1.75rem;
+  margin-bottom: 0.55rem;
+}
+
+.sl-markdown-content p {
+  margin-bottom: 1.25rem;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.sl-markdown-content ul,
+.sl-markdown-content ol {
+  font-size: inherit;
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+.sl-markdown-content li {
+  margin-bottom: 0.4rem;
+}
+
+/* ==========================================================================
+   Homepage Specific Components & Sections
+   ========================================================================== */
+
+/* Hero Section - Vibrant, premium blue gradient hero, full-width starting flush from the top without outer padding */
+.mfc-hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3.5rem 1.5rem 2.5rem;
+  background: 
+    radial-gradient(ellipse 65% 75% at 84% 18%, rgba(180, 215, 255, 0.88) 0%, rgba(204, 228, 255, 0.55) 35%, rgba(224, 242, 254, 0.2) 60%, transparent 80%),
+    radial-gradient(ellipse 45% 55% at 16% 12%, rgba(224, 242, 254, 0.45) 0%, rgba(239, 246, 255, 0.18) 45%, transparent 70%),
+    linear-gradient(180deg, #f2f7ff 0%, #f9fbff 40%, #ffffff 100%);
+  border: none;
+  border-radius: 0;
+  margin: 0 0 2rem 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.mfc-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #2563eb;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 0.24rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 1px 2px rgba(37, 99, 235, 0.05);
+}
+
+.mfc-hero-title {
+  font-size: clamp(1.85rem, 1.65rem + 1vw, 2.3rem);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.035em;
+  line-height: 1.18;
+  max-width: 44rem;
+  margin: 0 auto 0.45rem auto;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .mfc-hero-section {
+    padding: 2rem 1.25rem 1.5rem;
+  }
+  .mfc-hero-title {
+    font-size: 1.55rem;
+  }
+}
+
+.mfc-hero-desc {
+  font-size: clamp(0.9rem, 0.88rem + 0.1vw, 0.975rem);
+  color: #475569;
+  max-width: 38rem;
+  margin: 0 auto !important;
+  padding: 0;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Eliminate extra markdown paragraph margins inside hero */
+.mfc-hero-section p {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Section Containers */
+.mfc-section {
+  margin: 2.25rem 0;
+  width: 100%;
+}
+
+.mfc-section-header {
+  margin-bottom: 1.15rem;
+}
+
+.mfc-section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.35rem;
+}
+
+.mfc-section-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.4rem;
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #dbeafe;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mfc-section-icon svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  margin: 0;
+}
+
+.mfc-section-title,
+.mfc-section-title-wrap .mfc-section-title,
+.sl-markdown-content .mfc-section-title-wrap h2,
+.sl-markdown-content .mfc-section-title-wrap .mfc-section-title {
+  font-size: 1.18rem !important;
+  font-weight: 700 !important;
+  color: var(--mfc-navy-dark) !important;
+  letter-spacing: -0.02em !important;
+  margin: 0 !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 0 !important;
+  padding-bottom: 0 !important;
+  border: none !important;
+  border-bottom: none !important;
+  line-height: 1.75rem !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+
+.mfc-section-subtitle {
+  font-size: 0.825rem;
+  color: var(--mfc-muted-text);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.mfc-clean-header {
+  margin-bottom: 0.85rem;
+}
+
+.mfc-clean-header .mfc-section-title,
+.sl-markdown-content .mfc-clean-header .mfc-section-title {
+  font-size: 1.22rem !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  letter-spacing: -0.02em !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-bottom: none !important;
+  line-height: 1.75rem !important;
+}
+
+/* Getting Started Horizontal Card Grid */
+.mfc-grid-getting-started {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+}
+
+@media (max-width: 960px) {
+  .mfc-grid-getting-started {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .mfc-grid-getting-started {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Card Grids */
+/* Universal margin reset on all card grid items to prevent markdown sibling margin-top misalignment */
+.mfc-grid-getting-started > *,
+.mfc-grid-4 > *,
+.mfc-grid-3 > *,
+.mfc-grid-compact > *,
+.mfc-card,
+.sl-markdown-content .mfc-card,
+.sl-markdown-content .mfc-grid-getting-started > *,
+.sl-markdown-content .mfc-grid-4 > *,
+.sl-markdown-content .mfc-grid-3 > *,
+.sl-markdown-content .mfc-grid-compact > * {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* 4-column grid (Getting Started, Website Builders) */
+.mfc-grid-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+@media (min-width: 580px) {
+  .mfc-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 980px) {
+  .mfc-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 3-column grid (Features, CMS, Frameworks) */
+.mfc-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+@media (min-width: 600px) {
+  .mfc-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .mfc-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Compact grid (Tools, Deployment, AI) */
+.mfc-grid-compact {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+@media (min-width: 540px) {
+  .mfc-grid-compact {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 860px) {
+  .mfc-grid-compact {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Special Section J Container: AI & No-backend Forms */
+.mfc-ai-section-box {
+  background: linear-gradient(180deg, #f0f7ff 0%, #fbfdff 100%);
+  border: 1px solid #bfdbfe;
+  border-radius: 0.875rem;
+  padding: 1.75rem 1.5rem;
+  margin: 3rem 0;
+  box-shadow: 0 4px 20px -2px rgba(37, 99, 235, 0.05);
+}
+
+.mfc-ai-section-box .mfc-section-header {
+  margin-bottom: 1.25rem;
+}
+
+/* Preview Toast for Prototype Cards */
+.mfc-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #0f172a;
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+}
+
+.mfc-toast.is-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.mfc-toast-icon {
+  display: flex;
+  align-items: center;
+  color: #60a5fa;
+}
+
+/* Featured Integration Preview Box - Decent Size */
+.mfc-preview-box {
+  background: #f8fafc;
+  border: 1px solid var(--mfc-border-subtle);
+  border-radius: var(--mfc-radius-md);
+  padding: 1.15rem;
+  margin-top: 0.875rem;
+}
+
+.mfc-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.875rem;
+}
+
+.mfc-preview-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: #166534;
+  background: #dcfce7;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  border: 1px solid #bbf7d0;
+}
+
+.mfc-preview-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+/* Documentation Categories Grid */
+.mfc-categories-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 600px) {
+  .mfc-categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .mfc-categories-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.mfc-category-item {
+  display: flex;
+  flex-direction: column;
+  padding: 0.85rem 1rem;
+  background: #ffffff;
+  border: 1px solid var(--mfc-border-subtle);
+  border-radius: var(--mfc-radius-md);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.mfc-category-item:hover {
+  border-color: #93c5fd;
+  transform: translateY(-2px);
+}
+
+.mfc-category-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--mfc-navy-dark);
+  margin: 0 0 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.mfc-category-desc {
+  font-size: 0.775rem;
+  color: var(--mfc-muted-text);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ==========================================================================
+   Guide Page Components (HTML & React Guides)
+   ========================================================================== */
+
+/* Back to documentation link */
+.mfc-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--mfc-muted-text);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--mfc-radius-sm);
+  background: var(--mfc-bg-light);
+  border: 1px solid var(--mfc-border-subtle);
+  transition: all 0.15s ease;
+}
+
+.mfc-back-link:hover {
+  color: var(--mfc-primary);
+  border-color: var(--mfc-primary-border);
+  background: var(--mfc-primary-light);
+}
+
+/* Callout / Note Boxes */
+.mfc-callout {
+  display: flex;
+  gap: 0.875rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--mfc-radius-md);
+  margin: 1.5rem 0;
+  border: 1px solid;
+  font-size: clamp(0.975rem, 0.95rem + 0.12vw, 1.025rem);
+  line-height: 1.65;
+}
+
+.mfc-callout-info {
+  background-color: #f0f7ff;
+  border-color: #bfdbfe;
+  color: #1e40af;
+}
+
+.mfc-callout-warning {
+  background-color: #fffbeb;
+  border-color: #fde68a;
+  color: #92400e;
+}
+
+.mfc-callout-icon {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.mfc-callout-body strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  font-size: 1.05rem;
+}
+
+/* Visual File Tree */
+.mfc-file-tree {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: var(--mfc-radius-md);
+  padding: 1.125rem 1.35rem;
+  font-family: var(--mfc-font-mono);
+  font-size: clamp(0.875rem, 0.85rem + 0.12vw, 0.925rem);
+  line-height: 1.65;
+  margin: 1.5rem 0;
+  border: 1px solid #1e293b;
+}
+
+.mfc-file-tree-header {
+  font-size: 0.775rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #334155;
+}
+
+/* Step badges */
+.mfc-step-item {
+  display: flex;
+  gap: 1.125rem;
+  margin-bottom: 1.75rem;
+}
+
+.mfc-step-num {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--mfc-primary);
+  color: #ffffff;
+  font-size: 0.925rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.mfc-step-content {
+  flex: 1;
+}
+
+.mfc-step-title {
+  font-size: clamp(1.1rem, 1.05rem + 0.2vw, 1.25rem);
+  font-weight: 700;
+  color: var(--mfc-navy-dark);
+  margin: 0 0 0.35rem 0;
+}
+
+.mfc-step-content p {
+  font-size: clamp(0.975rem, 0.95rem + 0.12vw, 1.025rem);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Documentation Figures, Previews & Images */
+.mfc-doc-figure {
+  margin: 1.75rem 0;
+  border: 1px solid var(--mfc-border-subtle);
+  border-radius: var(--mfc-radius-lg);
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+}
+
+.mfc-doc-figure img,
+.mfc-doc-figure svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.mfc-doc-figure.is-centered {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mfc-doc-caption {
+  padding: 0.65rem 1rem;
+  font-size: 0.825rem;
+  font-weight: 500;
+  color: var(--mfc-muted-text);
+  background: #f8fafc;
+  border-top: 1px solid var(--mfc-border-subtle);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mfc-doc-caption svg {
+  width: 14px;
+  height: 14px;
+  color: var(--mfc-primary);
+  flex-shrink: 0;
+}
+
+/* Hide previous/next doc pagination buttons at the bottom */
+.pagination-links,
+footer .pagination-links,
+[class*='pagination-links'] {
+  display: none !important;
+}
+

@@ -1,0 +1,548 @@
+---
+title: Welcome to MyFormCapture Docs
+description: Everything you need to integrate MyFormCapture into your website, apps, and forms.
+template: doc
+tableOfContents: false
+---
+
+import IntegrationCard from '../../components/IntegrationCard.astro';
+import CodeExample from '../../components/CodeExample.astro';
+import SupportBanner from '../../components/SupportBanner.astro';
+import DocSearch from '../../components/DocSearch.astro';
+
+{/* Section A: Documentation Hero */}
+<div class="mfc-hero-section">
+  <span class="mfc-eyebrow">DOCUMENTATION & GUIDES</span>
+  <h1 class="mfc-hero-title">Connect & Automate Form Submissions</h1>
+  <p class="mfc-hero-desc">Guides to integrate forms with your website, platform, or AI workflow.</p>
+  <DocSearch />
+</div>
+
+{/* Section B: Getting Started */}
+<section class="mfc-section" id="getting-started">
+  <div class="mfc-section-header mfc-clean-header">
+    <h2 class="mfc-section-title">Getting Started</h2>
+  </div>
+
+  <div class="mfc-grid-getting-started not-content">
+    <IntegrationCard
+      variant="featured"
+      title="Integrating HTML forms"
+      description="Integrating HTML forms in website, platforms."
+      icon="html"
+      href="/guides/html-form/"
+      actionText="View guide"
+    />
+    <IntegrationCard
+      variant="featured"
+      title="Using React SDK"
+      description="Using React SDK forms with your React API."
+      icon="react"
+      href="/guides/react/"
+      actionText="View guide"
+    />
+    <IntegrationCard
+      variant="featured"
+      title="API Quickstart"
+      description="API quickstart for direct submission & AI documentation."
+      icon="api"
+      href="/#api-quickstart"
+      actionText="View guide"
+    />
+    <IntegrationCard
+      variant="featured"
+      title="AI Webhooks"
+      description="Automate submission payloads to AI agents and webhooks."
+      icon="webhook"
+      href="/#webhooks"
+      actionText="View guide"
+    />
+  </div>
+</section>
+
+{/* Section C: Features */}
+<section class="mfc-section" id="features">
+  <div class="mfc-section-header">
+    <div class="mfc-section-title-wrap">
+      <div class="mfc-section-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="21" x2="4" y2="14"></line>
+          <line x1="4" y1="10" x2="4" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="12"></line>
+          <line x1="12" y1="8" x2="12" y2="3"></line>
+          <line x1="20" y1="21" x2="20" y2="16"></line>
+          <line x1="20" y1="12" x2="20" y2="3"></line>
+          <line x1="1" y1="14" x2="7" y2="14"></line>
+          <line x1="9" y1="8" x2="15" y2="8"></line>
+          <line x1="17" y1="16" x2="23" y2="16"></line>
+        </svg>
+      </div>
+      <h2 class="mfc-section-title">Features</h2>
+    </div>
+    <p class="mfc-section-subtitle">Core capabilities and configurations built into every MyFormCapture endpoint.</p>
+  </div>
+
+  <div class="mfc-grid-3 not-content">
+    <IntegrationCard
+      title="Domain Configuration"
+      description="Restrict submissions to approved domains and configure CORS security."
+      icon="domain"
+    />
+    <IntegrationCard
+      title="Form Configuration"
+      description="Configure custom thank-you redirects, reply-to headers, and field rules."
+      icon="sliders"
+    />
+    <IntegrationCard
+      title="Loader.js"
+      description="Drop a lightweight script tag onto any static page to render popup forms."
+      icon="loader"
+    />
+    <IntegrationCard
+      title="Booking Widget"
+      description="Embed calendar time slots and scheduling directly inside your forms."
+      icon="calendar"
+    />
+    <IntegrationCard
+      title="Forms with File Upload"
+      description="Securely capture resumes, PDFs, and attachments up to 25MB with scanning."
+      icon="upload"
+    />
+    <IntegrationCard
+      title="Tables & Choice Matrices"
+      description="Collect structured grid responses, surveys, and multi-option rating scales."
+      icon="table"
+    />
+    <IntegrationCard
+      title="Spam & CAPTCHA"
+      description="Stop bot submissions with silent honeypot fields and Cloudflare Turnstile."
+      icon="shield"
+    />
+    <IntegrationCard
+      title="Autoresponder Emails"
+      description="Send personalized confirmation emails with template tags upon submission."
+      icon="mail"
+    />
+  </div>
+</section>
+
+{/* Section D: CMS Platforms */}
+<section class="mfc-section" id="cms-platforms">
+  <div class="mfc-section-header">
+    <div class="mfc-section-title-wrap">
+      <div class="mfc-section-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+          <polyline points="2 17 12 22 22 17"></polyline>
+          <polyline points="2 12 12 17 22 12"></polyline>
+        </svg>
+      </div>
+      <h2 class="mfc-section-title">CMS Platforms</h2>
+    </div>
+    <p class="mfc-section-subtitle">Connect traditional and headless content management systems.</p>
+  </div>
+
+  <div class="mfc-grid-3 not-content">
+    <IntegrationCard
+      title="WordPress"
+      description="Integrate Contact Form 7, Elementor Forms, Gravity Forms, or custom theme templates."
+      icon="wordpress"
+    />
+    <IntegrationCard
+      title="Drupal"
+      description="Connect Drupal webforms or custom module submissions to your endpoint."
+      icon="drupal"
+    />
+    <IntegrationCard
+      title="Joomla"
+      description="Send contact form submissions directly from Joomla core or extension forms."
+      icon="joomla"
+    />
+    <IntegrationCard
+      title="Ghost"
+      description="Capture newsletter signups and contact requests from your Ghost publication."
+      icon="ghost"
+    />
+    <IntegrationCard
+      title="PHP Sites"
+      description="Submit directly from vanilla PHP templates or Laravel controller actions."
+      icon="php"
+    />
+  </div>
+</section>
+
+{/* Section E: Website Builders */}
+<section class="mfc-section" id="website-builders">
+  <div class="mfc-section-header">
+    <div class="mfc-section-title-wrap">
+      <div class="mfc-section-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+          <line x1="3" y1="9" x2="21" y2="9"></line>
+          <line x1="9" y1="21" x2="9" y2="9"></line>
+        </svg>
+      </div>
+      <h2 class="mfc-section-title">Website Builders</h2>
+    </div>
+    <p class="mfc-section-subtitle">Zero-backend form capture for visual page builders.</p>
+  </div>
+
+  <div class="mfc-grid-4 not-content">
+    <IntegrationCard
+      title="Wix"
+      description="Embed responsive contact forms and interactive Google Calendar booking widgets in minutes."
+      href="/guides/wix/"
+      icon="wix"
+      badge="Guide"
+      badgeType="active"
+      actionText="Explore guide"
+    />
+    <IntegrationCard
+      title="Squarespace"
+      description="Route Squarespace form blocks and newsletter forms through your secure endpoint."
+      icon="squarespace"
+    />
+    <IntegrationCard
+      title="Webflow"
+      description="Native Webflow form actions with custom redirects and automated webhook triggers."
+      icon="webflow"
+    />
+    <IntegrationCard
+      title="Framer Sites"
+      description="Link Framer interactive forms with instant submission handling and spam defense."
+      icon="framer"
+    />
+  </div>
+</section>
+
+{/* Section F: Frameworks */}
+<section class="mfc-section" id="frameworks">
+  <div class="mfc-section-header">
+    <div class="mfc-section-title-wrap">
+      <div class="mfc-section-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+      </div>
+      <h2 class="mfc-section-title">Frameworks</h2>
+    </div>
+    <p class="mfc-section-subtitle">Developer integrations featuring framework + MyFormCapture paired architecture.</p>
+  </div>
+
+  <div class="mfc-grid-3 not-content">
+    <IntegrationCard
+      title="React"
+      description="Hooks, controlled states, and clean async POST handler for Single Page Applications."
+      href="/guides/react/"
+      icon="react"
+      pairedIcon={true}
+      badge="Guide"
+      badgeType="active"
+      actionText="Explore guide"
+    />
+    <IntegrationCard
+      title="Next.js"
+      description="Server actions, API routes, or client-side form submissions with full TypeScript safety."
+      icon="nextjs"
+      pairedIcon={true}
+    />
+    <IntegrationCard
+      title="Vue.js"
+      description="Composition API reactive state bindings and automated form submission triggers."
+      icon="vue"
+      pairedIcon={true}
+    />
+    <IntegrationCard
+      title="Nuxt"
+      description="Universal SSR and static form posting with built-in nitro endpoint forwarders."
+      icon="nuxt"
+    />
+    <IntegrationCard
+      title="Svelte / SvelteKit"
+      description="Lightweight reactive form stores and progressive enhancement form actions."
+      icon="svelte"
+    />
+    <IntegrationCard
+      title="Angular"
+      description="Reactive forms module integration with typed submission state and validators."
+      icon="angular"
+    />
+    <IntegrationCard
+      title="Remix"
+      description="Progressive form submissions using native HTML form actions and action functions."
+      icon="remix"
+    />
+    <IntegrationCard
+      title="Astro"
+      description="Zero-JS island forms or client directives for hybrid static and SSR deployments."
+      icon="astro"
+      pairedIcon={true}
+    />
+    <IntegrationCard
+      title="Hugo"
+      description="Fast static site generation with clean HTML form endpoints and zero client runtime."
+      icon="hugo"
+    />
+    <IntegrationCard
+      title="Jekyll"
+      description="Markdown and Liquid template forms with native POST actions to MFC endpoints."
+      icon="jekyll"
+    />
+  </div>
+</section>
+
+{/* Section G: Tools — No-code */}
+<section class="mfc-section" id="no-code-tools">
+  <div class="mfc-section-header">
+    <div class="mfc-section-title-wrap">
+      <div class="mfc-section-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19.439 7.85c0-1.57-1.28-2.85-2.85-2.85h-1.5a2.85 2.85 0 0 0-5.7 0H7.89c-1.57 0-2.85 1.28-2.85 2.85v1.5a2.85 2.85 0 0 0 0 5.7v1.5c0 1.57 1.28 2.85 2.85 2.85h1.5a2.85 2.85 0 0 0 5.7 0h1.5c1.57 0 2.85-1.28 2.85-2.85v-1.5a2.85 2.85 0 0 0 0-5.7v-1.5z"></path>
+        </svg>
+      </div>
+      <h2 class="mfc-section-title">Tools — No-code</h2>
+    </div>
+    <p class="mfc-section-subtitle">Integrate with modern no-code databases and site creators.</p>
+  </div>
+
+  <div class="mfc-grid-compact not-content">
+    <IntegrationCard
+      variant="compact"
+      title="Carrd"
+      description="Simple one-page site forms with native action URL forwarding."
+      icon="carrd"
+    />
+    <IntegrationCard
+      variant="compact"
+      title="Airtable"
+      description="Sync form submissions straight into Airtable bases and relational records."
+      icon="airtable"
+    />
+    <IntegrationCard
+      variant="compact"
+      title="Bubble"
+      description="Trigger visual backend workflows or sync API connector calls on submission."
+      icon="bubble"
+    />
+  </div>
+</section>
+
+{/* Section H: Tools — Code & Automation */}
+<section class="mfc-section" id="automation-tools">
+  <div class="mfc-section-header">
+    <div class="mfc-section-title-wrap">
+      <div class="mfc-section-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+      </div>
+      <h2 class="mfc-section-title">Tools — Code & Automation</h2>
+    </div>
+    <p class="mfc-section-subtitle">Automate notifications, spreadsheets, and CRM updates across platforms.</p>
+  </div>
+
+  <div class="mfc-grid-compact not-content">
+    <IntegrationCard
+      variant="compact"
+      title="Custom Webhooks"
+      description="Deliver signed JSON payloads in real-time to any HTTPS endpoint with retry logic."
+      icon="webhook"
+    />
+    <IntegrationCard
+      variant="compact"
+      title="Zapier"
+      description="Connect submissions to 5,000+ apps including Google Sheets, HubSpot, and Salesforce."
+      icon="zapier"
+    />
+    <IntegrationCard
+      variant="compact"
+      title="Make.com"
+      description="Build complex multi-step automated routing scenarios from form trigger events."
+      icon="make"
+    />
+    <IntegrationCard
+      variant="compact"
+      title="Slack"
+      description="Receive instant team channel alerts with complete submission details."
+      icon="slack"
+    />
+    <IntegrationCard
+      variant="compact"
+      title="Webflow + Kit.com"
+      description="Combine Webflow lead capture with automated Kit (ConvertKit) email funnels."
+      icon="webflow-kit"
+    />
+  </div>
+</section>
+
+{/* Section I: Deployment */}
+<section class="mfc-section" id="deployment">
+  <div class="mfc-section-header">
+    <div class="mfc-section-title-wrap">
+      <div class="mfc-section-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"></path>
+          <polyline points="12 12 12 16"></polyline>
+          <polyline points="10 14 12 12 14 14"></polyline>
+        </svg>
+      </div>
+      <h2 class="mfc-section-title">Deployment</h2>
+    </div>
+    <p class="mfc-section-subtitle">Deploy and host your forms anywhere with static and serverless cloud edge providers.</p>
+  </div>
+
+  <div class="mfc-grid-compact not-content">
+    <IntegrationCard
+      variant="compact"
+      title="Static Sites"
+      description="Zero-dependency form handling for any static HTML or markdown site."
+      icon="static"
+    />
+    <IntegrationCard
+      variant="compact"
+      title="GitHub Pages"
+      description="Host free static projects and collect leads without a custom backend."
+      icon="github"
+    />
+    <IntegrationCard
+      variant="compact"
+      title="Vercel"
+      description="Deploy Next.js, Svelte, or static sites with edge-compatible form endpoints."
+      icon="vercel"
+    />
+    <IntegrationCard
+      variant="compact"
+      title="Netlify"
+      description="Simple form posting for Jamstack sites hosted on Netlify CDN."
+      icon="netlify"
+    />
+    <IntegrationCard
+      variant="compact"
+      title="Cloudflare Pages"
+      description="Ultra-fast global static deployment with Cloudflare Turnstile protection."
+      icon="cloudflare"
+    />
+  </div>
+</section>
+
+{/* Section J: AI & No-backend Forms */}
+<div class="mfc-ai-section-box">
+  <section class="mfc-section" id="ai-forms" style="margin: 0;">
+    <div class="mfc-section-header">
+      <div class="mfc-section-title-wrap">
+        <div class="mfc-section-icon" style="background: #ffffff; color: #2563eb; border-color: #93c5fd;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3L12 3z"></path>
+          </svg>
+        </div>
+        <h2 class="mfc-section-title">AI & No-backend Forms</h2>
+      </div>
+      <p class="mfc-section-subtitle">Modern form capture infrastructure designed for AI-generated websites and no-backend apps.</p>
+    </div>
+
+    <div class="mfc-grid-compact not-content">
+      <IntegrationCard
+        variant="compact"
+        title="Build Forms with AI"
+        description="Generate semantic form markup and validation schemas using AI prompts."
+        icon="ai"
+      />
+      <IntegrationCard
+        variant="compact"
+        title="HTML Contact Form with MFC"
+        description="Native form handling without JavaScript. Supports standard inputs, textareas, and files."
+        href="/guides/html-form/"
+        icon="html"
+        badge="Guide"
+        badgeType="active"
+        actionText="Explore guide"
+      />
+      <IntegrationCard
+        variant="compact"
+        title="Static Site Forms"
+        description="Complete zero-backend form solution for static generators and JAMstack."
+        icon="static"
+      />
+      <IntegrationCard
+        variant="compact"
+        title="Form Backend for AI Websites"
+        description="Connect v0, Lovable, Bolt.new, and Cursor generated apps without a server."
+        icon="ai"
+      />
+      <IntegrationCard
+        variant="compact"
+        title="ChatGPT & Claude Integration"
+        description="Integrate LLM-assisted form parsing, sentiment scoring, and auto-categorization."
+        icon="bot"
+      />
+      <IntegrationCard
+        variant="compact"
+        title="No-backend Form Submission"
+        description="Everything handled at the edge: storage, spam filtering, and notifications."
+        icon="rocket"
+      />
+    </div>
+  </section>
+</div>
+
+{/* Featured Integration Preview */}
+<section class="mfc-section" id="code-preview">
+  <div class="mfc-section-header">
+    <div class="mfc-section-title-wrap">
+      <div class="mfc-section-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+      </div>
+      <h2 class="mfc-section-title">Simple integration. Powerful results.</h2>
+    </div>
+    <p class="mfc-section-subtitle">
+      Connect your form simply by pointing the <code>action</code> attribute to your unique endpoint.
+    </p>
+  </div>
+
+  <div class="mfc-preview-box">
+    <div class="mfc-preview-header">
+      <span class="mfc-preview-badge">
+        <span class="mfc-preview-dot"></span>
+        Interactive Demo Snippet
+      </span>
+      <span style="font-size: 0.8rem; color: #64748b;">Endpoint: <code>https://myformcapture.com/f/demo-form-uuid</code></span>
+    </div>
+
+    <CodeExample
+      language="html"
+      filename="index.html"
+      code={`<!-- Demo MyFormCapture Integration Example -->
+<!-- Replace 'demo-form-uuid' with your real endpoint from your dashboard -->
+<form action="https://myformcapture.com/f/demo-form-uuid" method="POST">
+  <div class="form-group">
+    <label for="name">Your Name</label>
+    <input type="text" id="name" name="name" placeholder="Alex Morgan" required />
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" placeholder="alex@company.com" required />
+  </div>
+
+  <div class="form-group">
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="4" placeholder="How can we help?" required></textarea>
+  </div>
+
+  <!-- Optional custom redirect URL after successful submission -->
+  <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you" />
+
+  <button type="submit">Send Message</button>
+</form>`}
+    />
+  </div>
+</section>
+
+{/* Support Banner */}
+<SupportBanner />
+
+

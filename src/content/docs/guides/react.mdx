@@ -1,0 +1,237 @@
+---
+title: React Integration
+description: Learn how to connect a React or Next.js form component to MyFormCapture.
+---
+
+import CodeExample from '../../../components/CodeExample.astro';
+
+Connect your React or Next.js application to MyFormCapture using a clean, reusable component. Manage local form state, submit data asynchronously via `fetch`, and show instant loading and success confirmation feedback to your users.
+
+---
+
+## What you'll build
+
+In this guide, you will build a clean React form component (`ContactForm.jsx`) with:
+- Controlled state for `name`, `email`, and `message` fields.
+- Submission handling via asynchronous `fetch` POST.
+- Loading indicator while the request is in flight.
+- Success confirmation message without triggering a full page reload.
+
+---
+
+## Project folder structure
+
+Structure your React project components as follows:
+
+<div class="mfc-file-tree">
+  <div class="mfc-file-tree-header">React Project Structure</div>
+  <div>src/</div>
+  <div>├── components/</div>
+  <div>│   └── ContactForm.jsx &nbsp;&nbsp;&nbsp;&nbsp;← Reusable form component</div>
+  <div>├── App.jsx &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Imports and renders ContactForm</div>
+  <div>└── main.jsx &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← React root mounting point</div>
+</div>
+
+---
+
+## The `ContactForm.jsx` component
+
+Create a new file at `src/components/ContactForm.jsx` and add the following code:
+
+<CodeExample
+  language="jsx"
+  filename="src/components/ContactForm.jsx"
+  code={`import React, { useState } from 'react';
+
+export default function ContactForm() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
+  const [status, setStatus] = useState('idle'); // 'idle' | 'submitting' | 'success' | 'error'
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('submitting');
+
+    try {
+      // Replace 'demo-form-uuid' with your genuine MyFormCapture endpoint
+      const response = await fetch('https://myformcapture.com/f/demo-form-uuid', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      console.error('Submission failed:', err);
+      setStatus('error');
+    }
+  };
+
+  if (status === 'success') {
+    return (
+      <div className="alert-success">
+        <h3>Thank you!</h3>
+        <p>Your message has been sent successfully. We will be in touch soon.</p>
+        <button onClick={() => setStatus('idle')}>Send another message</button>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="contact-form">
+      <div className="form-group">
+        <label htmlFor="name">Your Name</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Sam Smith"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="email">Email Address</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="sam@example.com"
+          required
+        />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="message">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          rows="4"
+          placeholder="Tell us about your project..."
+          required
+        />
+      </div>
+
+      {status === 'error' && (
+        <p className="error-text">Something went wrong. Please try again.</p>
+      )}
+
+      <button type="submit" disabled={status === 'submitting'}>
+        {status === 'submitting' ? 'Submitting...' : 'Send Message'}
+      </button>
+    </form>
+  );
+}`}
+/>
+
+---
+
+## Importing into `App.jsx`
+
+Import and render your newly created `ContactForm` component inside `App.jsx`:
+
+<CodeExample
+  language="jsx"
+  filename="src/App.jsx"
+  code={`import React from 'react';
+import ContactForm from './components/ContactForm';
+
+export default function App() {
+  return (
+    <div className="app-container">
+      <header className="page-header">
+        <h1>Get in Touch</h1>
+        <p>Have questions? Reach out to our team.</p>
+      </header>
+
+      <main className="form-wrapper">
+        <ContactForm />
+      </main>
+    </div>
+  );
+}`}
+/>
+
+---
+
+## Component architecture breakdown
+
+<div class="mfc-step-item">
+  <div class="mfc-step-num">1</div>
+  <div class="mfc-step-content">
+    <h3 class="mfc-step-title">Controlled Input State</h3>
+    <p>
+      We use React's standard <code>useState</code> hook to bind form values, guaranteeing synchronized field state across user typing.
+    </p>
+  </div>
+</div>
+
+<div class="mfc-step-item">
+  <div class="mfc-step-num">2</div>
+  <div class="mfc-step-content">
+    <h3 class="mfc-step-title">Asynchronous POST Request</h3>
+    <p>
+      The <code>fetch</code> request sends JSON data with <code>Accept: application/json</code> header.
+      MyFormCapture responds with a JSON confirmation status code (HTTP 200), preventing page reload.
+    </p>
+  </div>
+</div>
+
+<div class="mfc-step-item">
+  <div class="mfc-step-num">3</div>
+  <div class="mfc-step-content">
+    <h3 class="mfc-step-title">Interactive UI States</h3>
+    <p>
+      The <code>status</code> state toggles between <code>idle</code>, <code>submitting</code>, and <code>success</code> to provide immediate visual feedback.
+    </p>
+  </div>
+</div>
+
+---
+
+<div class="mfc-callout mfc-callout-info">
+  <div class="mfc-callout-icon">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="16" x2="12" y2="12"></line>
+      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+    </svg>
+  </div>
+  <div class="mfc-callout-body">
+    <strong>Illustrative Integration Example</strong>
+    This React example is illustrative. The endpoint <code>https://myformcapture.com/f/demo-form-uuid</code> serves as a placeholder. In your live deployment, provide your active form endpoint from your MyFormCapture administration panel.
+  </div>
+</div>
+
+<a href="/" class="mfc-back-link" style="margin-top: 2rem;">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="19" y1="12" x2="5" y2="12"></line>
+    <polyline points="12 19 5 12 12 5"></polyline>
+  </svg>
+  Back to documentation
+</a>

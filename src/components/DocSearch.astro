@@ -1,0 +1,531 @@
+---
+// Interactive client-side documentation search component
+---
+
+<div class="mfc-search-wrapper" id="mfcSearchWrapper">
+  <div class="mfc-search-input-box">
+    <svg class="mfc-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"></circle>
+      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    </svg>
+    <input
+      type="search"
+      id="mfcSearchInput"
+      placeholder="Search guides, integrations, frameworks..."
+      autocomplete="off"
+      aria-label="Search documentation"
+      aria-expanded="false"
+      aria-controls="mfcSearchResults"
+    />
+    <div class="mfc-search-shortcut">
+      <kbd>[/]</kbd>
+    </div>
+  </div>
+
+  <!-- Search Results Dropdown -->
+  <div class="mfc-search-dropdown" id="mfcSearchResults" role="listbox" style="display: none;">
+    <div class="mfc-search-results-list" id="mfcResultsList">
+      <!-- Injected by script -->
+    </div>
+  </div>
+
+  <!-- Quick Filter Tags matching the screenshot -->
+  <div class="mfc-hero-pills">
+    <a href="/guides/html-form/" class="mfc-pill-btn" data-has-doc="true">
+      <span class="mfc-pill-icon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
+          <path d="M3 2L5 20.2L12 22.2L19 20.2L21 2H3Z" fill="#E44D26"/>
+          <path d="M12 3.8V20.4L17.6 18.8L19.2 3.8H12Z" fill="#F16529"/>
+          <path d="M12 7.8H7.6L7.9 10.6H12V13.1H8.2L8.5 16.5L12 17.5V19.7L5.8 17.9L5.2 5.5H18.8L18.4 9H12V7.8Z" fill="#FFFFFF"/>
+          <path d="M12 13.1V10.6H16.2L15.9 14.1L12 15.2V17.5L16.2 16.3L16.8 10.6H12" fill="#EBEBEB"/>
+        </svg>
+      </span>
+      <span>HTML Forms</span>
+    </a>
+    <a href="/guides/react/" class="mfc-pill-btn" data-has-doc="true">
+      <span class="mfc-pill-icon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#0ea5e9" stroke-width="2">
+          <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(0 12 12)"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)"/>
+          <circle cx="12" cy="12" r="2" fill="#0ea5e9"/>
+        </svg>
+      </span>
+      <span>React</span>
+    </a>
+    <a href="javascript:void(0)" class="mfc-pill-btn" data-has-doc="false" role="button">
+      <span class="mfc-pill-icon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 16.98h-5.99c-1.1 0-1.95.94-2.48 1.9A4 4 0 0 1 2 17c0-2.21 1.79-4 4-4h.24C6.67 11.45 8 9.5 10 9c0 0 1.25-.3 2.5 0"/>
+          <circle cx="6" cy="17" r="1.5" fill="#e11d48"/>
+          <circle cx="18" cy="17" r="1.5" fill="#e11d48"/>
+          <circle cx="12" cy="7" r="1.5" fill="#e11d48"/>
+        </svg>
+      </span>
+      <span>AI Webhooks</span>
+    </a>
+    <a href="javascript:void(0)" class="mfc-pill-btn" data-has-doc="false" role="button">
+      <span class="mfc-pill-icon">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="11" fill="#0f172a"/>
+          <path d="M8 8V16H9.7V11.2L14.7 16H16.2V8H14.5V12.8L9.5 8H8Z" fill="#FFFFFF"/>
+        </svg>
+      </span>
+      <span>Next.js</span>
+    </a>
+  </div>
+</div>
+
+<script>
+  // Docs search dataset
+  const searchIndex = [
+    {
+      title: 'HTML Form Integration',
+      category: 'Guides',
+      description: 'Connect standard HTML forms with plain POST action and zero backend setup.',
+      url: '/guides/html-form/',
+      keywords: ['html', 'form', 'action', 'post', 'endpoint', 'static', 'vanilla']
+    },
+    {
+      title: 'React Integration',
+      category: 'Guides',
+      description: 'Integrate React contact forms with state handling, hooks, and async submission.',
+      url: '/guides/react/',
+      keywords: ['react', 'jsx', 'component', 'nextjs', 'state', 'hooks', 'typescript']
+    },
+    {
+      title: 'Quick Start Overview',
+      category: 'Getting Started',
+      description: 'Learn the core concepts of connecting your first form in minutes.',
+      url: '/#quick-start',
+      keywords: ['getting started', 'quick start', 'setup', 'first form', 'basics']
+    },
+    {
+      title: 'Featured HTML Form Preview',
+      category: 'Code Examples',
+      description: 'See and copy the standard HTML integration snippet.',
+      url: '/#code-preview',
+      keywords: ['code', 'snippet', 'copy', 'example', 'preview', 'html']
+    },
+    {
+      title: 'Next.js Integration Guide',
+      category: 'Integrations',
+      description: 'Server actions, App Router, and client components form capture.',
+      url: '/#integrations',
+      keywords: ['nextjs', 'next', 'app router', 'ssr', 'react']
+    },
+    {
+      title: 'WordPress Form Capture',
+      category: 'Integrations',
+      description: 'Connect Elementor, Contact Form 7, or custom Gutenberg blocks.',
+      url: '/#integrations',
+      keywords: ['wordpress', 'wp', 'elementor', 'contact form 7', 'cf7', 'cms']
+    },
+    {
+      title: 'Wix Form Integration',
+      category: 'Guides',
+      description: 'Embed responsive contact forms and interactive Google Calendar booking widgets into Wix.',
+      url: '/guides/wix/',
+      keywords: ['wix', 'booking', 'widget', 'calendar', 'contact form', 'velo', 'studio', 'website builder']
+    },
+    {
+      title: 'Webhooks & Custom Endpoints',
+      category: 'Topics',
+      description: 'Forward incoming form payloads to Slack, Zapier, Make, or custom APIs.',
+      url: '/#categories',
+      keywords: ['webhooks', 'webhook', 'api', 'payload', 'zapier', 'make', 'slack']
+    },
+    {
+      title: 'File Uploads & Attachments',
+      category: 'Topics',
+      description: 'Accept documents, images, and attachments securely via multi-part forms.',
+      url: '/#categories',
+      keywords: ['file upload', 'upload', 'files', 'attachments', 'pdf', 'images', 'multipart']
+    },
+    {
+      title: 'Spam Protection & Honeypot',
+      category: 'Topics',
+      description: 'Bot filtering with hidden honeypot fields, reCAPTCHA, and Turnstile.',
+      url: '/#categories',
+      keywords: ['spam', 'honeypot', 'recaptcha', 'turnstile', 'captcha', 'security', 'protection']
+    },
+    {
+      title: 'Contact Support',
+      category: 'Help',
+      description: 'Get in touch with the MyFormCapture engineering team.',
+      url: '/#support',
+      keywords: ['support', 'help', 'contact', 'email', 'troubleshoot']
+    }
+  ];
+
+  const searchInput = document.getElementById('mfcSearchInput') as HTMLInputElement;
+  const searchWrapper = document.getElementById('mfcSearchWrapper');
+  const searchDropdown = document.getElementById('mfcSearchResults');
+  const resultsList = document.getElementById('mfcResultsList');
+
+  let activeIndex = -1;
+
+  function renderResults(query: string) {
+    if (!searchDropdown || !resultsList) return;
+    const cleanQuery = query.trim().toLowerCase();
+
+    if (!cleanQuery) {
+      searchDropdown.style.display = 'none';
+      return;
+    }
+
+    const matches = searchIndex.filter(item => {
+      return (
+        item.title.toLowerCase().includes(cleanQuery) ||
+        item.description.toLowerCase().includes(cleanQuery) ||
+        item.category.toLowerCase().includes(cleanQuery) ||
+        item.keywords.some(k => k.toLowerCase().includes(cleanQuery))
+      );
+    });
+
+    if (matches.length === 0) {
+      resultsList.innerHTML = `
+        <div class="mfc-search-empty">
+          <p class="mfc-search-empty-text">No documentation found for <strong>"${escapeHtml(query)}"</strong></p>
+          <p class="mfc-search-empty-hint">Try searching for <em>HTML</em>, <em>React</em>, <em>Webhooks</em>, or <em>Spam</em></p>
+        </div>
+      `;
+    } else {
+      resultsList.innerHTML = matches.map((item, idx) => `
+        <a href="${item.url}" class="mfc-search-item" data-index="${idx}" role="option">
+          <div class="mfc-search-item-info">
+            <div class="mfc-search-item-header">
+              <span class="mfc-search-item-title">${highlightMatch(item.title, cleanQuery)}</span>
+              <span class="mfc-search-item-cat">${item.category}</span>
+            </div>
+            <p class="mfc-search-item-desc">${highlightMatch(item.description, cleanQuery)}</p>
+          </div>
+          <svg class="mfc-search-item-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </a>
+      `).join('');
+    }
+
+    activeIndex = -1;
+    searchDropdown.style.display = 'block';
+  }
+
+  function highlightMatch(text: string, query: string): string {
+    const regex = new RegExp(`(${query})`, 'gi');
+    return escapeHtml(text).replace(regex, '<mark class="mfc-search-mark">$1</mark>');
+  }
+
+  function escapeHtml(str: string): string {
+    return str.replace(/[&<>"']/g, (m) => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#39;'
+    }[m] || m));
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      renderResults((e.target as HTMLInputElement).value);
+    });
+
+    searchInput.addEventListener('focus', () => {
+      if (searchInput.value.trim()) {
+        renderResults(searchInput.value);
+      }
+    });
+
+    // Keyboard navigation
+    searchInput.addEventListener('keydown', (e) => {
+      const items = resultsList?.querySelectorAll('.mfc-search-item');
+      if (!items || items.length === 0) return;
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        activeIndex = (activeIndex + 1) % items.length;
+        updateActiveItem(items);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        activeIndex = (activeIndex - 1 + items.length) % items.length;
+        updateActiveItem(items);
+      } else if (e.key === 'Enter') {
+        if (activeIndex >= 0 && activeIndex < items.length) {
+          e.preventDefault();
+          (items[activeIndex] as HTMLAnchorElement).click();
+        }
+      } else if (e.key === 'Escape') {
+        if (searchDropdown) searchDropdown.style.display = 'none';
+        searchInput.blur();
+      }
+    });
+  }
+
+  function updateActiveItem(items: NodeListOf<Element>) {
+    items.forEach((item, idx) => {
+      if (idx === activeIndex) {
+        item.classList.add('is-active');
+        item.scrollIntoView({ block: 'nearest' });
+      } else {
+        item.classList.remove('is-active');
+      }
+    });
+  }
+
+  // Keyboard shortcut '/' to focus search
+  window.addEventListener('keydown', (e) => {
+    if (e.key === '/' && document.activeElement !== searchInput) {
+      const target = e.target as HTMLElement;
+      if (target.tagName !== 'INPUT' && target.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        searchInput?.focus();
+      }
+    }
+  });
+
+  // Close dropdown on click outside
+  document.addEventListener('click', (e) => {
+    if (searchWrapper && !searchWrapper.contains(e.target as Node)) {
+      if (searchDropdown) {
+        searchDropdown.style.display = 'none';
+      }
+    }
+  });
+
+  // Pills interaction: redirect to documentation when available, do nothing when docs do not exist
+  document.querySelectorAll('.mfc-pill-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      const hasDoc = btn.getAttribute('data-has-doc') === 'true';
+      if (!hasDoc) {
+        // Feature documentation not available: do nothing, never show popup or write to search bar
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+      // Documentation exists: let standard link navigation take user directly to the relative docs
+    });
+  });
+</script>
+
+<style>
+  .mfc-search-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 580px;
+    margin: 1.15rem auto 0;
+  }
+
+  .mfc-search-input-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 0.65rem;
+    box-shadow: 0 4px 16px -2px rgba(37, 99, 235, 0.08), 0 1px 3px rgba(0, 0, 0, 0.03);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .mfc-search-input-box:focus-within {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15), 0 6px 20px rgba(37, 99, 235, 0.12);
+  }
+
+  .mfc-search-icon {
+    position: absolute;
+    left: 1rem;
+    color: #64748b;
+    pointer-events: none;
+  }
+
+  .mfc-search-input-box input {
+    width: 100%;
+    height: 3.1rem;
+    padding: 0 3.25rem 0 2.75rem;
+    font-size: 0.95rem;
+    color: #0f172a;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-family: inherit;
+  }
+
+  .mfc-search-input-box input::placeholder {
+    color: #94a3b8;
+  }
+
+  .mfc-search-shortcut {
+    position: absolute;
+    right: 0.875rem;
+    display: flex;
+    align-items: center;
+  }
+
+  .mfc-search-shortcut kbd {
+    background: #f8fafc;
+    color: #64748b;
+    border: 1px solid #cbd5e1;
+    border-radius: 0.3rem;
+    padding: 0.15rem 0.45rem;
+    font-size: 0.725rem;
+    font-family: inherit;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  /* Hero quick filter pills below search bar */
+  .mfc-hero-pills {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.65rem;
+    margin-top: 1.15rem;
+  }
+
+  .mfc-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.35rem 0.85rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 9999px;
+    font-size: 0.825rem;
+    font-weight: 500;
+    color: #334155;
+    text-decoration: none;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    transition: all 0.18s ease;
+    cursor: pointer;
+  }
+
+  .mfc-pill-btn:hover {
+    background: #ffffff;
+    border-color: #cbd5e1;
+    color: #0f172a;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .mfc-pill-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Dropdown results */
+  .mfc-search-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.625rem;
+    box-shadow: 0 12px 28px -6px rgba(15, 23, 42, 0.15), 0 4px 10px rgba(0, 0, 0, 0.04);
+    z-index: 50;
+    max-height: 360px;
+    overflow-y: auto;
+  }
+
+  .mfc-search-results-list {
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  :global(.mfc-search-item) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0.875rem;
+    border-radius: 0.45rem;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.12s ease;
+  }
+
+  :global(.mfc-search-item:hover),
+  :global(.mfc-search-item.is-active) {
+    background-color: #f0f7ff;
+  }
+
+  :global(.mfc-search-item-info) {
+    flex: 1;
+    min-width: 0;
+  }
+
+  :global(.mfc-search-item-header) {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+
+  :global(.mfc-search-item-title) {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  :global(.mfc-search-item:hover .mfc-search-item-title) {
+    color: #2563eb;
+  }
+
+  :global(.mfc-search-item-cat) {
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 0.1rem 0.35rem;
+    border-radius: 0.2rem;
+    background: #e2e8f0;
+    color: #475569;
+    text-transform: uppercase;
+  }
+
+  :global(.mfc-search-item-desc) {
+    font-size: 0.8rem;
+    color: #64748b;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  :global(.mfc-search-item-arrow) {
+    color: #94a3b8;
+    margin-left: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  :global(.mfc-search-item:hover .mfc-search-item-arrow) {
+    color: #2563eb;
+  }
+
+  :global(.mfc-search-mark) {
+    background: #fef08a;
+    color: #854d0e;
+    padding: 0 0.15rem;
+    border-radius: 0.15rem;
+  }
+
+  :global(.mfc-search-empty) {
+    padding: 1.5rem 1rem;
+    text-align: center;
+  }
+
+  :global(.mfc-search-empty-text) {
+    font-size: 0.875rem;
+    color: #475569;
+    margin: 0 0 0.25rem 0;
+  }
+
+  :global(.mfc-search-empty-hint) {
+    font-size: 0.775rem;
+    color: #94a3b8;
+    margin: 0;
+  }
+</style>

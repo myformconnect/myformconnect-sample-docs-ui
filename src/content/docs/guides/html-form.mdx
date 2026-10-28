@@ -1,0 +1,180 @@
+---
+title: HTML Form Integration
+description: Learn how to connect a standard HTML form to MyFormCapture with zero backend code.
+---
+
+import CodeExample from '../../../components/CodeExample.astro';
+
+Connect any static HTML form to MyFormCapture in under two minutes. You don't need PHP, Node.js, or any server-side logic — simply point your form's `action` attribute to your unique MyFormCapture endpoint.
+
+---
+
+## What you'll build
+
+In this guide, you will create a standard contact form with three inputs:
+1. **Name** (`<input type="text" name="name" />`)
+2. **Email address** (`<input type="email" name="email" />`)
+3. **Message** (`<textarea name="message"></textarea>`)
+
+When visitors submit this form on your website, MyFormCapture captures the submission, runs spam filtering, sends you an email notification, and forwards the data to any configured webhooks.
+
+---
+
+## File structure
+
+Place your HTML form inside your standard website project directory:
+
+<div class="mfc-file-tree">
+  <div class="mfc-file-tree-header">Project Workspace</div>
+  <div>my-website/</div>
+  <div>├── index.html &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Form markup goes here</div>
+  <div>├── styles.css &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;← Optional form styling</div>
+  <div>└── assets/</div>
+  <div>&nbsp;&nbsp;&nbsp;&nbsp;└── logo.svg</div>
+</div>
+
+---
+
+## Complete HTML form example
+
+Copy and paste the code snippet below directly into your `index.html` file:
+
+<CodeExample
+  language="html"
+  filename="index.html"
+  code={`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us — MyFormCapture Demo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Contact Our Team</h1>
+    <p>Fill out the form below and we will get back to you shortly.</p>
+
+    <!-- 1. Replace 'demo-form-uuid' with your real form ID from your dashboard -->
+    <!-- 2. Keep method set to POST -->
+    <form action="https://myformcapture.com/f/demo-form-uuid" method="POST">
+      
+      <!-- Name Field -->
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          placeholder="Jane Doe" 
+          required 
+        />
+      </div>
+
+      <!-- Email Field -->
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          placeholder="jane@example.com" 
+          required 
+        />
+      </div>
+
+      <!-- Message Field -->
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea 
+          id="message" 
+          name="message" 
+          rows="5" 
+          placeholder="How can we help your team?" 
+          required
+        ></textarea>
+      </div>
+
+      <!-- Optional: Custom redirect URL upon successful submission -->
+      <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html" />
+
+      <!-- Optional: Honeypot field for bot protection (keep hidden) -->
+      <input type="text" name="_gotcha" style="display:none !important" tabindex="-1" autocomplete="off" />
+
+      <!-- Submit Button -->
+      <button type="submit" class="submit-btn">Send Message</button>
+    </form>
+  </main>
+</body>
+</html>`}
+/>
+
+---
+
+## Step-by-step explanation
+
+<div class="mfc-step-item">
+  <div class="mfc-step-num">1</div>
+  <div class="mfc-step-content">
+    <h3 class="mfc-step-title">Set the Form Action URL</h3>
+    <p>
+      The <code>action</code> attribute points directly to your unique MyFormCapture endpoint.
+      Each form in your dashboard receives a dedicated UUID such as <code>https://myformcapture.com/f/your-form-uuid</code>.
+    </p>
+  </div>
+</div>
+
+<div class="mfc-step-item">
+  <div class="mfc-step-num">2</div>
+  <div class="mfc-step-content">
+    <h3 class="mfc-step-title">Specify the POST Method</h3>
+    <p>
+      Always configure <code>method="POST"</code>. MyFormCapture processes incoming form data over secure HTTPS POST requests.
+    </p>
+  </div>
+</div>
+
+<div class="mfc-step-item">
+  <div class="mfc-step-num">3</div>
+  <div class="mfc-step-content">
+    <h3 class="mfc-step-title">Assign Descriptive Input Names</h3>
+    <p>
+      MyFormCapture maps submission columns directly from each input's <code>name</code> attribute (e.g. <code>name="name"</code>, <code>name="email"</code>, <code>name="message"</code>). Make sure each field has a unique name.
+    </p>
+  </div>
+</div>
+
+<div class="mfc-step-item">
+  <div class="mfc-step-num">4</div>
+  <div class="mfc-step-content">
+    <h3 class="mfc-step-title">Add Custom Redirect & Spam Prevention</h3>
+    <p>
+      Adding <code>&lt;input type="hidden" name="_next" value="https://..."&gt;</code> automatically redirects users back to your custom thank-you page. Adding <code>name="_gotcha"</code> acts as a silent honeypot that catches automated spam bots.
+    </p>
+  </div>
+</div>
+
+---
+
+<div class="mfc-callout mfc-callout-info">
+  <div class="mfc-callout-icon">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"></circle>
+      <line x1="12" y1="16" x2="12" y2="12"></line>
+      <line x1="12" y1="8" x2="12.01" y2="8"></line>
+    </svg>
+  </div>
+  <div class="mfc-callout-body">
+    <strong>Illustrative Demo Endpoint</strong>
+    The endpoint <code>https://myformcapture.com/f/demo-form-uuid</code> is an illustrative placeholder.
+    In your actual production deployment, replace this placeholder with your authentic form endpoint from your MyFormCapture console.
+  </div>
+</div>
+
+<a href="/" class="mfc-back-link" style="margin-top: 2rem;">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="19" y1="12" x2="5" y2="12"></line>
+    <polyline points="12 19 5 12 12 5"></polyline>
+  </svg>
+  Back to documentation
+</a>

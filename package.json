@@ -1,0 +1,16 @@
+{
+  "name": "myformcapture-docs",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.42.7",
+    "astro": "^7.3.8"
+  }
+}
