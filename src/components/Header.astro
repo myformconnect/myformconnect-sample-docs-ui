@@ -1,14 +1,21 @@
 ---
 // Custom Header component for MyFormCapture documentation portal
-// Preserves the existing website header appearance, logo, navigation links, and Start Free Trial CTA
+// Features: Logo with Docs badge, Search bar with '/' shortcut, Language dropdown, Theme toggle, Sign in, and Create account
+import Search from "@astrojs/starlight/components/Search.astro";
 ---
 
-<div class="mfc-header-container">
+<header class="mfc-header-container">
   <div class="mfc-header-inner">
     <!-- Brand Logo -->
     <a href="/" class="mfc-brand" aria-label="MyFormCapture Documentation Home">
       <div class="mfc-brand-icon">
-        <img src="/favicon.png" alt="MyFormCapture Logo" width="28" height="28" class="mfc-brand-img" />
+        <img
+          src="/favicon.png"
+          alt="MyFormCapture Logo"
+          width="28"
+          height="28"
+          class="mfc-brand-img"
+        />
       </div>
       <div class="mfc-brand-text">
         <span class="mfc-brand-name">MyFormCapture</span>
@@ -16,34 +23,274 @@
       <span class="mfc-docs-badge">Docs</span>
     </a>
 
-    <!-- Desktop Navigation Links -->
-    <nav class="mfc-nav" aria-label="Main Navigation">
-      <a href="#features" class="mfc-nav-link">Features</a>
-      <a href="#pricing" class="mfc-nav-link">Pricing</a>
-      <a href="/" class="mfc-nav-link active">Resources</a>
-    </nav>
+    <!-- Center: Search Bar -->
+    <div class="mfc-header-search">
+      <button
+        type="button"
+        class="mfc-search-btn"
+        id="mfcSearchTrigger"
+        aria-label="Search documentation, integrations, guides, and features"
+        title="Search documentation (/ or Ctrl+K)"
+      >
+        <svg
+          class="mfc-search-icon"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span class="mfc-search-placeholder"
+          >Search documentation, integrations, guides, and features...</span
+        >
+        <kbd class="mfc-search-shortcut" aria-hidden="true">/</kbd>
+      </button>
 
-    <!-- Right Side Actions: Sign In + Start Free Trial CTA -->
+      <!-- Mounted Starlight Search for Dialog & Pagefind Modal -->
+      <div class="mfc-starlight-search-hidden" aria-hidden="true">
+        <Search />
+      </div>
+    </div>
+
+    <!-- Right Side Actions: Language, Theme, Sign in, Create account -->
     <div class="mfc-actions">
-      <a href="#signin" class="mfc-nav-link mfc-signin-link">Sign In</a>
-      <a href="#trial" class="mfc-trial-btn">Start Free Trial</a>
+      <!-- Language Dropdown -->
+      <div class="mfc-language-dropdown" id="mfcLanguageDropdown">
+        <button
+          type="button"
+          class="mfc-language-btn"
+          id="mfcLanguageBtn"
+          aria-haspopup="listbox"
+          aria-expanded="false"
+          aria-label="Select language"
+        >
+          <svg
+            class="mfc-lang-globe"
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path
+              d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+            ></path>
+          </svg>
+          <span class="mfc-lang-current" id="mfcCurrentLangText">English</span>
+          <svg
+            class="mfc-lang-chevron"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+
+        <div
+          class="mfc-language-menu"
+          id="mfcLanguageMenu"
+          role="listbox"
+          aria-label="Available languages"
+        >
+          <button
+            type="button"
+            class="mfc-lang-item is-selected"
+            role="option"
+            aria-selected="true"
+            data-lang="English"
+          >
+            <span>English</span>
+            <svg
+              class="mfc-check-icon"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="mfc-lang-item"
+            role="option"
+            aria-selected="false"
+            data-lang="Español"
+          >
+            <span>Español</span>
+          </button>
+          <button
+            type="button"
+            class="mfc-lang-item"
+            role="option"
+            aria-selected="false"
+            data-lang="Français"
+          >
+            <span>Français</span>
+          </button>
+          <button
+            type="button"
+            class="mfc-lang-item"
+            role="option"
+            aria-selected="false"
+            data-lang="Deutsch"
+          >
+            <span>Deutsch</span>
+          </button>
+          <button
+            type="button"
+            class="mfc-lang-item"
+            role="option"
+            aria-selected="false"
+            data-lang="Português"
+          >
+            <span>Português</span>
+          </button>
+          <button
+            type="button"
+            class="mfc-lang-item"
+            role="option"
+            aria-selected="false"
+            data-lang="日本語"
+          >
+            <span>日本語</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Theme Toggle Button -->
+      <button
+        type="button"
+        class="mfc-theme-btn"
+        id="mfcThemeToggle"
+        aria-label="Toggle color theme"
+        title="Toggle color theme"
+      >
+        <!-- Sun Icon (Light Mode) -->
+        <svg
+          class="mfc-theme-icon-sun"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Moon Icon (Dark Mode) -->
+        <svg
+          class="mfc-theme-icon-moon"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="display: none;"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+
+      <!-- Sign In Link -->
+      <a href="#signin" class="mfc-signin-link">Sign in</a>
+
+      <!-- Create Account CTA Button -->
+      <a href="#create-account" class="mfc-create-btn">Create account</a>
 
       <!-- Mobile Menu Toggle Button -->
-      <button type="button" class="mfc-mobile-toggle" id="mfcMobileToggle" aria-label="Toggle Navigation Menu" aria-expanded="false">
-        <svg class="mfc-icon-menu" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <button
+        type="button"
+        class="mfc-mobile-toggle"
+        id="mfcMobileToggle"
+        aria-label="Toggle Navigation Menu"
+        aria-expanded="false"
+      >
+        <svg
+          class="mfc-icon-menu"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <line x1="3" y1="12" x2="21" y2="12"></line>
           <line x1="3" y1="6" x2="21" y2="6"></line>
           <line x1="3" y1="18" x2="21" y2="18"></line>
         </svg>
-        <svg class="mfc-icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+        <svg
+          class="mfc-icon-close"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          style="display: none;"
+        >
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
 
       <!-- Starlight Docs Sidebar Toggle for Mobile -->
-      <button popovertarget="starlight__sidebar" class="mfc-sidebar-toggle" aria-label="Toggle Documentation Sidebar">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <button
+        popovertarget="starlight__sidebar"
+        class="mfc-sidebar-toggle"
+        aria-label="Toggle Documentation Sidebar"
+      >
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
           <line x1="9" y1="3" x2="9" y2="21"></line>
         </svg>
@@ -54,43 +301,237 @@
 
   <!-- Mobile Dropdown Menu -->
   <div class="mfc-mobile-drawer" id="mfcMobileDrawer">
-    <a href="#features" class="mfc-mobile-link">Features</a>
-    <a href="#pricing" class="mfc-mobile-link">Pricing</a>
-    <a href="/" class="mfc-mobile-link active">Resources & Docs</a>
+    <div class="mfc-mobile-search-row">
+      <button
+        type="button"
+        class="mfc-search-btn mfc-mobile-search-trigger"
+        id="mfcMobileSearchTrigger"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span>Search documentation...</span>
+        <kbd>/</kbd>
+      </button>
+    </div>
+
+    <div class="mfc-mobile-controls-row">
+      <span class="mfc-mobile-label">Language: English</span>
+      <span class="mfc-mobile-label">Theme: Auto / System</span>
+    </div>
+
     <div class="mfc-mobile-divider"></div>
-    <a href="#signin" class="mfc-mobile-link">Sign In</a>
-    <a href="#trial" class="mfc-trial-btn mfc-mobile-cta">Start Free Trial</a>
+    <a href="#signin" class="mfc-mobile-link">Sign in</a>
+    <a href="#create-account" class="mfc-create-btn mfc-mobile-cta"
+      >Create account</a
+    >
   </div>
-</div>
+</header>
 
 <script>
-  // Simple vanilla JS for the website mobile header toggle
-  const toggleBtn = document.getElementById('mfcMobileToggle');
-  const drawer = document.getElementById('mfcMobileDrawer');
+  // ---------------------------------------------------------------------------
+  // 1. Search Bar Trigger Delegation & Keyboard Shortcut
+  // ---------------------------------------------------------------------------
+  function openSearchModal() {
+    const starlightOpenBtn = document.querySelector(
+      "site-search button[data-open-modal]",
+    ) as HTMLButtonElement | null;
+    if (starlightOpenBtn) {
+      starlightOpenBtn.click();
+    }
+  }
+
+  const searchTrigger = document.getElementById("mfcSearchTrigger");
+  const mobileSearchTrigger = document.getElementById("mfcMobileSearchTrigger");
+
+  searchTrigger?.addEventListener("click", openSearchModal);
+  mobileSearchTrigger?.addEventListener("click", openSearchModal);
+
+  // Keyboard shortcut: '/' or 'Cmd+K' / 'Ctrl+K'
+  window.addEventListener("keydown", (e) => {
+    const activeEl = document.activeElement;
+    const isInputActive =
+      activeEl && ["INPUT", "TEXTAREA", "SELECT"].includes(activeEl.tagName);
+
+    if (e.key === "/" && !isInputActive) {
+      e.preventDefault();
+      openSearchModal();
+    } else if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      openSearchModal();
+    }
+  });
+
+  // ---------------------------------------------------------------------------
+  // 2. Language Dropdown Interactive Menu
+  // ---------------------------------------------------------------------------
+  const langDropdown = document.getElementById("mfcLanguageDropdown");
+  const langBtn = document.getElementById("mfcLanguageBtn");
+  const langMenu = document.getElementById("mfcLanguageMenu");
+  const langCurrentText = document.getElementById("mfcCurrentLangText");
+
+  if (langBtn && langMenu) {
+    langBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isOpen = langMenu.classList.toggle("is-open");
+      langBtn.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    langMenu.querySelectorAll(".mfc-lang-item").forEach((item) => {
+      item.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const selectedLang =
+          (item as HTMLElement).getAttribute("data-lang") || "English";
+        if (langCurrentText) {
+          langCurrentText.textContent = selectedLang;
+        }
+
+        langMenu.querySelectorAll(".mfc-lang-item").forEach((btn) => {
+          btn.classList.remove("is-selected");
+          btn.setAttribute("aria-selected", "false");
+          btn.querySelector(".mfc-check-icon")?.remove();
+        });
+
+        item.classList.add("is-selected");
+        item.setAttribute("aria-selected", "true");
+
+        // Add checkmark icon to the newly selected item
+        const checkSvg = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "svg",
+        );
+        checkSvg.setAttribute("class", "mfc-check-icon");
+        checkSvg.setAttribute("width", "14");
+        checkSvg.setAttribute("height", "14");
+        checkSvg.setAttribute("viewBox", "0 0 24 24");
+        checkSvg.setAttribute("fill", "none");
+        checkSvg.setAttribute("stroke", "currentColor");
+        checkSvg.setAttribute("stroke-width", "2.5");
+        checkSvg.setAttribute("stroke-linecap", "round");
+        checkSvg.setAttribute("stroke-linejoin", "round");
+        const polyline = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "polyline",
+        );
+        polyline.setAttribute("points", "20 6 9 17 4 12");
+        checkSvg.appendChild(polyline);
+        item.appendChild(checkSvg);
+
+        langMenu.classList.remove("is-open");
+        langBtn.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.addEventListener("click", (e) => {
+      if (langDropdown && !langDropdown.contains(e.target as Node)) {
+        langMenu.classList.remove("is-open");
+        langBtn.setAttribute("aria-expanded", "false");
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && langMenu.classList.contains("is-open")) {
+        langMenu.classList.remove("is-open");
+        langBtn.setAttribute("aria-expanded", "false");
+        langBtn.focus();
+      }
+    });
+  }
+
+  // ---------------------------------------------------------------------------
+  // 3. Theme Toggle Button (Light / Dark)
+  // ---------------------------------------------------------------------------
+  const themeToggle = document.getElementById("mfcThemeToggle");
+  const sunIcon = themeToggle?.querySelector(
+    ".mfc-theme-icon-sun",
+  ) as HTMLElement | null;
+  const moonIcon = themeToggle?.querySelector(
+    ".mfc-theme-icon-moon",
+  ) as HTMLElement | null;
+
+  function updateThemeUI(theme: string) {
+    if (sunIcon && moonIcon) {
+      if (theme === "dark") {
+        sunIcon.style.display = "none";
+        moonIcon.style.display = "block";
+      } else {
+        sunIcon.style.display = "block";
+        moonIcon.style.display = "none";
+      }
+    }
+  }
+
+  // Read initial theme
+  const initialTheme =
+    document.documentElement.dataset.theme ||
+    localStorage.getItem("starlight-theme") ||
+    "light";
+  updateThemeUI(initialTheme);
+
+  themeToggle?.addEventListener("click", () => {
+    const currentTheme =
+      document.documentElement.dataset.theme ||
+      localStorage.getItem("starlight-theme") ||
+      "light";
+    const nextTheme = currentTheme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = nextTheme;
+    try {
+      localStorage.setItem("starlight-theme", nextTheme);
+    } catch {}
+    updateThemeUI(nextTheme);
+  });
+
+  // ---------------------------------------------------------------------------
+  // 4. Mobile Drawer Toggle
+  // ---------------------------------------------------------------------------
+  const toggleBtn = document.getElementById("mfcMobileToggle");
+  const drawer = document.getElementById("mfcMobileDrawer");
 
   if (toggleBtn && drawer) {
-    toggleBtn.addEventListener('click', () => {
-      const isOpen = drawer.classList.toggle('is-open');
-      toggleBtn.setAttribute('aria-expanded', String(isOpen));
-      const iconMenu = toggleBtn.querySelector('.mfc-icon-menu') as HTMLElement;
-      const iconClose = toggleBtn.querySelector('.mfc-icon-close') as HTMLElement;
+    toggleBtn.addEventListener("click", () => {
+      const isOpen = drawer.classList.toggle("is-open");
+      toggleBtn.setAttribute("aria-expanded", String(isOpen));
+      const iconMenu = toggleBtn.querySelector(".mfc-icon-menu") as HTMLElement;
+      const iconClose = toggleBtn.querySelector(
+        ".mfc-icon-close",
+      ) as HTMLElement;
       if (iconMenu && iconClose) {
-        iconMenu.style.display = isOpen ? 'none' : 'block';
-        iconClose.style.display = isOpen ? 'block' : 'none';
+        iconMenu.style.display = isOpen ? "none" : "block";
+        iconClose.style.display = isOpen ? "block" : "none";
       }
     });
   }
 </script>
 
 <style>
-  /* Scoped styles for the existing website header */
+  /* ==========================================================================
+     Header Container & Layout
+     ========================================================================== */
   .mfc-header-container {
     width: 100%;
     height: 100%;
     position: relative;
     background: #ffffff;
-    font-family: 'Inter var', 'Inter', ui-sans-serif, system-ui, sans-serif,
-      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    font-family:
+      "Inter var", "Inter", ui-sans-serif, system-ui, sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      "Noto Color Emoji";
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  :root[data-theme="dark"] .mfc-header-container {
+    background: #0f172a;
+    border-bottom-color: #1e293b;
   }
 
   .mfc-header-inner {
@@ -102,13 +543,17 @@
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 1.25rem;
+    gap: 1rem;
+    box-sizing: border-box;
   }
 
-  /* Logo */
+  /* --------------------------------------------------------------------------
+     Brand Logo
+     -------------------------------------------------------------------------- */
   .mfc-brand {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.65rem;
     text-decoration: none;
     color: inherit;
     user-select: none;
@@ -136,78 +581,360 @@
   }
 
   .mfc-brand-name {
-    font-size: clamp(1.2rem, 1.15rem + 0.25vw, 1.35rem);
+    font-size: 1.05rem;
     font-weight: 700;
     color: #0f172a;
-    letter-spacing: -0.025em;
+    letter-spacing: -0.02em;
+  }
+
+  :root[data-theme="dark"] .mfc-brand-name {
+    color: #f8fafc;
   }
 
   .mfc-docs-badge {
-    font-size: 0.775rem;
-    font-weight: 600;
+    font-size: 0.6875rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 0.2rem 0.55rem;
+    letter-spacing: 0.06em;
+    padding: 0.15rem 0.5rem;
     border-radius: 9999px;
     background-color: #eff6ff;
     color: #2563eb;
     border: 1px solid #bfdbfe;
-    margin-left: 0.35rem;
+    margin-left: 0.15rem;
   }
 
-  /* Desktop Nav */
-  .mfc-nav {
-    display: none;
-    align-items: center;
-    gap: 2.25rem;
+  :root[data-theme="dark"] .mfc-docs-badge {
+    background-color: rgba(37, 99, 235, 0.15);
+    color: #60a5fa;
+    border-color: rgba(37, 99, 235, 0.35);
   }
 
-  @media (min-width: 768px) {
-    .mfc-nav {
-      display: flex;
-    }
-  }
-
-  .mfc-nav-link {
-    font-size: clamp(1rem, 0.95rem + 0.2vw, 1.075rem);
-    font-weight: 500;
-    color: #475569;
-    text-decoration: none;
-    transition: color 0.15s ease;
-    padding: 0.45rem 0;
+  /* --------------------------------------------------------------------------
+     Center Search Bar
+     -------------------------------------------------------------------------- */
+  .mfc-header-search {
+    flex: 1;
+    max-width: 580px;
+    min-width: 220px;
+    margin: 0 0.5rem;
     position: relative;
   }
 
-  .mfc-nav-link:hover {
-    color: #0f172a;
+  .mfc-search-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 38px;
+    padding: 0 0.85rem;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #94a3b8;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
+    outline: none;
+    box-sizing: border-box;
   }
 
-  .mfc-nav-link.active {
-    color: #2563eb;
+  .mfc-search-btn:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+    color: #64748b;
+  }
+
+  :root[data-theme="dark"] .mfc-search-btn {
+    background: #1e293b;
+    border-color: #334155;
+    color: #64748b;
+  }
+
+  :root[data-theme="dark"] .mfc-search-btn:hover {
+    border-color: #475569;
+    background: #1e293b;
+    color: #94a3b8;
+  }
+
+  .mfc-search-icon {
+    color: #94a3b8;
+    margin-right: 0.65rem;
+    flex-shrink: 0;
+  }
+
+  .mfc-search-placeholder {
+    font-size: 0.8125rem;
+    color: #94a3b8;
+    font-weight: 400;
+    text-align: left;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  :root[data-theme="dark"] .mfc-search-placeholder {
+    color: #64748b;
+  }
+
+  .mfc-search-shortcut {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 4px;
+    font-size: 0.75rem;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
     font-weight: 600;
+    color: #64748b;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+    box-sizing: border-box;
+    line-height: 1;
   }
 
-  .mfc-nav-link.active::after {
-    content: '';
+  :root[data-theme="dark"] .mfc-search-shortcut {
+    background: #0f172a;
+    border-color: #334155;
+    color: #94a3b8;
+  }
+
+  /* Starlight Search hidden container: keeps dialog in DOM for modal popup */
+  .mfc-starlight-search-hidden {
     position: absolute;
-    bottom: -4px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background-color: #2563eb;
-    border-radius: 2px;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
   }
 
-  /* Right actions */
+  .mfc-starlight-search-hidden :global(dialog) {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+
+  /* --------------------------------------------------------------------------
+     Right Actions: Language, Theme, Sign in, Create account
+     -------------------------------------------------------------------------- */
   .mfc-actions {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 0.85rem;
+    flex-shrink: 0;
   }
 
+  /* Language Dropdown */
+  .mfc-language-dropdown {
+    position: relative;
+  }
+
+  .mfc-language-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    height: 34px;
+    padding: 0 0.65rem;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #334155;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+    outline: none;
+    user-select: none;
+    box-sizing: border-box;
+  }
+
+  .mfc-language-btn:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+    color: #0f172a;
+  }
+
+  :root[data-theme="dark"] .mfc-language-btn {
+    background: #1e293b;
+    border-color: #334155;
+    color: #e2e8f0;
+  }
+
+  :root[data-theme="dark"] .mfc-language-btn:hover {
+    border-color: #475569;
+    color: #ffffff;
+  }
+
+  .mfc-lang-globe {
+    color: #64748b;
+    flex-shrink: 0;
+  }
+
+  :root[data-theme="dark"] .mfc-lang-globe {
+    color: #94a3b8;
+  }
+
+  .mfc-lang-current {
+    font-size: 0.8125rem;
+  }
+
+  .mfc-lang-chevron {
+    color: #94a3b8;
+    flex-shrink: 0;
+    transition: transform 0.15s ease;
+  }
+
+  .mfc-language-btn[aria-expanded="true"] .mfc-lang-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Floating Language Menu */
+  .mfc-language-menu {
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    min-width: 145px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    box-shadow:
+      0 10px 25px -5px rgba(15, 23, 42, 0.1),
+      0 4px 6px -2px rgba(15, 23, 42, 0.05);
+    padding: 0.35rem;
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 1000;
+  }
+
+  .mfc-language-menu.is-open {
+    display: flex;
+  }
+
+  :root[data-theme="dark"] .mfc-language-menu {
+    background: #1e293b;
+    border-color: #334155;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  }
+
+  .mfc-lang-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0.45rem 0.65rem;
+    border: none;
+    background: transparent;
+    border-radius: 5px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #334155;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition:
+      background 0.12s ease,
+      color 0.12s ease;
+  }
+
+  .mfc-lang-item:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+  }
+
+  :root[data-theme="dark"] .mfc-lang-item {
+    color: #cbd5e1;
+  }
+
+  :root[data-theme="dark"] .mfc-lang-item:hover {
+    background: #334155;
+    color: #ffffff;
+  }
+
+  .mfc-lang-item.is-selected {
+    color: #2563eb;
+    font-weight: 600;
+    background: #eff6ff;
+  }
+
+  :root[data-theme="dark"] .mfc-lang-item.is-selected {
+    color: #60a5fa;
+    background: rgba(37, 99, 235, 0.15);
+  }
+
+  .mfc-check-icon {
+    color: #2563eb;
+  }
+
+  :root[data-theme="dark"] .mfc-check-icon {
+    color: #60a5fa;
+  }
+
+  /* --------------------------------------------------------------------------
+     Theme Toggle Button
+     -------------------------------------------------------------------------- */
+  .mfc-theme-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    color: #475569;
+    cursor: pointer;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+    padding: 0;
+  }
+
+  .mfc-theme-btn:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+  }
+
+  :root[data-theme="dark"] .mfc-theme-btn {
+    color: #cbd5e1;
+  }
+
+  :root[data-theme="dark"] .mfc-theme-btn:hover {
+    background-color: #1e293b;
+    color: #ffffff;
+  }
+
+  /* --------------------------------------------------------------------------
+     Sign In & Create Account
+     -------------------------------------------------------------------------- */
   .mfc-signin-link {
     display: none;
-    font-size: clamp(0.975rem, 0.95rem + 0.15vw, 1.025rem);
+    font-size: 0.845rem;
+    font-weight: 500;
+    color: #475569;
+    text-decoration: none;
+    padding: 0.4rem 0.25rem;
+    transition: color 0.15s ease;
+    white-space: nowrap;
+  }
+
+  .mfc-signin-link:hover {
+    color: #0f172a;
+  }
+
+  :root[data-theme="dark"] .mfc-signin-link {
+    color: #94a3b8;
+  }
+
+  :root[data-theme="dark"] .mfc-signin-link:hover {
+    color: #f8fafc;
   }
 
   @media (min-width: 640px) {
@@ -216,28 +943,32 @@
     }
   }
 
-  .mfc-trial-btn {
+  .mfc-create-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     background-color: #2563eb;
-    color: #ffffff;
-    font-size: clamp(0.95rem, 0.925rem + 0.15vw, 1.025rem);
+    color: #ffffff !important;
+    font-size: 0.8125rem;
     font-weight: 600;
-    padding: 0.6rem 1.35rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    transition: background-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    padding: 0.45rem 1rem;
+    border-radius: 0.45rem;
+    text-decoration: none !important;
+    transition:
+      background-color 0.15s ease,
+      box-shadow 0.15s ease;
     box-shadow: 0 1px 2px rgba(37, 99, 235, 0.2);
     white-space: nowrap;
   }
 
-  .mfc-trial-btn:hover {
+  .mfc-create-btn:hover {
     background-color: #1d4ed8;
     box-shadow: 0 3px 8px rgba(37, 99, 235, 0.3);
   }
 
-  /* Sidebar Toggle for Docs on Mobile */
+  /* --------------------------------------------------------------------------
+     Mobile & Responsive Elements
+     -------------------------------------------------------------------------- */
   .mfc-sidebar-toggle {
     display: none;
     align-items: center;
@@ -246,8 +977,8 @@
     color: #334155;
     border: 1px solid #cbd5e1;
     border-radius: 0.375rem;
-    padding: 0.45rem 0.75rem;
-    font-size: 0.85rem;
+    padding: 0.4rem 0.65rem;
+    font-size: 0.8125rem;
     font-weight: 600;
     cursor: pointer;
   }
@@ -258,21 +989,32 @@
     }
   }
 
-  /* Mobile toggle */
   .mfc-mobile-toggle {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     background: none;
     border: 1px solid #e2e8f0;
     border-radius: 0.375rem;
-    padding: 0.5rem;
+    padding: 0.45rem;
     color: #475569;
     cursor: pointer;
   }
 
-  @media (min-width: 768px) {
+  @media (max-width: 960px) {
     .mfc-mobile-toggle {
+      display: flex;
+    }
+
+    .mfc-language-dropdown,
+    .mfc-theme-btn,
+    .mfc-signin-link {
+      display: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .mfc-header-search {
       display: none;
     }
   }
@@ -290,35 +1032,60 @@
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
     flex-direction: column;
     gap: 0.875rem;
+    z-index: 999;
   }
 
   .mfc-mobile-drawer.is-open {
     display: flex;
   }
 
+  :root[data-theme="dark"] .mfc-mobile-drawer {
+    background: #0f172a;
+    border-bottom-color: #1e293b;
+  }
+
+  .mfc-mobile-search-row {
+    width: 100%;
+  }
+
+  .mfc-mobile-search-trigger {
+    width: 100%;
+  }
+
+  .mfc-mobile-controls-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8125rem;
+    color: #64748b;
+    padding: 0.25rem 0;
+  }
+
   .mfc-mobile-link {
-    font-size: 1.05rem;
+    font-size: 0.925rem;
     font-weight: 500;
     color: #334155;
     text-decoration: none;
-    padding: 0.5rem 0;
+    padding: 0.4rem 0;
   }
 
-  .mfc-mobile-link.active {
-    color: #2563eb;
-    font-weight: 600;
+  :root[data-theme="dark"] .mfc-mobile-link {
+    color: #cbd5e1;
   }
 
   .mfc-mobile-divider {
     height: 1px;
     background: #e2e8f0;
-    margin: 0.35rem 0;
+    margin: 0.25rem 0;
+  }
+
+  :root[data-theme="dark"] .mfc-mobile-divider {
+    background: #1e293b;
   }
 
   .mfc-mobile-cta {
     text-align: center;
     padding: 0.75rem 1.25rem;
     margin-top: 0.35rem;
-    font-size: 1rem;
+    font-size: 0.925rem;
   }
 </style>

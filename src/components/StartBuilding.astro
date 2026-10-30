@@ -1,0 +1,474 @@
+---
+// StartBuilding.astro — "Start building" section placed before Popular Integrations
+// Displays 4 integration path cards in 1:1 aspect ratio with compact typography and Read Guide links on all cards
+---
+
+<section class="mfc-start-building not-content" id="start-building">
+  <div class="mfc-building-inner">
+    {/* Section Header */}
+    <div class="mfc-building-header">
+      <h2 class="mfc-building-title">Start building</h2>
+      <p class="mfc-building-subtitle">
+        Choose your integration path and connect your first form.
+      </p>
+    </div>
+
+    {/* 4 Cards Grid in 1:1 Aspect Ratio */}
+    <div class="mfc-building-grid">
+      {/* Card 1: Integrating HTML Forms */}
+      <a
+        href="/guides/html-form/"
+        class="mfc-building-card is-link"
+        data-path="html"
+      >
+        <div class="mfc-card-top-row">
+          <div class="mfc-card-icons mfc-paired-html-js" aria-hidden="true">
+            {/* HTML5 Badge */}
+            <div class="mfc-html-badge" title="HTML5">
+              <svg
+                width="22"
+                height="26"
+                viewBox="0 0 24 28"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M2 0H22L20.2 21.5L12 24L3.8 21.5L2 0Z" fill="#E44D26"
+                ></path>
+                <path d="M12 22.2L18.7 20.3L20.2 2H12V22.2Z" fill="#F16529"
+                ></path>
+                <path d="M4 2.5H20V5H4V2.5Z" fill="#E44D26"></path>
+                <text
+                  x="12"
+                  y="4.5"
+                  fill="#FFFFFF"
+                  font-size="2.6"
+                  font-family="system-ui, sans-serif"
+                  font-weight="900"
+                  text-anchor="middle"
+                  letter-spacing="0.2">HTML</text
+                >
+                <text
+                  x="12"
+                  y="17.5"
+                  fill="#FFFFFF"
+                  font-size="14"
+                  font-family="system-ui, sans-serif"
+                  font-weight="900"
+                  text-anchor="middle">5</text
+                >
+              </svg>
+            </div>
+          </div>
+          <h3 class="mfc-card-heading">
+            Integrating<br class="mfc-heading-break" />HTML Forms
+          </h3>
+        </div>
+
+        <p class="mfc-card-desc">
+          Connect static websites and standard HTML forms without building a
+          backend.
+        </p>
+
+        <div class="mfc-card-footer">
+          <span class="mfc-card-link-text">Read Guide</span>
+          <span class="mfc-card-arrow" aria-hidden="true">&rarr;</span>
+        </div>
+      </a>
+
+      {/* Card 2: Using React SDK */}
+      <a
+        href="/guides/react/"
+        class="mfc-building-card is-link"
+        data-path="react"
+      >
+        <div class="mfc-card-top-row">
+          <div class="mfc-card-icons" aria-hidden="true">
+            <div class="mfc-react-icon" title="React">
+              <svg width="28" height="28" viewBox="0 0 128 128" fill="none">
+                <circle cx="64" cy="64" r="11" fill="#00bcd4"></circle>
+                <ellipse
+                  cx="64"
+                  cy="64"
+                  rx="54"
+                  ry="20"
+                  stroke="#00bcd4"
+                  stroke-width="7"
+                  fill="none"></ellipse>
+                <ellipse
+                  cx="64"
+                  cy="64"
+                  rx="54"
+                  ry="20"
+                  stroke="#00bcd4"
+                  stroke-width="7"
+                  fill="none"
+                  transform="rotate(60 64 64)"></ellipse>
+                <ellipse
+                  cx="64"
+                  cy="64"
+                  rx="54"
+                  ry="20"
+                  stroke="#00bcd4"
+                  stroke-width="7"
+                  fill="none"
+                  transform="rotate(120 64 64)"></ellipse>
+              </svg>
+            </div>
+          </div>
+          <h3 class="mfc-card-heading">Using React SDK</h3>
+        </div>
+
+        <p class="mfc-card-desc">
+          Handle form state, asynchronous submission, and user feedback.
+        </p>
+
+        <div class="mfc-card-footer">
+          <span class="mfc-card-link-text">Read Guide</span>
+          <span class="mfc-card-arrow" aria-hidden="true">&rarr;</span>
+        </div>
+      </a>
+
+      {/* Card 3: API Quickstart */}
+      <a href="#api" class="mfc-building-card is-link" data-path="api">
+        <div class="mfc-card-top-row">
+          <div class="mfc-card-icons" aria-hidden="true">
+            <div class="mfc-terminal-badge" title="API Quickstart">
+              <svg width="30" height="24" viewBox="0 0 32 26" fill="none">
+                <rect width="32" height="26" rx="5" fill="#1e293b"></rect>
+                <polyline
+                  points="7 8 12 13 7 18"
+                  stroke="#ffffff"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></polyline>
+                <line
+                  x1="15"
+                  y1="18"
+                  x2="23"
+                  y2="18"
+                  stroke="#ffffff"
+                  stroke-width="2.2"
+                  stroke-linecap="round"></line>
+              </svg>
+            </div>
+          </div>
+          <h3 class="mfc-card-heading">API Quickstart</h3>
+        </div>
+
+        <p class="mfc-card-desc">
+          Learn how to send form submissions programmatically.
+        </p>
+
+        <div class="mfc-card-footer">
+          <span class="mfc-card-link-text">Read Guide</span>
+          <span class="mfc-card-arrow" aria-hidden="true">&rarr;</span>
+        </div>
+      </a>
+
+      {/* Card 4: AI Webhooks */}
+      <a
+        href="#webhooks"
+        class="mfc-building-card is-link"
+        data-path="webhooks"
+      >
+        <div class="mfc-card-top-row">
+          <div class="mfc-card-icons" aria-hidden="true">
+            <div class="mfc-ai-webhooks-icon" title="AI Webhooks">
+              <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                <ellipse
+                  cx="16"
+                  cy="16"
+                  rx="13"
+                  ry="5.5"
+                  stroke="#a855f7"
+                  stroke-width="1.8"
+                  stroke-dasharray="2.5 2.5"
+                  transform="rotate(-30 16 16)"></ellipse>
+                <ellipse
+                  cx="16"
+                  cy="16"
+                  rx="13"
+                  ry="5.5"
+                  stroke="#8b5cf6"
+                  stroke-width="1.8"
+                  stroke-dasharray="2.5 2.5"
+                  transform="rotate(30 16 16)"></ellipse>
+                <circle
+                  cx="16"
+                  cy="7"
+                  r="3.5"
+                  fill="#7c3aed"
+                  stroke="#ffffff"
+                  stroke-width="1.5"></circle>
+                <circle
+                  cx="8"
+                  cy="22"
+                  r="3.5"
+                  fill="#7c3aed"
+                  stroke="#ffffff"
+                  stroke-width="1.5"></circle>
+                <circle
+                  cx="24"
+                  cy="22"
+                  r="3.5"
+                  fill="#7c3aed"
+                  stroke="#ffffff"
+                  stroke-width="1.5"></circle>
+                <circle cx="16" cy="16" r="2" fill="#c084fc"></circle>
+              </svg>
+            </div>
+          </div>
+          <h3 class="mfc-card-heading">AI Webhooks</h3>
+        </div>
+
+        <p class="mfc-card-desc">
+          Connect form submission events to automated workflows.
+        </p>
+
+        <div class="mfc-card-footer">
+          <span class="mfc-card-link-text">Read Guide</span>
+          <span class="mfc-card-arrow" aria-hidden="true">&rarr;</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     StartBuilding Component Styles
+     Section preceding Popular Integrations
+     ========================================================================== */
+
+  .mfc-start-building {
+    width: 100%;
+    padding: 0.85rem 2rem 0.85rem;
+    box-sizing: border-box;
+    background-color: #ffffff;
+  }
+
+  .mfc-building-inner {
+    max-width: 86rem;
+    margin: 0 auto;
+  }
+
+  /* --------------------------------------------------------------------------
+     Header: Title & Subtitle
+     -------------------------------------------------------------------------- */
+  .mfc-building-header {
+    margin-bottom: 1.15rem;
+  }
+
+  .mfc-building-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.025em;
+    margin: 0 0 0.35rem;
+    line-height: 1.25;
+  }
+
+  .mfc-building-subtitle {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  /* --------------------------------------------------------------------------
+     Cards Grid: 4 Column Layout
+     -------------------------------------------------------------------------- */
+  .mfc-building-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.15rem;
+    width: 100%;
+  }
+
+  /* --------------------------------------------------------------------------
+     1:1 Ratio Card Design
+     -------------------------------------------------------------------------- */
+  .mfc-building-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1.2rem 1.1rem 1rem;
+    box-sizing: border-box;
+    text-decoration: none !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .mfc-building-card:hover {
+    border-color: #93c5fd;
+    box-shadow:
+      0 10px 24px -4px rgba(37, 99, 235, 0.09),
+      0 2px 6px -1px rgba(15, 23, 42, 0.04);
+    transform: translateY(-2px);
+  }
+
+  /* --------------------------------------------------------------------------
+     Card Header Row (Icon + Title)
+     -------------------------------------------------------------------------- */
+  .mfc-card-top-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0;
+    margin-bottom: 0.6rem;
+  }
+
+  .mfc-card-icons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .mfc-paired-html-js {
+    gap: 0.3rem;
+  }
+
+  .mfc-html-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 1px 2px rgba(228, 77, 38, 0.18));
+  }
+
+  .mfc-js-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 1px 2px rgba(247, 223, 30, 0.2));
+  }
+
+  .mfc-react-icon,
+  .mfc-terminal-badge,
+  .mfc-ai-webhooks-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mfc-card-heading {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.25;
+    margin: 0 !important;
+    letter-spacing: -0.015em;
+  }
+
+  /* --------------------------------------------------------------------------
+     Card Description (Compact Size to Fit 1:1)
+     -------------------------------------------------------------------------- */
+  .mfc-card-desc {
+    font-size: 0.78rem;
+    color: #475569;
+    line-height: 1.45;
+    margin: 0;
+    flex-grow: 1;
+  }
+
+  /* --------------------------------------------------------------------------
+     Card Footer (Read Guide Link on All Cards)
+     -------------------------------------------------------------------------- */
+  .mfc-card-footer {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #2563eb;
+    margin-top: auto;
+    padding-top: 0.45rem;
+    transition: gap 0.15s ease;
+  }
+
+  .mfc-building-card:hover .mfc-card-footer {
+    gap: 0.45rem;
+  }
+
+  .mfc-card-arrow {
+    transition: transform 0.15s ease;
+    font-size: 0.85rem;
+    line-height: 1;
+  }
+
+  .mfc-building-card:hover .mfc-card-arrow {
+    transform: translateX(2px);
+  }
+
+  /* --------------------------------------------------------------------------
+     Responsive Breakpoints
+     -------------------------------------------------------------------------- */
+  @media (max-width: 1100px) {
+    .mfc-building-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .mfc-start-building {
+      padding: 0.85rem 1.25rem 1rem;
+    }
+
+    .mfc-building-title {
+      font-size: 1.25rem;
+    }
+
+    .mfc-building-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.75rem;
+    }
+
+    .mfc-building-card {
+      padding: 1rem 0.85rem 0.85rem;
+    }
+
+    .mfc-card-heading {
+      font-size: 0.85rem;
+    }
+
+    .mfc-card-desc {
+      font-size: 0.75rem;
+      line-height: 1.35;
+    }
+
+    .mfc-card-footer {
+      font-size: 0.75rem;
+    }
+
+    .mfc-heading-break {
+      display: none;
+    }
+  }
+
+  @media (max-width: 440px) {
+    .mfc-building-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .mfc-building-card {
+      aspect-ratio: 1.25 / 1;
+      padding: 1.15rem;
+    }
+
+    .mfc-card-heading {
+      font-size: 0.925rem;
+    }
+
+    .mfc-card-desc {
+      font-size: 0.8rem;
+    }
+  }
+</style>

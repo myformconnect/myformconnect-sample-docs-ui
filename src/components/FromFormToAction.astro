@@ -1,0 +1,621 @@
+---
+// FromFormToAction.astro — "From Form to Action" section
+// Displays 4 square 1:1 workflow cards with circular numbering badges,
+// colored squircle icons, and circular sequence connector arrows.
+---
+
+<section class="mfc-form-to-action not-content" id="from-form-to-action">
+  <div class="mfc-action-inner">
+    {/* Section Header */}
+    <div class="mfc-action-header">
+      <h2 class="mfc-action-title">
+        From Form to <span class="mfc-title-action">Action</span>
+      </h2>
+
+      <p class="mfc-action-subtitle">
+        See how MyFormCapture turns form submissions into protected, enriched,
+        and actionable leads.
+      </p>
+    </div>
+
+    {/* Workflow Cards Area with Circular Arrow Connectors */}
+    <div class="mfc-flow-wrapper">
+      <div class="mfc-flow-grid">
+        {/* Card 01: Capture */}
+        <article class="mfc-flow-card">
+          <div class="mfc-card-top-bar">
+            <span class="mfc-step-circle circle-blue" aria-label="Step 01"
+              >01</span
+            >
+          </div>
+
+          <div class="mfc-card-content-wrap">
+            <div class="mfc-icon-squircle squircle-blue" aria-hidden="true">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#2563eb"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                ></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <line x1="10" y1="9" x2="8" y2="9"></line>
+              </svg>
+            </div>
+
+            <h3 class="mfc-flow-heading">Capture</h3>
+            <p class="mfc-flow-desc">
+              Collect submissions from HTML, React, Wix, and other platforms.
+            </p>
+          </div>
+        </article>
+
+        {/* Connector 1 -> 2 */}
+        <div class="mfc-flow-connector" aria-hidden="true">
+          <div class="mfc-connector-line"></div>
+          <div class="mfc-connector-circle">
+            <svg
+              class="mfc-arrow-h"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+            <svg
+              class="mfc-arrow-v"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="5 12 12 19 19 12"></polyline>
+            </svg>
+          </div>
+        </div>
+
+        {/* Card 02: Protect */}
+        <article class="mfc-flow-card">
+          <div class="mfc-card-top-bar">
+            <span class="mfc-step-circle circle-green" aria-label="Step 02"
+              >02</span
+            >
+          </div>
+
+          <div class="mfc-card-content-wrap">
+            <div class="mfc-icon-squircle squircle-green" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"
+                  fill="#10b981"></path>
+                <polyline
+                  points="9 12 11 14 15 10"
+                  stroke="#ffffff"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"></polyline>
+              </svg>
+            </div>
+
+            <h3 class="mfc-flow-heading">Protect</h3>
+            <p class="mfc-flow-desc">
+              Apply domain validation and spam-protection methods.
+            </p>
+          </div>
+        </article>
+
+        {/* Connector 2 -> 3 */}
+        <div class="mfc-flow-connector" aria-hidden="true">
+          <div class="mfc-connector-line"></div>
+          <div class="mfc-connector-circle">
+            <svg
+              class="mfc-arrow-h"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+            <svg
+              class="mfc-arrow-v"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="5 12 12 19 19 12"></polyline>
+            </svg>
+          </div>
+        </div>
+
+        {/* Card 03: Enrich */}
+        <article class="mfc-flow-card">
+          <div class="mfc-card-top-bar">
+            <span class="mfc-step-circle circle-purple" aria-label="Step 03"
+              >03</span
+            >
+          </div>
+
+          <div class="mfc-card-content-wrap">
+            <div class="mfc-icon-squircle squircle-purple" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#a855f7">
+                <path
+                  d="m10 2 1.6 4.4L16 8l-4.4 1.6L10 14l-1.6-4.4L4 8l4.4-1.6L10 2z"
+                ></path>
+                <path
+                  d="m18 13 1 2.5 2.5 1-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1 1-2.5z"
+                ></path>
+              </svg>
+            </div>
+
+            <h3 class="mfc-flow-heading">Enrich</h3>
+            <p class="mfc-flow-desc">
+              Make incoming leads easier to understand with AI-powered
+              summaries.
+            </p>
+          </div>
+        </article>
+
+        {/* Connector 3 -> 4 */}
+        <div class="mfc-flow-connector" aria-hidden="true">
+          <div class="mfc-connector-line"></div>
+          <div class="mfc-connector-circle">
+            <svg
+              class="mfc-arrow-h"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+            <svg
+              class="mfc-arrow-v"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <polyline points="5 12 12 19 19 12"></polyline>
+            </svg>
+          </div>
+        </div>
+
+        {/* Card 04: Route */}
+        <article class="mfc-flow-card">
+          <div class="mfc-card-top-bar">
+            <span class="mfc-step-circle circle-orange" aria-label="Step 04"
+              >04</span
+            >
+          </div>
+
+          <div class="mfc-card-content-wrap">
+            <div class="mfc-icon-squircle squircle-orange" aria-hidden="true">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#f97316">
+                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+              </svg>
+            </div>
+
+            <h3 class="mfc-flow-heading">Route</h3>
+            <p class="mfc-flow-desc">
+              Deliver notifications through email, Slack, and supported
+              webhooks.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     From Form to Action Section
+     ========================================================================== */
+  .mfc-form-to-action {
+    width: 100%;
+    padding: 0.85rem 2rem 2.5rem;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    position: relative;
+  }
+
+  .mfc-action-inner {
+    max-width: 86rem;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* --------------------------------------------------------------------------
+     Header: Consistent Section Title (Documentation Scale) & Subtitle
+     -------------------------------------------------------------------------- */
+  .mfc-action-header {
+    margin-bottom: 1.15rem;
+  }
+
+  .mfc-action-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+    margin: 0 0 0.35rem;
+  }
+
+  .mfc-title-action {
+    color: #2563eb;
+  }
+
+  .mfc-action-subtitle {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  /* --------------------------------------------------------------------------
+     Workflow Area
+     -------------------------------------------------------------------------- */
+  .mfc-flow-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
+  /* --------------------------------------------------------------------------
+     Horizontal Grid with Cards & Connectors
+     -------------------------------------------------------------------------- */
+  .mfc-flow-grid {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  /* --------------------------------------------------------------------------
+     1:1 Square Flow Card Design
+     -------------------------------------------------------------------------- */
+  .mfc-flow-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    flex: 1 1 0;
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+    background: #ffffff;
+    border: 1px solid #eef2f6;
+    border-radius: 12px;
+    padding: 1rem 0.95rem 1.05rem;
+    box-sizing: border-box;
+    box-shadow:
+      0 4px 18px -2px rgba(15, 23, 42, 0.04),
+      0 1px 3px rgba(15, 23, 42, 0.02);
+    transition:
+      transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+    overflow: hidden;
+  }
+
+  .mfc-flow-card:hover {
+    transform: translateY(-3px);
+    border-color: #dbeafe;
+    box-shadow:
+      0 12px 26px -4px rgba(37, 99, 235, 0.09),
+      0 2px 6px -1px rgba(15, 23, 42, 0.03);
+  }
+
+  /* Top bar inside card: left-aligned circular number badge */
+  .mfc-card-top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 0.15rem;
+  }
+
+  .mfc-step-circle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    font-weight: 700;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    flex-shrink: 0;
+    user-select: none;
+  }
+
+  .circle-blue {
+    background-color: #eff6ff;
+    color: #2563eb;
+  }
+
+  .circle-green {
+    background-color: #f0fdf4;
+    color: #16a34a;
+  }
+
+  .circle-purple {
+    background-color: #faf5ff;
+    color: #9333ea;
+  }
+
+  .circle-orange {
+    background-color: #fff7ed;
+    color: #ea580c;
+  }
+
+  /* Main Card Content: Centered icon squircle, heading, description */
+  .mfc-card-content-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    flex-grow: 1;
+  }
+
+  /* Center Icon Squircle */
+  .mfc-icon-squircle {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.5rem;
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+  }
+
+  .mfc-flow-card:hover .mfc-icon-squircle {
+    transform: scale(1.05);
+  }
+
+  .squircle-blue {
+    background-color: #eff6ff;
+  }
+
+  .squircle-green {
+    background-color: #ecfdf5;
+  }
+
+  .squircle-purple {
+    background-color: #f3e8ff;
+  }
+
+  .squircle-orange {
+    background-color: #ffedd5;
+  }
+
+  /* Heading & Description (Centered) */
+  .mfc-flow-heading {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.25;
+    margin: 0 !important;
+    letter-spacing: -0.015em;
+  }
+
+  .mfc-flow-desc {
+    font-size: 0.775rem;
+    color: #64748b;
+    line-height: 1.4;
+    margin: 0.35rem 0 0 !important;
+  }
+
+  /* --------------------------------------------------------------------------
+     Connector between Cards: Dashed Line + Circular Arrow Badge
+     -------------------------------------------------------------------------- */
+  .mfc-flow-connector {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 44px;
+    height: 32px;
+    user-select: none;
+  }
+
+  /* Horizontal dashed line spanning behind the circle */
+  .mfc-connector-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 0;
+    border-top: 1.5px dashed #bfdbfe;
+    z-index: 1;
+  }
+
+  /* Circular arrow pill */
+  .mfc-connector-circle {
+    position: relative;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #dbeafe;
+    box-shadow: 0 2px 5px rgba(37, 99, 235, 0.08);
+    color: #2563eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition:
+      transform 0.15s ease,
+      border-color 0.15s ease;
+  }
+
+  .mfc-arrow-h {
+    display: block;
+  }
+
+  .mfc-arrow-v {
+    display: none;
+  }
+
+  /* --------------------------------------------------------------------------
+     Responsive Breakpoints & Mobile Stacking
+     -------------------------------------------------------------------------- */
+  @media (max-width: 960px) {
+    .mfc-flow-grid {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .mfc-flow-card {
+      width: 100%;
+      max-width: 380px;
+      aspect-ratio: auto;
+      min-height: auto;
+      padding: 1.25rem 1.15rem 1.35rem;
+    }
+
+    .mfc-flow-connector {
+      flex: none;
+      width: 32px;
+      height: 42px;
+      margin: 0 auto;
+    }
+
+    .mfc-connector-line {
+      left: 50%;
+      right: auto;
+      top: 0;
+      bottom: 0;
+      width: 0;
+      height: 100%;
+      border-top: none;
+      border-left: 1.5px dashed #bfdbfe;
+    }
+
+    .mfc-arrow-h {
+      display: none;
+    }
+
+    .mfc-arrow-v {
+      display: block;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .mfc-form-to-action {
+      padding: 0.85rem 1.25rem 2rem;
+    }
+
+    .mfc-action-title {
+      font-size: 1.25rem;
+    }
+
+    .mfc-action-subtitle {
+      font-size: 0.825rem;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     Reduced Motion Support
+     -------------------------------------------------------------------------- */
+  @media (prefers-reduced-motion: reduce) {
+    .mfc-flow-card,
+    .mfc-icon-squircle,
+    .mfc-connector-circle {
+      transition: none !important;
+    }
+
+    .mfc-flow-card:hover {
+      transform: none !important;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     Dark Theme Styles
+     -------------------------------------------------------------------------- */
+  :root[data-theme="dark"] .mfc-form-to-action {
+    background-color: transparent;
+  }
+
+  :root[data-theme="dark"] .mfc-action-title {
+    color: #f8fafc;
+  }
+
+  :root[data-theme="dark"] .mfc-action-subtitle {
+    color: #94a3b8;
+  }
+
+  :root[data-theme="dark"] .mfc-flow-card {
+    background: #0f172a;
+    border-color: #1e293b;
+    box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.4);
+  }
+
+  :root[data-theme="dark"] .mfc-flow-card:hover {
+    border-color: #3b82f6;
+  }
+
+  :root[data-theme="dark"] .mfc-flow-heading {
+    color: #f8fafc;
+  }
+
+  :root[data-theme="dark"] .mfc-flow-desc {
+    color: #94a3b8;
+  }
+
+  :root[data-theme="dark"] .mfc-connector-circle {
+    background: #1e293b;
+    border-color: #334155;
+    color: #60a5fa;
+  }
+
+  :root[data-theme="dark"] .mfc-connector-line {
+    border-color: #334155;
+  }
+</style>

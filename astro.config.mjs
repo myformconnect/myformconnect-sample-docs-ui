@@ -12,6 +12,7 @@ export default defineConfig({
       components: {
         Header: './src/components/Header.astro',
         PageTitle: './src/components/PageTitle.astro',
+        Sidebar: './src/components/Sidebar.astro',
       },
       expressiveCode: {
         themes: ['github-dark'],
@@ -20,25 +21,56 @@ export default defineConfig({
       sidebar: [
         {
           label: 'Getting Started',
+          collapsed: false,
           items: [
-            { label: 'Welcome', link: '/' },
+            { label: 'Overview', link: '/' },
+            { label: 'Integrating HTML Forms', link: '/guides/html-form/' },
+            { label: 'Using React SDK', link: '/guides/react/' },
+            { label: 'API Quickstart', link: '/guides/wix/' },
+          ],
+        },
+        {
+          label: 'Features',
+          collapsed: false,
+          items: [
+            { label: 'Domain Configuration', link: '/#explore-the-platform' },
+            { label: 'Form Configuration', link: '/#explore-the-platform' },
+            { label: 'Loader.js', link: '/#explore-the-platform' },
+            { label: 'Booking Widget', link: '/#explore-the-platform' },
+            { label: 'File Uploads', link: '/#explore-the-platform' },
+            { label: 'Spam & CAPTCHA', link: '/#explore-the-platform' },
+            { label: 'Autoresponder Emails', link: '/#explore-the-platform' },
           ],
         },
         {
           label: 'Integrations',
+          collapsed: false,
           items: [
-            { label: 'HTML Form Integration', link: '/guides/html-form/' },
-            { label: 'React Integration', link: '/guides/react/' },
-            { label: 'Wix Integration', link: '/guides/wix/' },
+            { label: 'Frameworks', link: '/#popular-integrations' },
+            { label: 'CMS Platforms', link: '/#popular-integrations' },
+            { label: 'Website Builders', link: '/#popular-integrations' },
+            { label: 'No-code Tools', link: '/#popular-integrations' },
+            { label: 'Automation & Webhooks', link: '/#popular-integrations' },
           ],
         },
         {
-          label: 'More Guides',
+          label: 'Deployment',
+          collapsed: false,
           items: [
-            { label: 'Webhooks', link: '/#webhooks', badge: { text: 'Soon', variant: 'caution' } },
-            { label: 'Booking Widget', link: '/#booking-widget', badge: { text: 'Soon', variant: 'caution' } },
-            { label: 'File Upload', link: '/#file-upload', badge: { text: 'Soon', variant: 'caution' } },
-            { label: 'WordPress', link: '/#wordpress', badge: { text: 'Soon', variant: 'caution' } },
+            { label: 'Static Sites', link: '/#more-guides' },
+            { label: 'GitHub Pages', link: '/#more-guides' },
+            { label: 'Vercel', link: '/#more-guides' },
+            { label: 'Netlify', link: '/#more-guides' },
+            { label: 'Cloudflare Pages', link: '/#more-guides' },
+          ],
+        },
+        {
+          label: 'AI & No-Backend Forms',
+          collapsed: false,
+          items: [
+            { label: 'Build Forms with AI', link: '/#from-form-to-action' },
+            { label: 'HTML Contact Form', link: '/#from-form-to-action' },
+            { label: 'Backend for AI Websites', link: '/#from-form-to-action' },
           ],
         },
       ],

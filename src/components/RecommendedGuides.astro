@@ -1,0 +1,255 @@
+---
+// RecommendedGuides.astro (More guides section)
+// Editorial multi-column layout inspired by Stripe Docs content organization
+// Features 5 category columns with bold headings and blue text links
+
+interface GuideLink {
+  label: string;
+  href: string;
+}
+
+interface GuideCategory {
+  title: string;
+  links: GuideLink[];
+}
+
+const categories: GuideCategory[] = [
+  {
+    title: "Getting started",
+    links: [
+      { label: "Getting Started", href: "/" },
+      { label: "HTML Form Integration", href: "/guides/html-form/" },
+      { label: "React Integration", href: "/guides/react/" },
+      { label: "API Quickstart", href: "/#api" },
+      {
+        label: "Your First Submission",
+        href: "/guides/html-form/#the-html-markup",
+      },
+    ],
+  },
+  {
+    title: "Form configuration",
+    links: [
+      { label: "Domain Configuration", href: "/#explore-the-platform" },
+      { label: "Form Configuration", href: "/#explore-the-platform" },
+      { label: "Custom Redirects", href: "/#explore-the-platform" },
+      { label: "Loader.js", href: "/#explore-the-platform" },
+      { label: "Tables & Choice Matrices", href: "/#explore-the-platform" },
+    ],
+  },
+  {
+    title: "Integrations",
+    links: [
+      { label: "React & Next.js", href: "/guides/react/" },
+      { label: "WordPress", href: "/#wordpress" },
+      { label: "Wix & Wix Studio", href: "/guides/wix/" },
+      { label: "Webflow & Website Builders", href: "/#popular-integrations" },
+      { label: "Custom Webhooks", href: "/#webhooks" },
+    ],
+  },
+  {
+    title: "Security & automation",
+    links: [
+      { label: "Spam & CAPTCHA", href: "/#explore-the-platform" },
+      { label: "Domain Restrictions", href: "/#explore-the-platform" },
+      { label: "Email Notifications", href: "/#explore-the-platform" },
+      { label: "Autoresponder Emails", href: "/#explore-the-platform" },
+      { label: "AI Lead Summaries", href: "/#from-form-to-action" },
+    ],
+  },
+  {
+    title: "Advanced features",
+    links: [
+      { label: "Booking Widget", href: "/#booking-widget" },
+      { label: "File Uploads", href: "/#file-upload" },
+      { label: "Forms with AI", href: "/#from-form-to-action" },
+      { label: "Zapier & Make.com", href: "/#popular-integrations" },
+      { label: "Deployment Guides", href: "/#start-building" },
+    ],
+  },
+];
+---
+
+<section class="mfc-more-guides not-content" id="more-guides">
+  <div class="mfc-more-guides-inner">
+    {/* Section Heading */}
+    <h2 class="mfc-more-guides-title">More guides</h2>
+
+    {/* 5-Column Editorial Grid */}
+    <div class="mfc-guides-columns">
+      {
+        categories.map((cat) => (
+          <div class="mfc-guide-col">
+            <h3 class="mfc-col-heading">{cat.title}</h3>
+            <ul class="mfc-links-list">
+              {cat.links.map((link) => (
+                <li>
+                  <a href={link.href} class="mfc-guide-link">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     More Guides Component Styles
+     Editorial multi-column layout inspired by Stripe Docs
+     ========================================================================== */
+
+  .mfc-more-guides {
+    width: 100%;
+    padding: 2.75rem 2rem 2.5rem;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .mfc-more-guides-inner {
+    max-width: 86rem;
+    margin: 0 auto;
+  }
+
+  .mfc-more-guides-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.025em;
+    line-height: 1.25;
+    margin: 0 0 1.5rem !important;
+  }
+
+  /* 5-Column Grid */
+  .mfc-guides-columns {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 2.25rem 1.75rem;
+    width: 100%;
+  }
+
+  /* Column Container */
+  .mfc-guide-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Column Category Heading */
+  .mfc-col-heading {
+    font-size: 0.925rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.015em;
+    margin: 0 0 0.85rem !important;
+    line-height: 1.35;
+  }
+
+  /* Vertical List of Links */
+  .mfc-links-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    width: 100%;
+  }
+
+  .mfc-links-list li {
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
+  }
+
+  /* Individual Text Link */
+  .mfc-guide-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #2563eb !important;
+    text-decoration: none !important;
+    line-height: 1.4;
+    transition:
+      color 0.15s ease,
+      text-decoration 0.15s ease;
+    display: inline-block;
+  }
+
+  .mfc-guide-link:hover {
+    color: #1d4ed8 !important;
+    text-decoration: underline !important;
+  }
+
+  .mfc-guide-link:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  /* --------------------------------------------------------------------------
+     Responsive Breakpoints
+     -------------------------------------------------------------------------- */
+  @media (max-width: 1080px) {
+    .mfc-guides-columns {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 2rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .mfc-more-guides {
+      padding: 2rem 1.25rem 3.5rem;
+    }
+
+    .mfc-more-guides-title {
+      font-size: 1.35rem;
+      margin-bottom: 1.25rem !important;
+    }
+
+    .mfc-guides-columns {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.75rem 1.25rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .mfc-more-guides-title {
+      font-size: 1.25rem;
+      margin-bottom: 1rem !important;
+    }
+
+    .mfc-guides-columns {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     Dark Theme Styles
+     -------------------------------------------------------------------------- */
+  :root[data-theme="dark"] .mfc-more-guides {
+    background-color: transparent;
+    border-top-color: #1e293b;
+  }
+
+  :root[data-theme="dark"] .mfc-more-guides-title {
+    color: #f8fafc;
+  }
+
+  :root[data-theme="dark"] .mfc-col-heading {
+    color: #f1f5f9;
+  }
+
+  :root[data-theme="dark"] .mfc-guide-link {
+    color: #60a5fa !important;
+  }
+
+  :root[data-theme="dark"] .mfc-guide-link:hover {
+    color: #93c5fd !important;
+  }
+</style>

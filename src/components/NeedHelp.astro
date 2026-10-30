@@ -1,0 +1,339 @@
+---
+// NeedHelp.astro — Compact "Need Help?" banner at the bottom of the homepage
+// Follows MyFormCapture blue-and-white theme with responsive desktop/mobile layouts
+---
+
+<section class="mfc-need-help not-content" id="need-help">
+  <div class="mfc-need-help-inner">
+    <div class="mfc-need-help-card">
+      {/* Left Column: Heading & Description */}
+      <div class="mfc-help-text-wrap">
+        <h3 class="mfc-help-heading">Need a hand with your integration?</h3>
+        <p class="mfc-help-desc">
+          Whether you're configuring a form, connecting a platform, or troubleshooting a submission, we're here to help.
+        </p>
+      </div>
+
+      {/* Right Column: Actions */}
+      <div class="mfc-help-actions">
+        <a
+          href="#contact-support"
+          class="mfc-btn-support"
+          aria-label="Contact Support — Get help with your integration"
+        >
+          <span>Contact Support</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+
+        <div class="mfc-help-secondary-links">
+          <a
+            href="/guides/html-form/"
+            class="mfc-help-link"
+            title="Explore guides and setup instructions"
+          >
+            Browse Documentation
+          </a>
+
+          <span class="mfc-link-dot" aria-hidden="true">&bull;</span>
+
+          <a
+            href="#troubleshooting"
+            class="mfc-help-link"
+            title="Find solutions to common issues"
+          >
+            Troubleshooting
+          </a>
+        </div>
+      </div>
+    </div>
+
+    {/* Footer Attribution */}
+    <div class="mfc-footer-attribution">
+      <span>Powered by <a href="https://myformconnect.io" target="_blank" rel="noopener noreferrer" class="mfc-powered-link">MyFormConnect</a></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* ==========================================================================
+     Need Help Component Styles
+     Slim, professional banner placed after More Guides
+     ========================================================================== */
+
+  .mfc-need-help {
+    width: 100%;
+    padding: 0.75rem 2rem 4rem;
+    box-sizing: border-box;
+    background-color: #ffffff;
+  }
+
+  .mfc-need-help-inner {
+    max-width: 86rem;
+    margin: 0 auto;
+  }
+
+  /* Compact Card Banner */
+  .mfc-need-help-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 12px;
+    padding: 1.6rem 2rem;
+    box-sizing: border-box;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .mfc-need-help-card:hover {
+    border-color: #93c5fd;
+    box-shadow: 0 4px 16px -2px rgba(37, 99, 235, 0.08);
+  }
+
+  /* Left Column */
+  .mfc-help-text-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 44rem;
+  }
+
+  .mfc-help-heading {
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.3;
+    margin: 0 0 0.35rem !important;
+    letter-spacing: -0.02em;
+  }
+
+  .mfc-help-desc {
+    font-size: 0.875rem;
+    color: #475569;
+    line-height: 1.5;
+    margin: 0 !important;
+  }
+
+  /* Right Column: Actions */
+  .mfc-help-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  /* Blue Primary Button */
+  .mfc-btn-support {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    padding: 0.6rem 1.25rem;
+    background-color: #2563eb;
+    color: #ffffff !important;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.25;
+    border-radius: 7px;
+    border: 1px solid #2563eb;
+    text-decoration: none !important;
+    white-space: nowrap;
+    transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 1px 3px rgba(37, 99, 235, 0.2);
+    cursor: pointer;
+  }
+
+  .mfc-btn-support:hover {
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
+  }
+
+  .mfc-btn-support:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+  }
+
+  .mfc-btn-support svg {
+    transition: transform 0.15s ease;
+  }
+
+  .mfc-btn-support:hover svg {
+    transform: translateX(2px);
+  }
+
+  /* Secondary Links Group */
+  .mfc-help-secondary-links {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    white-space: nowrap;
+  }
+
+  .mfc-help-link {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #2563eb !important;
+    text-decoration: none !important;
+    transition: color 0.15s ease, text-decoration 0.15s ease;
+  }
+
+  .mfc-help-link:hover {
+    color: #1d4ed8 !important;
+    text-decoration: underline !important;
+  }
+
+  .mfc-help-link:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .mfc-link-dot {
+    color: #94a3b8;
+    font-size: 0.75rem;
+    user-select: none;
+  }
+
+  /* --------------------------------------------------------------------------
+     Responsive Breakpoints
+     -------------------------------------------------------------------------- */
+  @media (max-width: 960px) {
+    .mfc-need-help-card {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.35rem;
+      padding: 1.5rem 1.5rem;
+    }
+
+    .mfc-help-actions {
+      width: 100%;
+      flex-wrap: wrap;
+      gap: 1rem 1.5rem;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .mfc-need-help {
+      padding: 0.5rem 1.25rem 3.5rem;
+    }
+
+    .mfc-need-help-card {
+      padding: 1.35rem 1.15rem;
+      border-radius: 10px;
+    }
+
+    .mfc-help-heading {
+      font-size: 1.1rem;
+    }
+
+    .mfc-help-desc {
+      font-size: 0.8125rem;
+    }
+
+    .mfc-help-actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+
+    .mfc-btn-support {
+      width: 100%;
+    }
+
+    .mfc-help-secondary-links {
+      justify-content: flex-start;
+      gap: 0.65rem;
+    }
+
+    .mfc-help-link {
+      font-size: 0.8125rem;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     Dark Theme Styles
+     -------------------------------------------------------------------------- */
+  :root[data-theme='dark'] .mfc-need-help {
+    background-color: transparent;
+  }
+
+  :root[data-theme='dark'] .mfc-need-help-card {
+    background: #0f172a;
+    border-color: #1e293b;
+    box-shadow: 0 4px 18px -2px rgba(0, 0, 0, 0.4);
+  }
+
+  :root[data-theme='dark'] .mfc-need-help-card:hover {
+    border-color: #3b82f6;
+  }
+
+  :root[data-theme='dark'] .mfc-help-heading {
+    color: #f8fafc;
+  }
+
+  :root[data-theme='dark'] .mfc-help-desc {
+    color: #94a3b8;
+  }
+
+  :root[data-theme='dark'] .mfc-help-link {
+    color: #60a5fa !important;
+  }
+
+  :root[data-theme='dark'] .mfc-help-link:hover {
+    color: #93c5fd !important;
+  }
+
+  :root[data-theme='dark'] .mfc-link-dot {
+    color: #475569;
+  }
+
+  /* --------------------------------------------------------------------------
+     Footer Attribution Styles
+     -------------------------------------------------------------------------- */
+  .mfc-footer-attribution {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    font-size: 0.8125rem;
+    color: #64748b;
+    font-weight: 500;
+  }
+
+  .mfc-powered-link {
+    color: #2563eb !important;
+    font-weight: 600;
+    text-decoration: none !important;
+    margin-left: 0.25rem;
+    transition: color 0.15s ease, text-decoration 0.15s ease;
+  }
+
+  .mfc-powered-link:hover {
+    color: #1d4ed8 !important;
+    text-decoration: underline !important;
+  }
+
+  .mfc-powered-link:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  :root[data-theme='dark'] .mfc-footer-attribution {
+    color: #94a3b8;
+  }
+
+  :root[data-theme='dark'] .mfc-powered-link {
+    color: #60a5fa !important;
+  }
+
+  :root[data-theme='dark'] .mfc-powered-link:hover {
+    color: #93c5fd !important;
+  }
+</style>

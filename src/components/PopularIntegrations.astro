@@ -1,0 +1,872 @@
+---
+// PopularIntegrations.astro — Popular Integrations directory section
+// Features category tabs, single-row horizontal scrolling, and overflow navigation arrows
+import Icon from "./Icon.astro";
+
+interface IntegrationItem {
+  id: string;
+  name: string;
+  icon: string;
+  href?: string;
+}
+
+interface CategoryGroup {
+  id: string;
+  label: string;
+  items: IntegrationItem[];
+}
+
+const categoriesData: CategoryGroup[] = [
+  {
+    id: "frameworks",
+    label: "Frameworks",
+    items: [
+      { id: "react", name: "React", icon: "react", href: "/guides/react/" },
+      { id: "nextjs", name: "Next.js", icon: "nextjs", href: "#nextjs" },
+      { id: "vue", name: "Vue.js", icon: "vue", href: "#vue" },
+      { id: "nuxt", name: "Nuxt", icon: "nuxt", href: "#nuxt" },
+      {
+        id: "svelte",
+        name: "Svelte / SvelteKit",
+        icon: "svelte",
+        href: "#svelte",
+      },
+      { id: "angular", name: "Angular", icon: "angular", href: "#angular" },
+      { id: "remix", name: "Remix", icon: "remix", href: "#remix" },
+      { id: "astro", name: "Astro", icon: "astro", href: "#astro" },
+      { id: "hugo", name: "Hugo", icon: "hugo", href: "#hugo" },
+      { id: "jekyll", name: "Jekyll", icon: "jekyll", href: "#jekyll" },
+    ],
+  },
+  {
+    id: "cms",
+    label: "CMS Platforms",
+    items: [
+      {
+        id: "wordpress",
+        name: "WordPress",
+        icon: "wordpress",
+        href: "#wordpress",
+      },
+      { id: "drupal", name: "Drupal", icon: "drupal", href: "#drupal" },
+      { id: "joomla", name: "Joomla", icon: "joomla", href: "#joomla" },
+      { id: "ghost", name: "Ghost", icon: "ghost", href: "#ghost" },
+      { id: "php", name: "PHP Sites", icon: "php", href: "#php" },
+    ],
+  },
+  {
+    id: "builders",
+    label: "Website Builders",
+    items: [
+      { id: "wix", name: "Wix", icon: "wix", href: "/guides/wix/" },
+      {
+        id: "squarespace",
+        name: "Squarespace",
+        icon: "squarespace",
+        href: "#squarespace",
+      },
+      { id: "webflow", name: "Webflow", icon: "webflow", href: "#webflow" },
+      {
+        id: "framer",
+        name: "Framer Form Backend",
+        icon: "framer",
+        href: "#framer",
+      },
+    ],
+  },
+  {
+    id: "nocode",
+    label: "No-code Tools",
+    items: [
+      { id: "carrd", name: "Carrd", icon: "carrd", href: "#carrd" },
+      { id: "notion", name: "Notion", icon: "notion", href: "#notion" },
+      { id: "bubble", name: "Bubble", icon: "bubble", href: "#bubble" },
+    ],
+  },
+  {
+    id: "automation",
+    label: "Automation",
+    items: [
+      { id: "slack", name: "Slack", icon: "slack", href: "#slack" },
+      {
+        id: "webhook",
+        name: "Custom Webhooks",
+        icon: "webhook",
+        href: "#webhook",
+      },
+      { id: "zapier", name: "Zapier", icon: "zapier", href: "#zapier" },
+      { id: "make", name: "Make.com", icon: "make", href: "#make" },
+      { id: "kit", name: "Waitlist + Kit.com", icon: "kit", href: "#kit" },
+    ],
+  },
+];
+---
+
+<section class="mfc-popular-integrations not-content" id="popular-integrations">
+  <div class="mfc-integrations-inner">
+    {/* Section Header */}
+    <div class="mfc-integrations-header">
+      <div class="mfc-header-left">
+        <div class="mfc-title-row">
+          <span class="mfc-grid-icon-wrap" aria-hidden="true">
+            <Icon name="grid" width="22" height="22" />
+          </span>
+          <h2 class="mfc-integrations-title">Popular integrations</h2>
+        </div>
+        <p class="mfc-integrations-subtitle">
+          Connect your form with the tools you already use.
+        </p>
+      </div>
+
+      <a href="#all-integrations" class="mfc-view-all-link">
+        <span>View all integrations</span>
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
+    </div>
+
+    {/* Category Tabs with Bottom Divider */}
+    <div class="mfc-category-tabs-container">
+      <div
+        class="mfc-category-tabs-row"
+        role="tablist"
+        aria-label="Integration categories"
+      >
+        {
+          categoriesData.map((cat, idx) => (
+            <button
+              type="button"
+              role="tab"
+              id={`mfc-tab-${cat.id}`}
+              aria-controls={`mfc-panel-${cat.id}`}
+              aria-selected={idx === 0 ? "true" : "false"}
+              class={`mfc-category-tab ${idx === 0 ? "is-active" : ""}`}
+              data-target={cat.id}
+            >
+              <span>{cat.label}</span>
+            </button>
+          ))
+        }
+      </div>
+      <div class="mfc-tabs-divider" aria-hidden="true"></div>
+    </div>
+
+    {
+      /* Category Panels: Each rendered in a single row with overflow navigation */
+    }
+    <div class="mfc-panels-container">
+      {
+        categoriesData.map((cat, idx) => (
+          <div
+            class={`mfc-category-panel ${idx === 0 ? "is-active" : ""}`}
+            id={`mfc-panel-${cat.id}`}
+            role="tabpanel"
+            aria-labelledby={`mfc-tab-${cat.id}`}
+            data-category={cat.id}
+          >
+            <div class="mfc-carousel-wrapper">
+              {/* Left navigation arrow */}
+              <button
+                type="button"
+                class="mfc-scroll-arrow mfc-scroll-arrow-left"
+                aria-label={`Scroll ${cat.label} backward`}
+                data-dir="left"
+                tabindex="-1"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+
+              {/* Single Row of Integration Cards */}
+              <div
+                class="mfc-cards-row"
+                tabindex="0"
+                role="region"
+                aria-label={`${cat.label} integrations list`}
+              >
+                {cat.items.map((item) => {
+                  const isVerifiedLink =
+                    item.href && !item.href.startsWith("#");
+                  const Tag = isVerifiedLink ? "a" : "div";
+                  return (
+                    <Tag
+                      href={isVerifiedLink ? item.href : undefined}
+                      class={`mfc-int-card ${isVerifiedLink ? "is-active-link" : "is-preview"}`}
+                      data-tech={item.id}
+                    >
+                      <div class="mfc-int-logo-box">
+                        <Icon name={item.icon} width="36" height="36" />
+                      </div>
+                      <div class="mfc-int-name">{item.name}</div>
+                      <div class="mfc-int-action">
+                        <span>View guide</span>
+                        <span class="mfc-int-arrow">&rarr;</span>
+                      </div>
+                    </Tag>
+                  );
+                })}
+              </div>
+
+              {/* Right navigation arrow */}
+              <button
+                type="button"
+                class="mfc-scroll-arrow mfc-scroll-arrow-right"
+                aria-label={`Scroll ${cat.label} forward`}
+                data-dir="right"
+                tabindex="0"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  function initIntegrations() {
+    const section = document.getElementById("popular-integrations");
+    if (!section) return;
+
+    const tabs =
+      section.querySelectorAll<HTMLButtonElement>(".mfc-category-tab");
+    const panels = section.querySelectorAll<HTMLElement>(".mfc-category-panel");
+
+    function updateArrows(panel: HTMLElement) {
+      const row = panel.querySelector<HTMLElement>(".mfc-cards-row");
+      const leftBtn = panel.querySelector<HTMLButtonElement>(
+        ".mfc-scroll-arrow-left",
+      );
+      const rightBtn = panel.querySelector<HTMLButtonElement>(
+        ".mfc-scroll-arrow-right",
+      );
+      const wrapper = panel.querySelector<HTMLElement>(".mfc-carousel-wrapper");
+      if (!row || !leftBtn || !rightBtn) return;
+
+      const scrollLeft = row.scrollLeft;
+      const maxScroll = row.scrollWidth - row.clientWidth;
+      const hasOverflow = maxScroll > 4;
+
+      // Update Left Arrow
+      if (hasOverflow && scrollLeft > 6) {
+        leftBtn.classList.add("is-visible");
+        leftBtn.setAttribute("tabindex", "0");
+        wrapper?.classList.add("has-scroll-left");
+      } else {
+        leftBtn.classList.remove("is-visible");
+        leftBtn.setAttribute("tabindex", "-1");
+        wrapper?.classList.remove("has-scroll-left");
+      }
+
+      // Update Right Arrow
+      if (hasOverflow && scrollLeft < maxScroll - 6) {
+        rightBtn.classList.add("is-visible");
+        rightBtn.setAttribute("tabindex", "0");
+        wrapper?.classList.add("has-scroll-right");
+      } else {
+        rightBtn.classList.remove("is-visible");
+        rightBtn.setAttribute("tabindex", "-1");
+        wrapper?.classList.remove("has-scroll-right");
+      }
+    }
+
+    // Category Tabs Switching
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const targetId = tab.getAttribute("data-target");
+        if (!targetId) return;
+
+        tabs.forEach((t) => {
+          const isActive = t === tab;
+          t.classList.toggle("is-active", isActive);
+          t.setAttribute("aria-selected", isActive ? "true" : "false");
+        });
+
+        panels.forEach((panel) => {
+          const isMatch = panel.getAttribute("data-category") === targetId;
+          panel.classList.toggle("is-active", isMatch);
+          if (isMatch) {
+            const row = panel.querySelector<HTMLElement>(".mfc-cards-row");
+            if (row) {
+              row.scrollLeft = 0;
+            }
+            // Recalculate visibility after DOM update
+            requestAnimationFrame(() => updateArrows(panel));
+          }
+        });
+      });
+    });
+
+    // Row Scroll & Arrow Controls
+    panels.forEach((panel) => {
+      const row = panel.querySelector<HTMLElement>(".mfc-cards-row");
+      const leftBtn = panel.querySelector<HTMLButtonElement>(
+        ".mfc-scroll-arrow-left",
+      );
+      const rightBtn = panel.querySelector<HTMLButtonElement>(
+        ".mfc-scroll-arrow-right",
+      );
+      if (!row) return;
+
+      row.addEventListener(
+        "scroll",
+        () => {
+          updateArrows(panel);
+        },
+        { passive: true },
+      );
+
+      if (leftBtn) {
+        leftBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const cardWidth =
+            (row.firstElementChild as HTMLElement)?.offsetWidth || 160;
+          const scrollDistance = cardWidth * 3;
+          row.scrollBy({ left: -scrollDistance, behavior: "smooth" });
+        });
+      }
+
+      if (rightBtn) {
+        rightBtn.addEventListener("click", (e) => {
+          e.preventDefault();
+          const cardWidth =
+            (row.firstElementChild as HTMLElement)?.offsetWidth || 160;
+          const scrollDistance = cardWidth * 3;
+          row.scrollBy({ left: scrollDistance, behavior: "smooth" });
+        });
+      }
+    });
+
+    // Initial check for currently active panel
+    const currentActive = section.querySelector<HTMLElement>(
+      ".mfc-category-panel.is-active",
+    );
+    if (currentActive) {
+      requestAnimationFrame(() => updateArrows(currentActive));
+      setTimeout(() => updateArrows(currentActive), 100);
+      setTimeout(() => updateArrows(currentActive), 350);
+    }
+
+    // Window resize handler
+    window.addEventListener(
+      "resize",
+      () => {
+        const active = section.querySelector<HTMLElement>(
+          ".mfc-category-panel.is-active",
+        );
+        if (active) updateArrows(active);
+      },
+      { passive: true },
+    );
+  }
+
+  // Support both standard load and Astro view transitions
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initIntegrations);
+  } else {
+    initIntegrations();
+  }
+  document.addEventListener("astro:page-load", initIntegrations);
+</script>
+
+<style>
+  /* ==========================================================================
+     PopularIntegrations Component Styles
+     Directory section matching MFC UI Design
+     ========================================================================== */
+
+  .mfc-popular-integrations {
+    width: 100%;
+    padding: 0.85rem 2rem 0.85rem;
+    box-sizing: border-box;
+    background-color: #ffffff;
+  }
+
+  .mfc-integrations-inner {
+    max-width: 86rem;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* --------------------------------------------------------------------------
+     Header Row: Title & View all link
+     -------------------------------------------------------------------------- */
+  .mfc-integrations-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 1.15rem;
+  }
+
+  .mfc-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .mfc-title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .mfc-grid-icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #2563eb;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .mfc-integrations-title {
+    font-size: 1.5rem !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    letter-spacing: -0.025em !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    line-height: 1.25 !important;
+  }
+
+  .mfc-integrations-subtitle {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin: 0;
+    line-height: 1.45;
+  }
+
+  .mfc-view-all-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #2563eb !important;
+    text-decoration: none !important;
+    transition:
+      color 0.15s ease,
+      transform 0.15s ease;
+    flex-shrink: 0;
+    padding-bottom: 0.2rem;
+  }
+
+  .mfc-view-all-link:hover {
+    color: #1d4ed8 !important;
+    transform: translateX(2px);
+  }
+
+  /* --------------------------------------------------------------------------
+     Category Tabs Selector
+     -------------------------------------------------------------------------- */
+  .mfc-category-tabs-container {
+    position: relative;
+    margin-bottom: 1.75rem;
+  }
+
+  .mfc-category-tabs-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    padding-bottom: 0.65rem;
+  }
+
+  .mfc-category-tabs-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mfc-category-tab {
+    background: transparent;
+    border: none;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #475569;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .mfc-category-tab:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+  }
+
+  .mfc-category-tab.is-active {
+    background-color: #eff6ff;
+    color: #2563eb;
+    font-weight: 700;
+  }
+
+  .mfc-category-tab.is-active::after {
+    content: "";
+    position: absolute;
+    bottom: -0.65rem;
+    left: 12%;
+    right: 12%;
+    height: 2.5px;
+    background-color: #2563eb;
+    border-radius: 9999px;
+  }
+
+  /* Thin separator divider line underneath the full tab list */
+  .mfc-tabs-divider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: #e2e8f0;
+  }
+
+  /* --------------------------------------------------------------------------
+     Category Panels & Carousel Wrapper
+     -------------------------------------------------------------------------- */
+  .mfc-panels-container {
+    position: relative;
+    width: 100%;
+  }
+
+  .mfc-category-panel {
+    display: none;
+    width: 100%;
+  }
+
+  .mfc-category-panel.is-active {
+    display: block;
+    animation: mfcFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes mfcFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(3px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .mfc-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Edge fade indicators when more content is scrollable */
+  .mfc-carousel-wrapper::before,
+  .mfc-carousel-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 32px;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .mfc-carousel-wrapper::before {
+    left: 0;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.95),
+      transparent
+    );
+  }
+
+  .mfc-carousel-wrapper::after {
+    right: 0;
+    background: linear-gradient(
+      to left,
+      rgba(255, 255, 255, 0.95),
+      transparent
+    );
+  }
+
+  .mfc-carousel-wrapper.has-scroll-left::before {
+    opacity: 1;
+  }
+
+  .mfc-carousel-wrapper.has-scroll-right::after {
+    opacity: 1;
+  }
+
+  /* --------------------------------------------------------------------------
+     Single Row of Integration Cards
+     -------------------------------------------------------------------------- */
+  .mfc-cards-row {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE/Edge */
+    padding: 0.35rem 0.2rem 0.65rem;
+    scroll-snap-type: x proximity;
+  }
+
+  .mfc-cards-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .mfc-cards-row:focus-visible {
+    outline: 2px solid #93c5fd;
+    outline-offset: 4px;
+    border-radius: 10px;
+  }
+
+  /* --------------------------------------------------------------------------
+     Integration Card (Uniform 1-Row Width)
+     -------------------------------------------------------------------------- */
+  .mfc-int-card {
+    flex: 0 0 calc((100% - 6 * 1rem) / 7);
+    min-width: 150px;
+    max-width: 190px;
+    scroll-snap-align: start;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 1.45rem 0.75rem 1.25rem;
+    min-height: 145px;
+    box-sizing: border-box;
+    text-decoration: none !important;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    user-select: none;
+  }
+
+  .mfc-int-card.is-active-link {
+    cursor: pointer;
+  }
+
+  .mfc-int-card.is-preview {
+    cursor: default;
+  }
+
+  .mfc-int-card:hover {
+    border-color: #93c5fd;
+    box-shadow:
+      0 8px 20px -4px rgba(37, 99, 235, 0.1),
+      0 2px 6px -1px rgba(15, 23, 42, 0.04);
+    transform: translateY(-2px);
+  }
+
+  .mfc-int-logo-box {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.85rem;
+    transition: transform 0.2s ease;
+  }
+
+  .mfc-int-card:hover .mfc-int-logo-box {
+    transform: scale(1.06);
+  }
+
+  .mfc-int-name {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 0.4rem;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    padding: 0 0.25rem;
+  }
+
+  .mfc-int-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #2563eb;
+    transition: gap 0.15s ease;
+  }
+
+  .mfc-int-card:hover .mfc-int-action {
+    gap: 0.4rem;
+  }
+
+  .mfc-int-arrow {
+    transition: transform 0.15s ease;
+  }
+
+  .mfc-int-card:hover .mfc-int-arrow {
+    transform: translateX(1px);
+  }
+
+  /* --------------------------------------------------------------------------
+     Navigation Scroll Arrows (Left & Right)
+     -------------------------------------------------------------------------- */
+  .mfc-scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    box-shadow:
+      0 4px 12px rgba(15, 23, 42, 0.12),
+      0 1px 3px rgba(15, 23, 42, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .mfc-scroll-arrow.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mfc-scroll-arrow-left {
+    left: -14px;
+  }
+
+  .mfc-scroll-arrow-right {
+    right: -14px;
+  }
+
+  .mfc-scroll-arrow:hover {
+    background: #2563eb;
+    border-color: #2563eb;
+    color: #ffffff;
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+  }
+
+  .mfc-scroll-arrow:active {
+    transform: translateY(-50%) scale(0.96);
+  }
+
+  .mfc-scroll-arrow:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+  }
+
+  /* --------------------------------------------------------------------------
+     Responsive Breakpoints
+     -------------------------------------------------------------------------- */
+  @media (max-width: 1200px) {
+    .mfc-int-card {
+      flex: 0 0 calc((100% - 4 * 0.85rem) / 5);
+      min-width: 145px;
+    }
+
+    .mfc-cards-row {
+      gap: 0.85rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .mfc-popular-integrations {
+      padding: 1rem 1.25rem 1.25rem;
+    }
+
+    .mfc-integrations-title {
+      font-size: 1.25rem !important;
+    }
+
+    .mfc-integrations-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .mfc-int-card {
+      flex: 0 0 calc((100% - 2 * 0.75rem) / 3);
+      min-width: 140px;
+    }
+
+    .mfc-cards-row {
+      gap: 0.75rem;
+    }
+
+    .mfc-scroll-arrow-left {
+      left: -6px;
+    }
+
+    .mfc-scroll-arrow-right {
+      right: -6px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .mfc-int-card {
+      flex: 0 0 calc((100% - 1 * 0.65rem) / 2);
+      min-width: 135px;
+      padding: 1.25rem 0.6rem 1rem;
+    }
+
+    .mfc-cards-row {
+      gap: 0.65rem;
+    }
+  }
+</style>

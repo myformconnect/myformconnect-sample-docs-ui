@@ -1,0 +1,653 @@
+---
+// Custom Starlight Sidebar Component
+// Features: Lucide-style SVG icons for categories & items, collapsible groups with smooth chevrons,
+// active page indicator, and seamless Starlight integration.
+import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
+
+const { sidebar } = Astro.locals.starlightRoute;
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+
+function isItemActive(href: string, label?: string) {
+  if (!href) return false;
+  // Anchor links, hashes, and placeholders should never receive active page status
+  if (href.includes('#') || href.startsWith('#') || href === 'javascript:void(0)') {
+    return false;
+  }
+  const cleanHref = href.replace(/\/$/, '') || '/';
+  if (cleanHref === '/') {
+    // Only 'Overview' is active on root '/'
+    return currentPath === '/' && (label ? label.toLowerCase() === 'overview' : true);
+  }
+  return currentPath === cleanHref || currentPath === `${cleanHref}/`;
+}
+
+function hasActiveChild(entry: any): boolean {
+  if (entry.type === 'link') {
+    return isItemActive(entry.href, entry.label);
+  }
+  if (entry.entries && Array.isArray(entry.entries)) {
+    return entry.entries.some((child: any) => hasActiveChild(child));
+  }
+  return false;
+}
+---
+
+<div class="mfc-custom-sidebar">
+  <nav class="mfc-sidebar-nav" aria-label="Documentation Sidebar">
+    {sidebar.map((group: any) => {
+      const isGroup = group.type === 'group';
+      const isExpanded = hasActiveChild(group) || !group.collapsed;
+      const groupLabel = group.label || '';
+
+      return isGroup ? (
+        <details class="mfc-sidebar-group" open={isExpanded}>
+          <summary class="mfc-group-summary">
+            <span class="mfc-group-title-wrap">
+              {/* Category Icons */}
+              {groupLabel === 'Getting Started' && (
+                <svg class="mfc-cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
+                  <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
+                  <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
+                  <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
+                </svg>
+              )}
+              {groupLabel === 'Features' && (
+                <svg class="mfc-cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="7" height="7" rx="1.5" />
+                  <rect x="14" y="3" width="7" height="7" rx="1.5" />
+                  <rect x="14" y="14" width="7" height="7" rx="1.5" />
+                  <rect x="3" y="14" width="7" height="7" rx="1.5" />
+                </svg>
+              )}
+              {groupLabel === 'Integrations' && (
+                <svg class="mfc-cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="3" y="3" width="6" height="6" rx="1" />
+                  <rect x="15" y="3" width="6" height="6" rx="1" />
+                  <rect x="9" y="15" width="6" height="6" rx="1" />
+                  <path d="M6 9v3a3 3 0 0 0 3 3h3" />
+                  <path d="M18 9v3a3 3 0 0 1-3 3" />
+                </svg>
+              )}
+              {groupLabel === 'Deployment' && (
+                <svg class="mfc-cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+                </svg>
+              )}
+              {groupLabel === 'AI & No-Backend Forms' && (
+                <svg class="mfc-cat-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
+                </svg>
+              )}
+
+              <span class="mfc-group-title">{groupLabel}</span>
+            </span>
+
+            {/* Chevron toggle icon */}
+            <svg class="mfc-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </summary>
+
+          <ul class="mfc-group-list">
+            {group.entries.map((item: any) => {
+              const label = item.label || '';
+              const active = isItemActive(item.href, label);
+
+              return (
+                <li class="mfc-item-row">
+                  <a
+                    href={item.href}
+                    class={`mfc-sidebar-link ${active ? 'is-active' : ''}`}
+                    aria-current={active ? 'page' : undefined}
+                  >
+                    <span class="mfc-item-icon-wrap" aria-hidden="true">
+                      {/* Getting Started Icons */}
+                      {label === 'Overview' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+                          <polyline points="9 22 9 12 15 12 15 22" />
+                        </svg>
+                      )}
+                      {label === 'Integrating HTML Forms' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="16 18 22 12 16 6" />
+                          <polyline points="8 6 2 12 8 18" />
+                        </svg>
+                      )}
+                      {label === 'Using React SDK' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(0 12 12)" />
+                          <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(60 12 12)" />
+                          <ellipse cx="12" cy="12" rx="10" ry="4.5" transform="rotate(120 12 12)" />
+                          <circle cx="12" cy="12" r="1.5" />
+                        </svg>
+                      )}
+                      {label === 'API Quickstart' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="4" y="4" width="16" height="16" rx="2" />
+                          <rect x="9" y="9" width="6" height="6" />
+                          <line x1="9" y1="1" x2="9" y2="4" />
+                          <line x1="15" y1="1" x2="15" y2="4" />
+                          <line x1="9" y1="20" x2="9" y2="23" />
+                          <line x1="15" y1="20" x2="15" y2="23" />
+                          <line x1="20" y1="9" x2="23" y2="9" />
+                          <line x1="20" y1="14" x2="23" y2="14" />
+                          <line x1="1" y1="9" x2="4" y2="9" />
+                          <line x1="1" y1="14" x2="4" y2="14" />
+                        </svg>
+                      )}
+
+                      {/* Features Icons */}
+                      {label === 'Domain Configuration' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10" />
+                          <line x1="2" y1="12" x2="22" y2="12" />
+                          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
+                      )}
+                      {label === 'Form Configuration' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <line x1="4" y1="21" x2="4" y2="14" />
+                          <line x1="4" y1="10" x2="4" y2="3" />
+                          <line x1="12" y1="21" x2="12" y2="12" />
+                          <line x1="12" y1="8" x2="12" y2="3" />
+                          <line x1="20" y1="21" x2="20" y2="16" />
+                          <line x1="20" y1="12" x2="20" y2="3" />
+                          <line x1="1" y1="14" x2="7" y2="14" />
+                          <line x1="9" y1="8" x2="15" y2="8" />
+                          <line x1="17" y1="16" x2="23" y2="16" />
+                        </svg>
+                      )}
+                      {label === 'Loader.js' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                          <polyline points="14 2 14 8 20 8" />
+                          <line x1="16" y1="13" x2="8" y2="13" />
+                          <line x1="16" y1="17" x2="8" y2="17" />
+                        </svg>
+                      )}
+                      {label === 'Booking Widget' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                          <line x1="16" y1="2" x2="16" y2="6" />
+                          <line x1="8" y1="2" x2="8" y2="6" />
+                          <line x1="3" y1="10" x2="21" y2="10" />
+                          <polyline points="9 16 11 18 15 14" />
+                        </svg>
+                      )}
+                      {label === 'File Uploads' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                          <polyline points="17 8 12 3 7 8" />
+                          <line x1="12" y1="3" x2="12" y2="15" />
+                        </svg>
+                      )}
+                      {label === 'Spam & CAPTCHA' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                          <polyline points="9 12 11 14 15 10" />
+                        </svg>
+                      )}
+                      {label === 'Autoresponder Emails' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="2" y="4" width="20" height="16" rx="2" />
+                          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                        </svg>
+                      )}
+
+                      {/* Integrations Icons */}
+                      {label === 'Frameworks' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polyline points="16 18 22 12 16 6" />
+                          <polyline points="8 6 2 12 8 18" />
+                        </svg>
+                      )}
+                      {label === 'CMS Platforms' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="3" width="18" height="18" rx="2" />
+                          <line x1="3" y1="9" x2="21" y2="9" />
+                          <line x1="9" y1="21" x2="9" y2="9" />
+                        </svg>
+                      )}
+                      {label === 'Website Builders' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                          <polyline points="2 17 12 22 22 17" />
+                          <polyline points="2 12 12 17 22 12" />
+                        </svg>
+                      )}
+                      {label === 'No-code Tools' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                        </svg>
+                      )}
+                      {label === 'Automation & Webhooks' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                          <path d="M13.73 21a2 2 0 0 1-3.46 0" />
+                        </svg>
+                      )}
+
+                      {/* Deployment Icons */}
+                      {label === 'Static Sites' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="12" cy="12" r="10" />
+                          <line x1="2" y1="12" x2="22" y2="12" />
+                          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        </svg>
+                      )}
+                      {label === 'GitHub Pages' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                        </svg>
+                      )}
+                      {label === 'Vercel' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polygon points="12 3 22 21 2 21 12 3" />
+                        </svg>
+                      )}
+                      {label === 'Netlify' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <polygon points="12 2 2 12 12 22 22 12 12 2" />
+                        </svg>
+                      )}
+                      {label === 'Cloudflare Pages' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+                        </svg>
+                      )}
+
+                      {/* AI & No-Backend Forms Icons */}
+                      {label === 'Build Forms with AI' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+                          <circle cx="12" cy="12" r="3" />
+                        </svg>
+                      )}
+                      {label === 'HTML Contact Form' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect width="20" height="16" x="2" y="4" rx="2" />
+                          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                        </svg>
+                      )}
+                      {label === 'Backend for AI Websites' && (
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <ellipse cx="12" cy="5" rx="9" ry="3" />
+                          <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+                          <path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3" />
+                        </svg>
+                      )}
+                    </span>
+
+                    <span class="mfc-item-label">{label}</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </details>
+      ) : (
+        <div class="mfc-single-item">
+          <a
+            href={group.href}
+            class={`mfc-sidebar-link ${isItemActive(group.href, group.label) ? 'is-active' : ''}`}
+            aria-current={isItemActive(group.href, group.label) ? 'page' : undefined}
+          >
+            <span class="mfc-item-label">{group.label}</span>
+          </a>
+        </div>
+      );
+    })}
+  </nav>
+
+  {/* Always-visible "NEED HELP?" horizontal section at the end of sidebar menu */}
+  <div class="mfc-sidebar-help-section">
+    <div class="mfc-help-heading">NEED HELP?</div>
+    <a
+      href="mailto:support@myformconnect.io"
+      class="mfc-help-link"
+      title="Contact Tech Support (support@myformconnect.io)"
+    >
+      <span class="mfc-help-icon-wrap" aria-hidden="true">
+        <svg class="mfc-tech-support-icon" width="18" height="15" viewBox="0 0 20 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="20" height="15" rx="3" fill="#2563eb" />
+          <path d="M2.5 4L10 9.5L17.5 4" stroke="#ffffff" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </span>
+      <span class="mfc-help-label">Tech Support</span>
+    </a>
+  </div>
+
+  <div class="md:sl-hidden mfc-mobile-footer-wrap">
+    <MobileMenuFooter />
+  </div>
+</div>
+
+<style>
+  /* --------------------------------------------------------------------------
+     Sidebar Container & Navigation
+     Matches the reference image: light slate background, bold category headers,
+     subtle hover, and clean left active indicator.
+     -------------------------------------------------------------------------- */
+  .mfc-custom-sidebar {
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.85rem 0.65rem 0;
+    box-sizing: border-box;
+    font-family: inherit;
+  }
+
+  .mfc-sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    width: 100%;
+    flex: 1 0 auto;
+    padding-bottom: 0.75rem;
+  }
+
+  /* Expandable group details container */
+  .mfc-sidebar-group {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Summary header: bold category title with category icon and right chevron */
+  .mfc-group-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.45rem 0.65rem;
+    border-radius: 6px;
+    cursor: pointer;
+    user-select: none;
+    list-style: none;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .mfc-group-summary::-webkit-details-marker,
+  .mfc-group-summary::marker {
+    display: none;
+  }
+
+  .mfc-group-summary:hover {
+    background-color: #e2e8f0;
+  }
+
+  :root[data-theme='dark'] .mfc-group-summary:hover {
+    background-color: #1e293b;
+  }
+
+  .mfc-group-title-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-width: 0;
+  }
+
+  .mfc-cat-icon {
+    flex-shrink: 0;
+    color: #475569;
+    transition: color 0.15s ease;
+  }
+
+  :root[data-theme='dark'] .mfc-cat-icon {
+    color: #94a3b8;
+  }
+
+  .mfc-group-summary:hover .mfc-cat-icon {
+    color: #0f172a;
+  }
+
+  :root[data-theme='dark'] .mfc-group-summary:hover .mfc-cat-icon {
+    color: #f8fafc;
+  }
+
+  .mfc-group-title {
+    font-size: 0.825rem;
+    font-weight: 700;
+    color: #0f172a;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  :root[data-theme='dark'] .mfc-group-title {
+    color: #f1f5f9;
+  }
+
+  /* Chevron rotation */
+  .mfc-chevron {
+    flex-shrink: 0;
+    color: #94a3b8;
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), color 0.15s ease;
+  }
+
+  .mfc-sidebar-group[open] > .mfc-group-summary .mfc-chevron {
+    transform: rotate(90deg);
+    color: #64748b;
+  }
+
+  :root[data-theme='dark'] .mfc-sidebar-group[open] > .mfc-group-summary .mfc-chevron {
+    color: #cbd5e1;
+  }
+
+  /* Child links list under each category */
+  .mfc-group-list {
+    list-style: none;
+    margin: 0.2rem 0 0 0.85rem;
+    padding: 0 0 0.25rem 0.65rem;
+    border-left: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  :root[data-theme='dark'] .mfc-group-list {
+    border-left-color: #334155;
+  }
+
+  .mfc-item-row {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  /* Individual sidebar navigation link */
+  .mfc-sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.38rem 0.65rem;
+    border-radius: 6px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    color: #475569;
+    text-decoration: none !important;
+    transition: all 0.15s ease;
+    border-left: 2px solid transparent;
+    margin-left: -1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+  }
+
+  .mfc-item-icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #64748b;
+    line-height: 1;
+    transition: color 0.15s ease;
+  }
+
+  .mfc-item-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1;
+  }
+
+  /* Hover state */
+  .mfc-sidebar-link:hover {
+    color: #0f172a;
+    background-color: #e2e8f0;
+  }
+
+  .mfc-sidebar-link:hover .mfc-item-icon-wrap {
+    color: #2563eb;
+  }
+
+  /* Active State: subtle blue tint, blue text, blue left indicator */
+  .mfc-sidebar-link.is-active,
+  .mfc-sidebar-link[aria-current='page'] {
+    color: #2563eb !important;
+    background-color: #eff6ff !important;
+    font-weight: 600 !important;
+    border-left: 2.5px solid #2563eb !important;
+  }
+
+  .mfc-sidebar-link.is-active .mfc-item-icon-wrap,
+  .mfc-sidebar-link[aria-current='page'] .mfc-item-icon-wrap {
+    color: #2563eb !important;
+  }
+
+  /* Dark Theme Support */
+  :root[data-theme='dark'] .mfc-sidebar-link {
+    color: #94a3b8;
+  }
+
+  :root[data-theme='dark'] .mfc-item-icon-wrap {
+    color: #64748b;
+  }
+
+  :root[data-theme='dark'] .mfc-sidebar-link:hover {
+    color: #f8fafc;
+    background-color: #1e293b;
+  }
+
+  :root[data-theme='dark'] .mfc-sidebar-link:hover .mfc-item-icon-wrap {
+    color: #60a5fa;
+  }
+
+  :root[data-theme='dark'] .mfc-sidebar-link.is-active,
+  :root[data-theme='dark'] .mfc-sidebar-link[aria-current='page'] {
+    color: #60a5fa !important;
+    background-color: rgba(37, 99, 235, 0.14) !important;
+    border-left-color: #3b82f6 !important;
+  }
+
+  :root[data-theme='dark'] .mfc-sidebar-link.is-active .mfc-item-icon-wrap,
+  :root[data-theme='dark'] .mfc-sidebar-link[aria-current='page'] .mfc-item-icon-wrap {
+    color: #60a5fa !important;
+  }
+
+  .mfc-mobile-footer-wrap {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  :root[data-theme='dark'] .mfc-mobile-footer-wrap {
+    border-top-color: #334155;
+  }
+
+  /* --------------------------------------------------------------------------
+     Always-Visible "NEED HELP?" Sticky Bottom Section
+     Small horizontal section at the end of the sidebar menu
+     -------------------------------------------------------------------------- */
+  .mfc-sidebar-help-section {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    margin-top: auto;
+    padding: 0.85rem 0.65rem 0.85rem;
+    background-color: #f1f5f9;
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-radius: 0 0 4px 4px;
+  }
+
+  :root[data-theme='dark'] .mfc-sidebar-help-section {
+    background-color: #0b1120;
+    border-top-color: #1e293b;
+  }
+
+  .mfc-help-heading {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: #0f172a;
+    text-transform: uppercase;
+    padding-left: 0.25rem;
+    user-select: none;
+    line-height: 1;
+  }
+
+  :root[data-theme='dark'] .mfc-help-heading {
+    color: #f1f5f9;
+  }
+
+  .mfc-help-link {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.35rem 0.45rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #1e293b;
+    text-decoration: none !important;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .mfc-help-icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .mfc-tech-support-icon {
+    display: block;
+    border-radius: 3px;
+    box-shadow: 0 1px 2px rgba(37, 99, 235, 0.2);
+    transition: transform 0.15s ease, filter 0.15s ease;
+  }
+
+  .mfc-help-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+  }
+
+  .mfc-help-link:hover {
+    background-color: #e2e8f0;
+    color: #0f172a;
+  }
+
+  .mfc-help-link:hover .mfc-tech-support-icon {
+    transform: scale(1.06);
+    filter: brightness(1.08);
+  }
+
+  :root[data-theme='dark'] .mfc-help-link {
+    color: #cbd5e1;
+  }
+
+  :root[data-theme='dark'] .mfc-help-link:hover {
+    background-color: #1e293b;
+    color: #f8fafc;
+  }
+</style>

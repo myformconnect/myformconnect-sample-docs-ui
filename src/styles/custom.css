@@ -61,7 +61,7 @@
 
   --sl-color-bg: #ffffff;
   --sl-color-bg-nav: #ffffff;
-  --sl-color-bg-sidebar: #f8fafc;
+  --sl-color-bg-sidebar: #f1f5f9;
   --sl-color-hairline: #e2e8f0;
   --sl-color-hairline-shade: #e2e8f0;
   --sl-color-hairline-light: #f1f5f9;
@@ -217,54 +217,21 @@ header.header {
 
 /* Sidebar styling */
 .sidebar-pane {
-  background-color: var(--mfc-bg-light) !important;
-  border-inline-end: 1px solid var(--mfc-border-subtle) !important;
+  background-color: #f1f5f9 !important;
+  border-inline-end: 1px solid #e2e8f0 !important;
+}
+
+:root[data-theme='dark'] .sidebar-pane {
+  background-color: #0b1120 !important;
+  border-inline-end-color: #1e293b !important;
 }
 
 .sidebar-content {
-  padding-top: 1.5rem !important;
-}
-
-/* Sidebar group headers */
-.sidebar-content .top-level > li > details > summary,
-.sidebar-content .top-level > li > .group-label {
-  font-size: clamp(0.725rem, 0.7rem + 0.08vw, 0.775rem) !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.06em !important;
-  color: var(--mfc-muted-text) !important;
-  margin-bottom: 0.45rem !important;
-}
-
-/* Sidebar navigation links */
-.sidebar-content a {
-  font-size: clamp(0.815rem, 0.8rem + 0.1vw, 0.865rem) !important;
-  line-height: 1.5 !important;
-  color: #475569 !important;
-  padding: 0.45rem 0.75rem !important;
-  border-radius: var(--mfc-radius-sm) !important;
-  transition: all 0.15s ease !important;
-}
-
-.sidebar-content a:hover {
-  color: var(--mfc-navy-dark) !important;
-  background-color: #e2e8f0 !important;
-}
-
-/* Active sidebar link highlighted in blue */
-.sidebar-content a[aria-current="page"],
-.sidebar-content a.is-current {
-  color: var(--mfc-primary) !important;
-  background-color: #eff6ff !important;
-  font-weight: 600 !important;
-  border-inline-start: 3px solid var(--mfc-primary) !important;
-}
-
-/* Badges in sidebar */
-.sidebar-content .sl-badge {
-  font-size: 0.72rem !important;
-  padding: 0.15rem 0.45rem !important;
-  border-radius: 9999px !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 100% !important;
 }
 
 /* Content area adjustments */
@@ -280,7 +247,7 @@ html:not([data-has-toc]) .main-pane {
   width: 100% !important;
 }
 
-html:not([data-has-toc]):not(:has(.mfc-hero-section)) .sl-container {
+html:not([data-has-toc]):not(:has(.mfc-hero-section)):not(:has(.mfc-home-hero)) .sl-container {
   max-width: var(--sl-content-width, 56rem) !important;
   margin-inline: auto !important;
   width: 100% !important;
@@ -288,7 +255,9 @@ html:not([data-has-toc]):not(:has(.mfc-hero-section)) .sl-container {
 
 /* Homepage Hero: full remaining width, no outer padding, flush from top navbar */
 body:has(.mfc-hero-section) .main-pane,
-html body:has(.mfc-hero-section) .main-pane {
+body:has(.mfc-home-hero) .main-pane,
+html body:has(.mfc-hero-section) .main-pane,
+html body:has(.mfc-home-hero) .main-pane {
   display: flex !important;
   flex-direction: column !important;
   align-items: stretch !important;
@@ -299,8 +268,11 @@ html body:has(.mfc-hero-section) .main-pane {
 }
 
 body:has(.mfc-hero-section) main,
+body:has(.mfc-home-hero) main,
 html body:has(.mfc-hero-section) main,
-main:has(.mfc-hero-section) {
+html body:has(.mfc-home-hero) main,
+main:has(.mfc-hero-section),
+main:has(.mfc-home-hero) {
   width: 100% !important;
   max-width: 100% !important;
   padding: 0 !important;
@@ -309,15 +281,21 @@ main:has(.mfc-hero-section) {
 
 /* Hide default duplicate title container on homepage/welcome page */
 body:has(.mfc-hero-section) main > .content-panel:first-of-type,
+body:has(.mfc-home-hero) main > .content-panel:first-of-type,
 html body:has(.mfc-hero-section) main > .content-panel:first-of-type,
-main:has(.mfc-hero-section) > .content-panel:first-of-type {
+html body:has(.mfc-home-hero) main > .content-panel:first-of-type,
+main:has(.mfc-hero-section) > .content-panel:first-of-type,
+main:has(.mfc-home-hero) > .content-panel:first-of-type {
   display: none !important;
 }
 
 /* Homepage content-panel: zero padding so hero stretches full remaining width edge-to-edge */
 body:has(.mfc-hero-section) main > .content-panel,
+body:has(.mfc-home-hero) main > .content-panel,
 html body:has(.mfc-hero-section) main > .content-panel,
-main:has(.mfc-hero-section) > .content-panel {
+html body:has(.mfc-home-hero) main > .content-panel,
+main:has(.mfc-hero-section) > .content-panel,
+main:has(.mfc-home-hero) > .content-panel {
   padding: 0 !important;
   margin: 0 !important;
   border-top: none !important;
@@ -326,8 +304,11 @@ main:has(.mfc-hero-section) > .content-panel {
 }
 
 body:has(.mfc-hero-section) .sl-container,
+body:has(.mfc-home-hero) .sl-container,
 html body:has(.mfc-hero-section) .sl-container,
-main:has(.mfc-hero-section) .sl-container {
+html body:has(.mfc-home-hero) .sl-container,
+main:has(.mfc-hero-section) .sl-container,
+main:has(.mfc-home-hero) .sl-container {
   max-width: 100% !important;
   width: 100% !important;
   padding: 0 !important;
@@ -335,8 +316,11 @@ main:has(.mfc-hero-section) .sl-container {
 }
 
 body:has(.mfc-hero-section) .sl-markdown-content,
+body:has(.mfc-home-hero) .sl-markdown-content,
 html body:has(.mfc-hero-section) .sl-markdown-content,
-main:has(.mfc-hero-section) .sl-markdown-content {
+html body:has(.mfc-home-hero) .sl-markdown-content,
+main:has(.mfc-hero-section) .sl-markdown-content,
+main:has(.mfc-home-hero) .sl-markdown-content {
   max-width: 100% !important;
   width: 100% !important;
   padding: 0 !important;
@@ -346,13 +330,19 @@ main:has(.mfc-hero-section) .sl-markdown-content {
 /* Sections below the hero retain proper max-width and padding so they align comfortably */
 body:has(.mfc-hero-section) .mfc-section,
 body:has(.mfc-hero-section) .mfc-support-banner,
+body:has(.mfc-home-hero) .mfc-section,
+body:has(.mfc-home-hero) .mfc-support-banner,
 html body:has(.mfc-hero-section) .mfc-section,
 html body:has(.mfc-hero-section) .mfc-support-banner,
+html body:has(.mfc-home-hero) .mfc-section,
+html body:has(.mfc-home-hero) .mfc-support-banner,
 main:has(.mfc-hero-section) .mfc-section,
-main:has(.mfc-hero-section) .mfc-support-banner {
-  max-width: 76rem !important;
+main:has(.mfc-hero-section) .mfc-support-banner,
+main:has(.mfc-home-hero) .mfc-section,
+main:has(.mfc-home-hero) .mfc-support-banner {
+  max-width: 86rem !important;
   margin-inline: auto !important;
-  padding-inline: 2.5rem !important;
+  padding-inline: 2rem !important;
   box-sizing: border-box !important;
 }
 
@@ -541,40 +531,49 @@ html:not(:has(.mfc-hero-section)) .content-panel {
   color: #2563eb !important;
 }
 
-/* Normal documentation body typography (slightly reduced for clean reading) */
+/* Normal documentation body typography (refined to recommended documentation standards) */
 .sl-markdown-content {
-  font-size: clamp(0.925rem, 0.9rem + 0.1vw, 0.965rem);
-  line-height: 1.65;
+  font-size: 0.9rem;
+  line-height: 1.6;
   color: var(--mfc-body-text);
   width: 100%;
 }
 
 .sl-markdown-content h1 {
-  font-size: clamp(1.8rem, 1.65rem + 0.5vw, 2.2rem);
-  font-weight: 800;
-  color: var(--mfc-navy-dark);
-  letter-spacing: -0.025em;
-  line-height: 1.25;
-  margin-bottom: 0.85rem;
-}
-
-.sl-markdown-content h2:not(.mfc-section-title) {
-  font-size: clamp(1.22rem, 1.15rem + 0.3vw, 1.45rem);
+  font-size: clamp(1.6rem, 1.5rem + 0.35vw, 1.85rem);
   font-weight: 700;
   color: var(--mfc-navy-dark);
   letter-spacing: -0.02em;
-  margin-top: 2.25rem;
+  line-height: 1.25;
   margin-bottom: 0.75rem;
+}
+
+.sl-markdown-content h2:not(.mfc-section-title):not([class*='mfc-']) {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--mfc-navy-dark);
+  letter-spacing: -0.015em;
+  margin-top: 2rem;
+  margin-bottom: 0.65rem;
   border-bottom: 1px solid var(--mfc-border-subtle);
-  padding-bottom: 0.45rem;
+  padding-bottom: 0.4rem;
 }
 
 .sl-markdown-content h3 {
-  font-size: clamp(1rem, 0.95rem + 0.15vw, 1.125rem);
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--mfc-navy-dark);
-  margin-top: 1.75rem;
-  margin-bottom: 0.55rem;
+  letter-spacing: -0.01em;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.sl-markdown-content h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--mfc-navy-dark);
+  margin-top: 1.25rem;
+  margin-bottom: 0.45rem;
 }
 
 .sl-markdown-content p {
