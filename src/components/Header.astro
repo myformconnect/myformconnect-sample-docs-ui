@@ -54,7 +54,7 @@ import Search from "@astrojs/starlight/components/Search.astro";
       </button>
 
       <!-- Mounted Starlight Search for Dialog & Pagefind Modal -->
-      <div class="mfc-starlight-search-hidden" aria-hidden="true">
+      <div class="mfc-starlight-search-wrapper">
         <Search />
       </div>
     </div>
@@ -342,20 +342,39 @@ import Search from "@astrojs/starlight/components/Search.astro";
   // ---------------------------------------------------------------------------
   // 1. Search Bar Trigger Delegation & Keyboard Shortcut
   // ---------------------------------------------------------------------------
-  function openSearchModal() {
+  function openSearchModal(e?: Event) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     const starlightOpenBtn = document.querySelector(
       "site-search button[data-open-modal]",
     ) as HTMLButtonElement | null;
     if (starlightOpenBtn) {
+      starlightOpenBtn.disabled = false;
       starlightOpenBtn.click();
+    } else {
+      const dialog = document.querySelector(
+        "site-search dialog",
+      ) as HTMLDialogElement | null;
+      if (dialog && !dialog.open) {
+        dialog.showModal();
+        document.body.toggleAttribute("data-search-modal-open", true);
+      }
     }
   }
 
   const searchTrigger = document.getElementById("mfcSearchTrigger");
   const mobileSearchTrigger = document.getElementById("mfcMobileSearchTrigger");
 
-  searchTrigger?.addEventListener("click", openSearchModal);
-  mobileSearchTrigger?.addEventListener("click", openSearchModal);
+  searchTrigger?.addEventListener("click", (e) => {
+    openSearchModal(e);
+  });
+  mobileSearchTrigger?.addEventListener("click", (e) => {
+    const mobileDrawer = document.getElementById("mfcMobileDrawer");
+    mobileDrawer?.classList.remove("is-open");
+    openSearchModal(e);
+  });
 
   // Keyboard shortcut: '/' or 'Cmd+K' / 'Ctrl+K'
   window.addEventListener("keydown", (e) => {
@@ -365,10 +384,10 @@ import Search from "@astrojs/starlight/components/Search.astro";
 
     if (e.key === "/" && !isInputActive) {
       e.preventDefault();
-      openSearchModal();
+      openSearchModal(e);
     } else if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
       e.preventDefault();
-      openSearchModal();
+      openSearchModal(e);
     }
   });
 
@@ -705,19 +724,15 @@ import Search from "@astrojs/starlight/components/Search.astro";
     color: #94a3b8;
   }
 
-  /* Starlight Search hidden container: keeps dialog in DOM for modal popup */
-  .mfc-starlight-search-hidden {
+  /* Starlight Search wrapper: visually hides only the default trigger button so modal dialog stays intact */
+  .mfc-starlight-search-wrapper {
     position: absolute;
     width: 0;
     height: 0;
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: none;
   }
 
-  .mfc-starlight-search-hidden :global(dialog) {
-    opacity: 1 !important;
-    pointer-events: auto !important;
+  .mfc-starlight-search-wrapper :global(site-search > button[data-open-modal]) {
+    display: none !important;
   }
 
   /* --------------------------------------------------------------------------

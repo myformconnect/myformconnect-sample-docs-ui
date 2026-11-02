@@ -86,7 +86,8 @@ body {
   background-color: var(--mfc-bg-white);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11'; /* Inter optical variants */
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  /* Inter optical variants */
 }
 
 /* Propagate Inter + mono stack to all Starlight elements */
@@ -168,7 +169,7 @@ body {
   scrollbar-color: #30363d #161b22;
 }
 
-.expressive-code pre > code {
+.expressive-code pre>code {
   background-color: transparent !important;
   color: #e6edf3 !important;
   font-family: var(--mfc-font-mono) !important;
@@ -280,22 +281,22 @@ main:has(.mfc-home-hero) {
 }
 
 /* Hide default duplicate title container on homepage/welcome page */
-body:has(.mfc-hero-section) main > .content-panel:first-of-type,
-body:has(.mfc-home-hero) main > .content-panel:first-of-type,
-html body:has(.mfc-hero-section) main > .content-panel:first-of-type,
-html body:has(.mfc-home-hero) main > .content-panel:first-of-type,
-main:has(.mfc-hero-section) > .content-panel:first-of-type,
-main:has(.mfc-home-hero) > .content-panel:first-of-type {
+body:has(.mfc-hero-section) main>.content-panel:first-of-type,
+body:has(.mfc-home-hero) main>.content-panel:first-of-type,
+html body:has(.mfc-hero-section) main>.content-panel:first-of-type,
+html body:has(.mfc-home-hero) main>.content-panel:first-of-type,
+main:has(.mfc-hero-section)>.content-panel:first-of-type,
+main:has(.mfc-home-hero)>.content-panel:first-of-type {
   display: none !important;
 }
 
 /* Homepage content-panel: zero padding so hero stretches full remaining width edge-to-edge */
-body:has(.mfc-hero-section) main > .content-panel,
-body:has(.mfc-home-hero) main > .content-panel,
-html body:has(.mfc-hero-section) main > .content-panel,
-html body:has(.mfc-home-hero) main > .content-panel,
-main:has(.mfc-hero-section) > .content-panel,
-main:has(.mfc-home-hero) > .content-panel {
+body:has(.mfc-hero-section) main>.content-panel,
+body:has(.mfc-home-hero) main>.content-panel,
+html body:has(.mfc-hero-section) main>.content-panel,
+html body:has(.mfc-home-hero) main>.content-panel,
+main:has(.mfc-hero-section)>.content-panel,
+main:has(.mfc-home-hero)>.content-panel {
   padding: 0 !important;
   margin: 0 !important;
   border-top: none !important;
@@ -379,7 +380,8 @@ html:not(:has(.mfc-hero-section)) .content-panel {
   html:not(:has(.mfc-hero-section)) .content-panel {
     padding: 2.5rem 3rem !important;
   }
-  html body:has(.mfc-hero-section) main > .content-panel {
+
+  html body:has(.mfc-hero-section) main>.content-panel {
     padding: 0 !important;
   }
 }
@@ -388,7 +390,8 @@ html:not(:has(.mfc-hero-section)) .content-panel {
   html:not(:has(.mfc-hero-section)) .content-panel {
     padding: 1.5rem 1.25rem !important;
   }
-  html body:has(.mfc-hero-section) main > .content-panel {
+
+  html body:has(.mfc-hero-section) main>.content-panel {
     padding: 0 !important;
   }
 }
@@ -398,6 +401,7 @@ html:not(:has(.mfc-hero-section)) .content-panel {
    ========================================================================== */
 
 @media (min-width: 60rem) {
+
   /* Flex container row layout */
   html[data-has-toc] .lg\:sl-flex {
     display: flex !important;
@@ -460,7 +464,7 @@ html:not(:has(.mfc-hero-section)) .content-panel {
     box-sizing: border-box !important;
   }
 
-  html[data-has-toc] .main-pane .content-panel + .content-panel {
+  html[data-has-toc] .main-pane .content-panel+.content-panel {
     border-top: none !important;
     padding: 0 2.5rem 3.5rem !important;
     max-width: 100% !important;
@@ -604,7 +608,7 @@ html:not(:has(.mfc-hero-section)) .content-panel {
   align-items: center;
   text-align: center;
   padding: 3.5rem 1.5rem 2.5rem;
-  background: 
+  background:
     radial-gradient(ellipse 65% 75% at 84% 18%, rgba(180, 215, 255, 0.88) 0%, rgba(204, 228, 255, 0.55) 35%, rgba(224, 242, 254, 0.2) 60%, transparent 80%),
     radial-gradient(ellipse 45% 55% at 16% 12%, rgba(224, 242, 254, 0.45) 0%, rgba(239, 246, 255, 0.18) 45%, transparent 70%),
     linear-gradient(180deg, #f2f7ff 0%, #f9fbff 40%, #ffffff 100%);
@@ -770,16 +774,16 @@ html:not(:has(.mfc-hero-section)) .content-panel {
 
 /* Card Grids */
 /* Universal margin reset on all card grid items to prevent markdown sibling margin-top misalignment */
-.mfc-grid-getting-started > *,
-.mfc-grid-4 > *,
-.mfc-grid-3 > *,
-.mfc-grid-compact > *,
+.mfc-grid-getting-started>*,
+.mfc-grid-4>*,
+.mfc-grid-3>*,
+.mfc-grid-compact>*,
 .mfc-card,
 .sl-markdown-content .mfc-card,
-.sl-markdown-content .mfc-grid-getting-started > *,
-.sl-markdown-content .mfc-grid-4 > *,
-.sl-markdown-content .mfc-grid-3 > *,
-.sl-markdown-content .mfc-grid-compact > * {
+.sl-markdown-content .mfc-grid-getting-started>*,
+.sl-markdown-content .mfc-grid-4>*,
+.sl-markdown-content .mfc-grid-3>*,
+.sl-markdown-content .mfc-grid-compact>* {
   margin-top: 0 !important;
   margin-bottom: 0 !important;
 }
@@ -1151,4 +1155,386 @@ footer .pagination-links,
 [class*='pagination-links'] {
   display: none !important;
 }
+
+/* ==========================================================================
+   MyFormConnect Search Modal Theme Styles
+   Matches MyFormConnect brand: clean white/off-white, #e2e8f0 borders,
+   #0f172a navy text, and #2563eb blue accents.
+   ========================================================================== */
+
+/* 1. Modal Backdrop */
+site-search dialog::backdrop {
+  background: rgba(15, 23, 42, 0.55) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
+/* 2. Dialog Container */
+site-search dialog {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.18), 0 1px 3px rgba(15, 23, 42, 0.05) !important;
+  color: #0f172a !important;
+  padding: 0 !important;
+  width: 92vw !important;
+  max-width: 46rem !important;
+  max-height: 82vh !important;
+  overflow: hidden !important;
+}
+
+@media (min-width: 50rem) {
+  site-search dialog {
+    margin: 4.5rem auto auto auto !important;
+    max-width: 46rem !important;
+  }
+}
+
+site-search .dialog-frame {
+  padding: 1.25rem 1.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.75rem !important;
+  max-height: 82vh !important;
+  overflow-y: auto !important;
+}
+
+/* 3. Search Input & Icon */
+#starlight__search {
+  --pagefind-ui-primary: #2563eb !important;
+  --pagefind-ui-text: #0f172a !important;
+  --pagefind-ui-background: #ffffff !important;
+  --pagefind-ui-border: #e2e8f0 !important;
+  --pagefind-ui-border-width: 1.5px !important;
+  --pagefind-ui-border-radius: 10px !important;
+  --pagefind-ui-font: var(--mfc-font-sans) !important;
+}
+
+#starlight__search .pagefind-ui__form {
+  position: relative !important;
+}
+
+#starlight__search .pagefind-ui__form::before {
+  background-color: #2563eb !important;
+  opacity: 1 !important;
+  width: 17px !important;
+  height: 17px !important;
+  top: 24px !important;
+  left: 1rem !important;
+  transform: translateY(-50%) !important;
+  pointer-events: none !important;
+  z-index: 2 !important;
+}
+
+#starlight__search .pagefind-ui__search-input {
+  height: 48px !important;
+  padding: 0 2.5rem 0 2.85rem !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 10px !important;
+  outline: none !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03) !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+#starlight__search .pagefind-ui__search-input::placeholder {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+  font-weight: 400 !important;
+}
+
+#starlight__search .pagefind-ui__search-input:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14) !important;
+}
+
+/* Clear Button */
+#starlight__search .pagefind-ui__search-clear {
+  position: absolute !important;
+  right: 0.75rem !important;
+  top: 24px !important;
+  transform: translateY(-50%) !important;
+  height: 24px !important;
+  width: 24px !important;
+  padding: 0 !important;
+  background-color: #f1f5f9 !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 6px !important;
+  color: #64748b !important;
+  font-size: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.15s ease !important;
+  z-index: 2 !important;
+}
+
+#starlight__search .pagefind-ui__search-clear.pagefind-ui__suppressed {
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+#starlight__search .pagefind-ui__search-clear:hover {
+  background-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+#starlight__search .pagefind-ui__search-clear::before {
+  background-color: currentColor !important;
+}
+
+/* 4. Results Message */
+#starlight__search .pagefind-ui__message {
+  font-size: 0.825rem !important;
+  font-weight: 600 !important;
+  color: #64748b !important;
+  padding: 0.5rem 0.25rem 0.25rem !important;
+  margin: 0 !important;
+  border: none !important;
+}
+
+/* 5. Results List & Hover State */
+#starlight__search .pagefind-ui__results {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0.25rem 0 0 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.4rem !important;
+}
+
+#starlight__search .pagefind-ui__result {
+  border: 1px solid #e2e8f0 !important;
+  border-left: 4px solid transparent !important;
+  border-radius: 10px !important;
+  padding: 0.75rem 0.85rem !important;
+  background-color: #ffffff !important;
+  transition: background-color 0.15s ease, border-left-color 0.15s ease, box-shadow 0.15s ease !important;
+  position: relative !important;
+  outline: none !important;
+}
+
+#starlight__search .pagefind-ui__result:hover,
+#starlight__search .pagefind-ui__result:focus-within {
+  background-color: #eff6ff !important;
+  border-color: #e2e8f0 !important;
+  border-left: 4px solid #2563eb !important;
+  box-shadow: 0 1px 4px rgba(37, 99, 235, 0.06) !important;
+  outline: none !important;
+}
+
+/* Remove default sleek/slim blue outline on hover or focus */
+#starlight__search .pagefind-ui__result,
+#starlight__search .pagefind-ui__result-title,
+#starlight__search .pagefind-ui__result-title:hover,
+#starlight__search .pagefind-ui__result-title:focus-within,
+#starlight__search .pagefind-ui__result-nested,
+#starlight__search .pagefind-ui__result-nested:hover,
+#starlight__search .pagefind-ui__result-nested:focus-within,
+#starlight__search .pagefind-ui__result-link,
+#starlight__search .pagefind-ui__result-link:hover,
+#starlight__search .pagefind-ui__result-link:focus {
+  outline: none !important;
+}
+
+#starlight__search .pagefind-ui__result-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.2rem !important;
+  margin: 0 !important;
+}
+
+#starlight__search .pagefind-ui__result-title {
+  font-size: 0.925rem !important;
+  font-weight: 600 !important;
+  color: #0f172a !important;
+  margin: 0 !important;
+  background: transparent !important;
+  transition: color 0.15s ease !important;
+}
+
+#starlight__search .pagefind-ui__result:hover .pagefind-ui__result-title,
+#starlight__search .pagefind-ui__result:focus-within .pagefind-ui__result-title {
+  color: #2563eb !important;
+}
+
+#starlight__search .pagefind-ui__result-link {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+#starlight__search .pagefind-ui__result-excerpt {
+  font-size: 0.8125rem !important;
+  color: #64748b !important;
+  line-height: 1.45 !important;
+  margin: 0 !important;
+}
+
+/* Highlight Matching Terms */
+#starlight__search mark {
+  background-color: transparent !important;
+  color: #2563eb !important;
+  font-weight: 700 !important;
+}
+
+/* Nested Sub-results */
+#starlight__search .pagefind-ui__result-nested {
+  margin-top: 0.35rem !important;
+  padding: 0.35rem 0.6rem !important;
+  border: none !important;
+  border-left: none !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  transition: background-color 0.15s ease !important;
+}
+
+#starlight__search .pagefind-ui__result-nested:hover,
+#starlight__search .pagefind-ui__result-nested:focus-within {
+  border: none !important;
+  border-left: none !important;
+  background-color: rgba(37, 99, 235, 0.05) !important;
+}
+
+/* Remove all grey hierarchy tree lines, branch icons, and pseudo-element bars */
+#starlight__search .pagefind-ui__result-nested::before,
+#starlight__search .pagefind-ui__result-nested:last-of-type::before,
+#starlight__search .pagefind-ui__result-nested .pagefind-ui__result-link::before,
+#starlight__search .pagefind-ui__result-link::before {
+  display: none !important;
+  content: none !important;
+  background: none !important;
+  border: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  mask: none !important;
+  -webkit-mask: none !important;
+}
+
+#starlight__search .pagefind-ui__result-nested .pagefind-ui__result-title {
+  font-size: 0.825rem !important;
+  font-weight: 500 !important;
+  color: #334155 !important;
+}
+
+#starlight__search .pagefind-ui__result-nested:hover .pagefind-ui__result-title,
+#starlight__search .pagefind-ui__result-nested:focus-within .pagefind-ui__result-title {
+  color: #2563eb !important;
+}
+
+#starlight__search .pagefind-ui__result-nested .pagefind-ui__result-excerpt {
+  font-size: 0.775rem !important;
+}
+
+/* 6. Mobile Responsiveness */
+@media (max-width: 48rem) {
+  site-search dialog {
+    width: 95vw !important;
+    max-height: 88vh !important;
+    border-radius: 12px !important;
+    margin: 2rem auto auto auto !important;
+  }
+
+  site-search .dialog-frame {
+    padding: 1rem !important;
+  }
+
+  #starlight__search .pagefind-ui__search-input {
+    height: 44px !important;
+    font-size: 0.875rem !important;
+    padding: 0 2.25rem 0 2.5rem !important;
+  }
+
+  #starlight__search .pagefind-ui__form::before {
+    top: 22px !important;
+    left: 0.85rem !important;
+  }
+
+  #starlight__search .pagefind-ui__search-clear {
+    top: 22px !important;
+    right: 0.65rem !important;
+  }
+}
+
+/* 7. Dark Mode Support */
+:root[data-theme='dark'] site-search dialog {
+  background: #0f172a !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.6) !important;
+}
+
+:root[data-theme='dark'] #starlight__search {
+  --pagefind-ui-text: #f8fafc !important;
+  --pagefind-ui-background: #0f172a !important;
+  --pagefind-ui-border: #334155 !important;
+}
+
+:root[data-theme='dark'] #starlight__search .pagefind-ui__search-input {
+  background-color: #0f172a !important;
+  border-color: #334155 !important;
+  color: #f8fafc !important;
+}
+
+:root[data-theme='dark'] #starlight__search .pagefind-ui__search-input:focus {
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.25) !important;
+}
+
+:root[data-theme='dark'] #starlight__search .pagefind-ui__search-clear {
+  background-color: #1e293b !important;
+  border-color: #334155 !important;
+  color: #94a3b8 !important;
+}
+
+:root[data-theme='dark'] #starlight__search .pagefind-ui__message {
+  color: #94a3b8 !important;
+}
+
+:root[data-theme='dark'] #starlight__search .pagefind-ui__result {
+  background-color: #1e293b !important;
+  border: 1px solid #334155 !important;
+  border-left: 4px solid transparent !important;
+}
+
+:root[data-theme='dark'] #starlight__search .pagefind-ui__result:hover,
+:root[data-theme='dark'] #starlight__search .pagefind-ui__result:focus-within {
+  background-color: #24344d !important;
+  border-color: #334155 !important;
+  border-left: 4px solid #3b82f6 !important;
+  outline: none !important;
+}
+
+:root[data-theme='dark'] #starlight__search .pagefind-ui__result-title {
+  color: #f8fafc !important;
+}
+
+:root[data-theme='dark'] #starlight__search .pagefind-ui__result:hover .pagefind-ui__result-title,
+:root[data-theme='dark'] #starlight__search .pagefind-ui__result:focus-within .pagefind-ui__result-title {
+  color: #60a5fa !important;
+}
+
+:root[data-theme='dark'] #starlight__search .pagefind-ui__result-excerpt {
+  color: #94a3b8 !important;
+}
+
+:root[data-theme='dark'] #starlight__search .pagefind-ui__result-nested {
+  border: none !important;
+  border-left: none !important;
+}
+
+:root[data-theme='dark'] #starlight__search .pagefind-ui__result-nested:hover,
+:root[data-theme='dark'] #starlight__search .pagefind-ui__result-nested:focus-within {
+  border: none !important;
+  border-left: none !important;
+  background-color: rgba(96, 165, 250, 0.08) !important;
+}
+
+:root[data-theme='dark'] #starlight__search .pagefind-ui__result-nested .pagefind-ui__result-title {
+  color: #cbd5e1 !important;
+}
+
 
