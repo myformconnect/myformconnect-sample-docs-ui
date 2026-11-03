@@ -869,4 +869,116 @@ const categoriesData: CategoryGroup[] = [
       gap: 0.65rem;
     }
   }
+
+  /* --------------------------------------------------------------------------
+     Dark Theme Styles
+     -------------------------------------------------------------------------- */
+  :root[data-theme="dark"] .mfc-popular-integrations {
+    background-color: #080b12;
+  }
+
+  :root[data-theme="dark"] .mfc-integrations-title {
+    color: #f8fafc !important;
+  }
+
+  :root[data-theme="dark"] .mfc-integrations-subtitle {
+    color: #a1adbd;
+  }
+
+  :root[data-theme="dark"] .mfc-grid-icon-wrap {
+    color: #0b75ff;
+  }
+
+  :root[data-theme="dark"] .mfc-view-all-link {
+    color: #0b75ff !important;
+  }
+
+  :root[data-theme="dark"] .mfc-view-all-link:hover {
+    color: #60a5fa !important;
+  }
+
+  :root[data-theme="dark"] .mfc-category-tab {
+    color: #a1adbd;
+  }
+
+  :root[data-theme="dark"] .mfc-category-tab:hover {
+    background-color: #171e2b;
+    color: #f8fafc;
+  }
+
+  :root[data-theme="dark"] .mfc-category-tab.is-active {
+    background-color: rgba(11, 117, 255, 0.14);
+    color: #0b75ff;
+  }
+
+  :root[data-theme="dark"] .mfc-category-tab.is-active::after {
+    background-color: #0b75ff;
+    box-shadow: 0 0 8px rgba(11, 117, 255, 0.6);
+  }
+
+  :root[data-theme="dark"] .mfc-tabs-divider {
+    background-color: #263244;
+  }
+
+  /* Edge fade indicators in dark mode (replaces white blur) */
+  :root[data-theme="dark"] .mfc-carousel-wrapper::before {
+    background: linear-gradient(
+      to right,
+      rgba(8, 11, 18, 0.98),
+      transparent
+    );
+  }
+
+  :root[data-theme="dark"] .mfc-carousel-wrapper::after {
+    background: linear-gradient(
+      to left,
+      rgba(8, 11, 18, 0.98),
+      transparent
+    );
+  }
+
+  /* Dark Integration Cards */
+  :root[data-theme="dark"] .mfc-int-card {
+    background: #111827;
+    border-color: #263244;
+    box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.3);
+  }
+
+  :root[data-theme="dark"] .mfc-int-card:hover {
+    border-color: #0b75ff;
+    background: #171e2b;
+    box-shadow:
+      0 8px 24px -4px rgba(0, 0, 0, 0.5),
+      0 0 16px rgba(11, 117, 255, 0.16);
+    transform: translateY(-2px);
+  }
+
+  :root[data-theme="dark"] .mfc-int-name {
+    color: #f8fafc;
+  }
+
+  :root[data-theme="dark"] .mfc-int-action {
+    color: #0b75ff;
+  }
+
+  :root[data-theme="dark"] .mfc-int-card:hover .mfc-int-action {
+    color: #60a5fa;
+  }
+
+  /* Navigation Scroll Arrows in dark mode */
+  :root[data-theme="dark"] .mfc-scroll-arrow {
+    background: #111827;
+    border-color: #263244;
+    color: #f8fafc;
+    box-shadow:
+      0 4px 12px rgba(0, 0, 0, 0.4),
+      0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  :root[data-theme="dark"] .mfc-scroll-arrow:hover {
+    background: #0b75ff;
+    border-color: #0b75ff;
+    color: #ffffff;
+    box-shadow: 0 6px 20px rgba(11, 117, 255, 0.5);
+  }
 </style>

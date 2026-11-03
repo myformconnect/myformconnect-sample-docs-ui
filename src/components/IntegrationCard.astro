@@ -417,6 +417,116 @@ const Tag = isLink ? 'a' : 'div';
   .mfc-card:hover .mfc-arrow-icon {
     transform: translateX(2px);
   }
+
+  /* --------------------------------------------------------------------------
+     Dark Theme Styles
+     -------------------------------------------------------------------------- */
+  :root[data-theme="dark"] .mfc-card {
+    background: #111827;
+    border-color: #263244;
+    color: #f8fafc;
+    box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.3);
+  }
+
+  :root[data-theme="dark"] .mfc-card:hover {
+    border-color: #0b75ff;
+    background: #171e2b;
+    box-shadow:
+      0 8px 24px -3px rgba(0, 0, 0, 0.5),
+      0 0 16px rgba(11, 117, 255, 0.16);
+  }
+
+  :root[data-theme="dark"] .mfc-card.variant-featured {
+    background: #111827;
+    border-color: #263244;
+    box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.3);
+  }
+
+  :root[data-theme="dark"] .mfc-card.variant-featured:hover {
+    border-color: #0b75ff;
+    box-shadow:
+      0 8px 24px -3px rgba(0, 0, 0, 0.5),
+      0 0 16px rgba(11, 117, 255, 0.16);
+  }
+
+  :root[data-theme="dark"] .mfc-card-icon-wrapper {
+    background: #171e2b;
+    border-color: #263244;
+    color: #0b75ff;
+  }
+
+  :root[data-theme="dark"] .mfc-card:hover .mfc-card-icon-wrapper,
+  :root[data-theme="dark"] .mfc-card:focus-visible .mfc-card-icon-wrapper {
+    background: #1e293b;
+    border-color: #0b75ff;
+    box-shadow: 0 4px 12px -2px rgba(11, 117, 255, 0.25);
+  }
+
+  :root[data-theme="dark"] .mfc-paired-wrapper {
+    background: #171e2b;
+    border-color: #263244;
+  }
+
+  :root[data-theme="dark"] .mfc-card:hover .mfc-paired-wrapper {
+    border-color: #0b75ff;
+    background: rgba(11, 117, 255, 0.12);
+  }
+
+  :root[data-theme="dark"] .mfc-paired-plus {
+    color: #64748b;
+  }
+
+  :root[data-theme="dark"] .mfc-card-title {
+    color: #f8fafc;
+  }
+
+  :root[data-theme="dark"] .mfc-card-desc {
+    color: #a1adbd;
+  }
+
+  :root[data-theme="dark"] .mfc-card-btn {
+    background: rgba(11, 117, 255, 0.14);
+    border-color: rgba(11, 117, 255, 0.3);
+    color: #0b75ff;
+  }
+
+  :root[data-theme="dark"] .mfc-card:hover .mfc-card-btn {
+    background: #0b75ff;
+    color: #ffffff;
+    border-color: #0b75ff;
+    box-shadow: 0 2px 10px rgba(11, 117, 255, 0.4);
+  }
+
+  /* Status Badges */
+  :root[data-theme="dark"] .badge-active {
+    background: rgba(11, 117, 255, 0.15);
+    color: #60a5fa;
+    border: 1px solid rgba(11, 117, 255, 0.35);
+  }
+
+  :root[data-theme="dark"] .badge-core {
+    background: rgba(11, 117, 255, 0.15);
+    color: #60a5fa;
+    border: 1px solid rgba(11, 117, 255, 0.35);
+  }
+
+  :root[data-theme="dark"] .badge-popular {
+    background: rgba(245, 158, 11, 0.15);
+    color: #fbbf24;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+  }
+
+  :root[data-theme="dark"] .badge-new {
+    background: rgba(34, 197, 94, 0.15);
+    color: #4ade80;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+  }
+
+  :root[data-theme="dark"] .badge-soon {
+    background: #1e293b;
+    color: #94a3b8;
+    border: 1px solid #334155;
+  }
 </style>
 
 <script>
