@@ -216,6 +216,16 @@ header.header {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
 }
 
+/* Hide Starlight default fixed hamburger button on the right */
+.sl-menu-button {
+  display: none !important;
+}
+
+[data-has-sidebar] .header,
+header.header {
+  padding-inline-end: 0 !important;
+}
+
 /* Sidebar styling */
 .sidebar-pane {
   background-color: #f1f5f9 !important;
@@ -233,6 +243,67 @@ header.header {
   display: flex !important;
   flex-direction: column !important;
   min-height: 100% !important;
+}
+
+@media (max-width: 799px) {
+  .sidebar-pane {
+    top: var(--sl-nav-height) !important;
+    height: calc(100vh - var(--sl-nav-height)) !important;
+    max-height: calc(100dvh - var(--sl-nav-height)) !important;
+    background-color: #f1f5f9 !important;
+    padding: 0 !important;
+    border-inline-end: none !important;
+  }
+
+  :root[data-theme='dark'] .sidebar-pane {
+    background-color: #0d111b !important;
+  }
+
+  .sidebar-content {
+    height: 100% !important;
+    min-height: 100% !important;
+    padding: 0 !important;
+  }
+}
+
+/* Desktop Sidebar Collapse / Shrink State (>= 800px) */
+@media (min-width: 800px) {
+  html[data-sidebar-collapsed="true"] {
+    --sl-sidebar-width: 3.75rem !important;
+  }
+
+  html[data-sidebar-collapsed="true"] .sidebar-pane {
+    width: 3.75rem !important;
+    overflow-x: hidden !important;
+  }
+
+  html[data-sidebar-collapsed="true"] [data-has-sidebar] .main-frame {
+    padding-inline-start: 3.75rem !important;
+  }
+
+  /* Prevent cards from expanding into giant empty squares when sidebar collapses */
+  html[data-sidebar-collapsed="true"] .mfc-building-card,
+  html[data-sidebar-collapsed="true"] .mfc-explore-card {
+    aspect-ratio: auto !important;
+    min-height: 165px !important;
+    max-height: 195px !important;
+  }
+
+  /* Smooth transition when toggling sidebar width */
+  .sidebar-pane,
+  [data-has-sidebar] .main-frame {
+    transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                padding-inline-start 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@media (max-width: 799px) {
+  html[data-sidebar-collapsed="true"] .sidebar-pane {
+    width: 100% !important;
+  }
+  html[data-sidebar-collapsed="true"] [data-has-sidebar] .main-frame {
+    padding-inline-start: 0 !important;
+  }
 }
 
 /* Content area adjustments */
@@ -1183,6 +1254,10 @@ site-search dialog {
   overflow: hidden !important;
 }
 
+site-search dialog[open] {
+  display: flex !important;
+}
+
 @media (min-width: 50rem) {
   site-search dialog {
     margin: 4.5rem auto auto auto !important;
@@ -1208,6 +1283,9 @@ site-search .dialog-frame {
   --pagefind-ui-border-width: 1.5px !important;
   --pagefind-ui-border-radius: 10px !important;
   --pagefind-ui-font: var(--mfc-font-sans) !important;
+  --sl-search-tree-diagram-size: 0px !important;
+  --sl-search-page-icon-size: 0px !important;
+  --sl-search-result-pad-inline-start: 0.85rem !important;
 }
 
 #starlight__search .pagefind-ui__form {
@@ -1384,7 +1462,8 @@ site-search .dialog-frame {
 /* Nested Sub-results */
 #starlight__search .pagefind-ui__result-nested {
   margin-top: 0.35rem !important;
-  padding: 0.35rem 0.6rem !important;
+  padding: 0.4rem 0.75rem !important;
+  padding-inline-start: 0.75rem !important;
   border: none !important;
   border-left: none !important;
   border-radius: 6px !important;
@@ -1402,16 +1481,32 @@ site-search .dialog-frame {
 /* Remove all grey hierarchy tree lines, branch icons, and pseudo-element bars */
 #starlight__search .pagefind-ui__result-nested::before,
 #starlight__search .pagefind-ui__result-nested:last-of-type::before,
+#starlight__search .pagefind-ui__result-nested::after,
 #starlight__search .pagefind-ui__result-nested .pagefind-ui__result-link::before,
-#starlight__search .pagefind-ui__result-link::before {
+#starlight__search .pagefind-ui__result-link::before,
+#starlight__search .pagefind-ui__result-title::before,
+#starlight__search .pagefind-ui__result-inner > .pagefind-ui__result-title::before,
+site-search .pagefind-ui__result-nested::before,
+site-search .pagefind-ui__result-nested:last-of-type::before,
+site-search .pagefind-ui__result-nested::after,
+site-search .pagefind-ui__result-title::before {
   display: none !important;
   content: none !important;
-  background: none !important;
-  border: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
   width: 0 !important;
   height: 0 !important;
+  min-width: 0 !important;
+  max-width: 0 !important;
+  background: none !important;
+  background-color: transparent !important;
+  background-image: none !important;
   mask: none !important;
   -webkit-mask: none !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+  border: none !important;
+  pointer-events: none !important;
 }
 
 #starlight__search .pagefind-ui__result-nested .pagefind-ui__result-title {
@@ -1435,7 +1530,9 @@ site-search .dialog-frame {
     width: 95vw !important;
     max-height: 88vh !important;
     border-radius: 12px !important;
-    margin: 2rem auto auto auto !important;
+    margin: 1.5rem auto auto auto !important;
+    position: fixed !important;
+    z-index: 999999 !important;
   }
 
   site-search .dialog-frame {
@@ -1650,20 +1747,15 @@ html[data-theme='dark'] .mfc-create-btn:hover {
   box-shadow: 0 0 22px rgba(11, 117, 255, 0.55) !important;
 }
 
-html[data-theme='dark'] .mfc-mobile-drawer {
-  background: #080b12 !important;
-  border-bottom: 1px solid #263244 !important;
+html[data-theme='dark'] .mfc-header-hamburger {
+  background-color: #111827 !important;
+  border-color: #263244 !important;
+  color: #a1adbd !important;
 }
 
-html[data-theme='dark'] .mfc-mobile-link {
-  color: #cbd5e1 !important;
-}
-
-html[data-theme='dark'] .mfc-mobile-divider {
-  background: #263244 !important;
-}
-
-html[data-theme='dark'] .mfc-mobile-toggle {
+html[data-theme='dark'] .mfc-header-hamburger:hover {
+  background-color: #171e2b !important;
+  border-color: #0b75ff !important;
   color: #f8fafc !important;
 }
 
@@ -2574,6 +2666,9 @@ html[data-theme='dark'] #starlight__search {
   --pagefind-ui-text: #f8fafc !important;
   --pagefind-ui-background: #0d111b !important;
   --pagefind-ui-border: #263244 !important;
+  --sl-search-tree-diagram-size: 0px !important;
+  --sl-search-page-icon-size: 0px !important;
+  --sl-search-result-pad-inline-start: 0.85rem !important;
 }
 
 html[data-theme='dark'] #starlight__search .pagefind-ui__form::before {

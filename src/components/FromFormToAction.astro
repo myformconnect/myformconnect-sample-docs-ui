@@ -318,16 +318,16 @@
   .mfc-flow-card {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     text-align: center;
     flex: 1 1 0;
     min-width: 0;
-    aspect-ratio: 1 / 1;
+    min-height: 190px;
     background: #ffffff;
     border: 1px solid #eef2f6;
     border-radius: 12px;
-    padding: 1rem 0.95rem 1.05rem;
+    padding: 1rem 0.95rem 1.15rem;
     box-sizing: border-box;
     box-shadow:
       0 4px 18px -2px rgba(15, 23, 42, 0.04),
@@ -336,7 +336,6 @@
       transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
       box-shadow 0.25s ease,
       border-color 0.25s ease;
-    overflow: hidden;
   }
 
   .mfc-flow-card:hover {
@@ -506,24 +505,35 @@
   /* --------------------------------------------------------------------------
      Responsive Breakpoints & Mobile Stacking
      -------------------------------------------------------------------------- */
-  @media (max-width: 960px) {
+  @media (max-width: 1024px) {
     .mfc-flow-grid {
       flex-direction: column;
+      align-items: center;
       gap: 0;
+      width: 100%;
     }
 
     .mfc-flow-card {
+      flex: 0 0 auto !important;
       width: 100%;
-      max-width: 380px;
-      aspect-ratio: auto;
-      min-height: auto;
-      padding: 1.25rem 1.15rem 1.35rem;
+      max-width: 440px;
+      height: auto !important;
+      min-height: 150px;
+      aspect-ratio: auto !important;
+      padding: 1.15rem 1.15rem 1.25rem;
+      overflow: visible !important;
+    }
+
+    .mfc-card-content-wrap {
+      width: 100%;
+      height: auto;
+      flex-grow: 1;
     }
 
     .mfc-flow-connector {
-      flex: none;
+      flex: 0 0 38px !important;
       width: 32px;
-      height: 42px;
+      height: 38px;
       margin: 0 auto;
     }
 
@@ -539,17 +549,17 @@
     }
 
     .mfc-arrow-h {
-      display: none;
+      display: none !important;
     }
 
     .mfc-arrow-v {
-      display: block;
+      display: block !important;
     }
   }
 
   @media (max-width: 640px) {
     .mfc-form-to-action {
-      padding: 0.85rem 1.25rem 2rem;
+      padding: 0.85rem 1rem 1.75rem;
     }
 
     .mfc-action-title {
@@ -558,6 +568,31 @@
 
     .mfc-action-subtitle {
       font-size: 0.825rem;
+    }
+
+    .mfc-flow-card {
+      max-width: 100%;
+      padding: 1rem 0.9rem 1.1rem;
+      min-height: 140px;
+    }
+
+    .mfc-icon-squircle {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 0.4rem;
+    }
+
+    .mfc-flow-heading {
+      font-size: 0.9rem;
+    }
+
+    .mfc-flow-desc {
+      font-size: 0.75rem;
+    }
+
+    .mfc-flow-connector {
+      flex: 0 0 32px !important;
+      height: 32px;
     }
   }
 

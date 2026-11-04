@@ -294,6 +294,7 @@
     justify-content: space-between;
     width: 100%;
     aspect-ratio: 1 / 1;
+    max-height: 215px;
     background: #ffffff;
     border: 1px solid #e2e8f0;
     border-radius: 10px;
@@ -419,7 +420,7 @@
 
   @media (max-width: 640px) {
     .mfc-start-building {
-      padding: 0.85rem 1.25rem 1rem;
+      padding: 0.85rem 1rem 1rem;
     }
 
     .mfc-building-title {
@@ -428,24 +429,26 @@
 
     .mfc-building-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 0.75rem;
+      gap: 0.65rem;
     }
 
     .mfc-building-card {
-      padding: 1rem 0.85rem 0.85rem;
+      aspect-ratio: auto;
+      min-height: 135px;
+      padding: 0.85rem 0.75rem 0.75rem;
     }
 
     .mfc-card-heading {
-      font-size: 0.85rem;
+      font-size: 0.825rem;
     }
 
     .mfc-card-desc {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       line-height: 1.35;
     }
 
     .mfc-card-footer {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
     }
 
     .mfc-heading-break {
@@ -454,21 +457,54 @@
   }
 
   @media (max-width: 440px) {
+    .mfc-start-building {
+      padding: 0.75rem 0.75rem 0.85rem;
+    }
+
     .mfc-building-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
     }
 
     .mfc-building-card {
-      aspect-ratio: 1.25 / 1;
-      padding: 1.15rem;
+      aspect-ratio: auto;
+      min-height: 125px;
+      padding: 0.75rem 0.6rem 0.65rem;
+    }
+
+    .mfc-html-badge svg {
+      width: 18px;
+      height: 22px;
+    }
+
+    .mfc-react-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .mfc-terminal-badge svg {
+      width: 24px;
+      height: 20px;
+    }
+
+    .mfc-ai-webhooks-icon svg {
+      width: 22px;
+      height: 22px;
     }
 
     .mfc-card-heading {
-      font-size: 0.925rem;
+      font-size: 0.75rem;
+      line-height: 1.2;
     }
 
     .mfc-card-desc {
-      font-size: 0.8rem;
+      font-size: 0.68rem;
+      line-height: 1.3;
+    }
+
+    .mfc-card-footer {
+      font-size: 0.68rem;
+      padding-top: 0.35rem;
     }
   }
 </style>

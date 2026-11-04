@@ -32,7 +32,96 @@ function hasActiveChild(entry: any): boolean {
 }
 ---
 
+<script is:inline>
+  (() => {
+    try {
+      if (window.innerWidth >= 800 && localStorage.getItem('mfc-sidebar-collapsed') === 'true') {
+        document.documentElement.setAttribute('data-sidebar-collapsed', 'true');
+      }
+    } catch {}
+  })();
+</script>
+
 <div class="mfc-custom-sidebar">
+  <!-- Mobile Search Bar at Top of Drawer with Separator & Shadow (Only visible on mobile < 800px) -->
+  <div class="mfc-sidebar-mobile-search-section">
+    <button
+      type="button"
+      class="mfc-sidebar-mobile-search-btn"
+      id="mfcSidebarMobileSearchTrigger"
+      aria-label="Search documentation, integrations, guides, and features"
+      title="Search documentation (/)"
+    >
+      <svg
+        class="mfc-mobile-search-icon"
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <span class="mfc-mobile-search-placeholder"
+        >Search documentation, guides, features...</span
+      >
+      <kbd class="mfc-mobile-search-kbd" aria-hidden="true">/</kbd>
+    </button>
+  </div>
+
+  <!-- Desktop Sidebar Collapse/Expand Toggle Header (Only visible on desktop >= 800px) -->
+  <div class="mfc-sidebar-desktop-header">
+    <span class="mfc-sidebar-desktop-tag">MENU</span>
+    <button
+      type="button"
+      class="mfc-sidebar-collapse-btn"
+      id="mfcSidebarCollapseToggle"
+      aria-label="Collapse sidebar"
+      title="Collapse sidebar"
+    >
+      <!-- Close/Collapse Icon (panel-left-close) -->
+      <svg
+        class="mfc-collapse-icon is-close"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+        <path d="M9 3v18"></path>
+        <path d="m16 15-3-3 3-3"></path>
+      </svg>
+      <!-- Open/Expand Icon (panel-left-open) -->
+      <svg
+        class="mfc-collapse-icon is-open"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+        style="display: none;"
+      >
+        <rect width="18" height="18" x="3" y="3" rx="2"></rect>
+        <path d="M9 3v18"></path>
+        <path d="m14 9 3 3-3 3"></path>
+      </svg>
+    </button>
+  </div>
+
   <nav class="mfc-sidebar-nav" aria-label="Documentation Sidebar">
     {sidebar.map((group: any) => {
       const isGroup = group.type === 'group';
@@ -319,8 +408,119 @@ function hasActiveChild(entry: any): boolean {
     </a>
   </div>
 
-  <div class="md:sl-hidden mfc-mobile-footer-wrap">
-    <MobileMenuFooter />
+  <!-- Mobile Drawer Preferences: Language & Theme (Only visible on mobile < 800px) -->
+  <div class="mfc-sidebar-mobile-prefs">
+    <div class="mfc-mobile-pref-heading">PREFERENCES</div>
+
+    <div class="mfc-mobile-pref-grid">
+      <!-- Language Selector -->
+      <div class="mfc-mobile-lang-box">
+        <div class="mfc-mobile-pref-header">
+          <svg
+            class="mfc-pref-icon"
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path
+              d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
+            ></path>
+          </svg>
+          <span class="mfc-pref-title">Language</span>
+        </div>
+        <div class="mfc-select-wrap">
+          <select
+            id="mfcMobileLangSelect"
+            class="mfc-mobile-select"
+            aria-label="Select documentation language"
+          >
+            <option value="English" selected>English</option>
+            <option value="Español">Español</option>
+            <option value="Français">Français</option>
+            <option value="Deutsch">Deutsch</option>
+            <option value="Português">Português</option>
+            <option value="日本語">日本語</option>
+          </select>
+          <svg
+            class="mfc-select-chevron"
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Theme Switcher -->
+      <div class="mfc-mobile-theme-box">
+        <div class="mfc-mobile-pref-header">
+          <svg
+            class="mfc-pref-icon mfc-icon-sun"
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg
+            class="mfc-pref-icon mfc-icon-moon"
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            style="display: none;"
+          >
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <span class="mfc-pref-title">Theme</span>
+        </div>
+        <button
+          type="button"
+          class="mfc-mobile-theme-btn"
+          id="mfcMobileThemeToggle"
+          aria-label="Toggle color theme"
+        >
+          <span class="mfc-mobile-theme-name" id="mfcMobileThemeText">Light Mode</span>
+          <span class="mfc-theme-pill" id="mfcMobileThemePill" aria-hidden="true">
+            <span class="mfc-pill-knob"></span>
+          </span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -650,4 +850,602 @@ function hasActiveChild(entry: any): boolean {
     background-color: #171e2b;
     color: #f8fafc;
   }
+
+  /* --------------------------------------------------------------------------
+     Desktop Collapse/Expand Header (Only visible on desktop >= 800px)
+     -------------------------------------------------------------------------- */
+  .mfc-sidebar-desktop-header {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.15rem 0.25rem 0.5rem;
+    margin-bottom: 0.35rem;
+    border-bottom: 1px solid #e2e8f0;
+  }
+
+  @media (min-width: 800px) {
+    .mfc-sidebar-desktop-header {
+      display: flex;
+    }
+  }
+
+  .mfc-sidebar-desktop-tag {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #64748b;
+    text-transform: uppercase;
+  }
+
+  .mfc-sidebar-collapse-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+    transition: color 0.15s ease, background-color 0.15s ease;
+    outline: none;
+    line-height: 1;
+    box-shadow: none;
+  }
+
+  .mfc-sidebar-collapse-btn:hover {
+    background: rgba(15, 23, 42, 0.05);
+    color: #0f172a;
+  }
+
+  :root[data-theme='dark'] .mfc-sidebar-desktop-header {
+    border-bottom-color: #263244;
+  }
+
+  :root[data-theme='dark'] .mfc-sidebar-desktop-tag {
+    color: #64748b;
+  }
+
+  :root[data-theme='dark'] .mfc-sidebar-collapse-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    box-shadow: none;
+  }
+
+  :root[data-theme='dark'] .mfc-sidebar-collapse-btn:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #f8fafc;
+  }
+
+  /* --------------------------------------------------------------------------
+     Sidebar Collapsed State (Desktop)
+     -------------------------------------------------------------------------- */
+  :global(html[data-sidebar-collapsed="true"]) .mfc-custom-sidebar {
+    padding: 0.85rem 0.25rem 0.85rem !important;
+    align-items: center !important;
+    overflow: hidden !important;
+  }
+
+  :global(html[data-sidebar-collapsed="true"]) .mfc-sidebar-desktop-header {
+    justify-content: center !important;
+    padding: 0.15rem 0 0.5rem !important;
+    width: 100% !important;
+    margin-bottom: 0 !important;
+    border-bottom: 1px solid transparent !important;
+  }
+
+  :global(html[data-sidebar-collapsed="true"]) .mfc-sidebar-desktop-tag {
+    display: none !important;
+  }
+
+  :global(html[data-sidebar-collapsed="true"]) .mfc-sidebar-collapse-btn {
+    width: 32px !important;
+    height: 32px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    border-radius: 6px !important;
+  }
+
+  :global(html[data-sidebar-collapsed="true"]) .mfc-collapse-icon.is-close {
+    display: none !important;
+  }
+
+  :global(html[data-sidebar-collapsed="true"]) .mfc-collapse-icon.is-open {
+    display: block !important;
+  }
+
+  :global(html[data-sidebar-collapsed="true"]) .mfc-sidebar-nav {
+    display: none !important;
+  }
+
+  :global(html[data-sidebar-collapsed="true"]) .mfc-sidebar-help-section {
+    margin-top: auto !important;
+    padding: 0.85rem 0.25rem !important;
+    gap: 0 !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  :global(html[data-sidebar-collapsed="true"]) .mfc-help-heading,
+  :global(html[data-sidebar-collapsed="true"]) .mfc-help-label {
+    display: none !important;
+  }
+
+  :global(html[data-sidebar-collapsed="true"]) .mfc-help-link {
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    gap: 0 !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border-radius: 8px !important;
+    margin: 0 auto !important;
+  }
+
+  :global(html[data-sidebar-collapsed="true"]) .mfc-help-icon-wrap {
+    margin: 0 !important;
+  }
+
+  @media (max-width: 799px) {
+    .mfc-sidebar-desktop-header {
+      display: none !important;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
+     Mobile Search Bar Section (Top of Drawer with Separator & Shadow)
+     -------------------------------------------------------------------------- */
+  .mfc-sidebar-mobile-search-section {
+    display: none;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: 0.75rem 0.65rem;
+    margin: -0.85rem -0.65rem 0.75rem;
+    background-color: #f1f5f9;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
+  }
+
+  :root[data-theme='dark'] .mfc-sidebar-mobile-search-section {
+    background-color: #0d111b;
+    border-bottom-color: #263244;
+    box-shadow: 0 4px 14px -2px rgba(0, 0, 0, 0.5);
+  }
+
+  @media (max-width: 799px) {
+    .mfc-sidebar-mobile-search-section {
+      display: block;
+    }
+  }
+
+  .mfc-sidebar-mobile-search-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    padding: 0 0.85rem;
+    border-radius: 8px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #64748b;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.15s ease;
+    box-sizing: border-box;
+    text-align: left;
+    outline: none;
+  }
+
+  .mfc-sidebar-mobile-search-btn:hover {
+    border-color: #2563eb;
+    background: #f8fafc;
+    color: #0f172a;
+  }
+
+  :root[data-theme='dark'] .mfc-sidebar-mobile-search-btn {
+    background: #171e2b;
+    border-color: #263244;
+    color: #a1adbd;
+  }
+
+  :root[data-theme='dark'] .mfc-sidebar-mobile-search-btn:hover {
+    border-color: #0b75ff;
+    background: #1e293b;
+    color: #f8fafc;
+  }
+
+  .mfc-mobile-search-icon {
+    color: #64748b;
+    margin-right: 0.65rem;
+    flex-shrink: 0;
+  }
+
+  :root[data-theme='dark'] .mfc-mobile-search-icon {
+    color: #a1adbd;
+  }
+
+  .mfc-mobile-search-placeholder {
+    font-size: 0.8125rem;
+    color: #64748b;
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  :root[data-theme='dark'] .mfc-mobile-search-placeholder {
+    color: #a1adbd;
+  }
+
+  .mfc-mobile-search-kbd {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 4px;
+    font-size: 0.75rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-weight: 600;
+    color: #64748b;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+  }
+
+  :root[data-theme='dark'] .mfc-mobile-search-kbd {
+    background: #111827;
+    border-color: #263244;
+    color: #a1adbd;
+  }
+
+  /* --------------------------------------------------------------------------
+     Mobile Drawer Preferences: Language & Theme
+     -------------------------------------------------------------------------- */
+  .mfc-sidebar-mobile-prefs {
+    display: none;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 0.85rem 0.65rem 1.25rem;
+    background-color: #f1f5f9;
+    border-top: 1px solid #e2e8f0;
+    margin-top: 0.5rem;
+    border-radius: 0 0 6px 6px;
+  }
+
+  :root[data-theme='dark'] .mfc-sidebar-mobile-prefs {
+    background-color: #0d111b;
+    border-top-color: #263244;
+  }
+
+  @media (max-width: 799px) {
+    .mfc-sidebar-mobile-prefs {
+      display: flex;
+    }
+  }
+
+  .mfc-mobile-pref-heading {
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: #0f172a;
+    text-transform: uppercase;
+    padding-left: 0.25rem;
+    user-select: none;
+    line-height: 1;
+  }
+
+  :root[data-theme='dark'] .mfc-mobile-pref-heading {
+    color: #f8fafc;
+  }
+
+  .mfc-mobile-pref-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.55rem;
+    width: 100%;
+  }
+
+  @media (max-width: 420px) {
+    .mfc-mobile-pref-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .mfc-mobile-lang-box,
+  .mfc-mobile-theme-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 0.45rem 0.65rem;
+    box-sizing: border-box;
+  }
+
+  :root[data-theme='dark'] .mfc-mobile-lang-box,
+  :root[data-theme='dark'] .mfc-mobile-theme-box {
+    background: #111827;
+    border-color: #263244;
+  }
+
+  .mfc-mobile-pref-header {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.725rem;
+    font-weight: 600;
+    color: #64748b;
+    user-select: none;
+  }
+
+  :root[data-theme='dark'] .mfc-mobile-pref-header {
+    color: #a1adbd;
+  }
+
+  .mfc-pref-icon {
+    color: #2563eb;
+    flex-shrink: 0;
+  }
+
+  :root[data-theme='dark'] .mfc-pref-icon {
+    color: #0b75ff;
+  }
+
+  .mfc-select-wrap {
+    position: relative;
+    width: 100%;
+  }
+
+  .mfc-mobile-select {
+    width: 100%;
+    height: 28px;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #0f172a;
+    cursor: pointer;
+    padding: 0 1.25rem 0 0;
+    outline: none;
+    font-family: inherit;
+  }
+
+  :root[data-theme='dark'] .mfc-mobile-select {
+    color: #f8fafc;
+  }
+
+  :root[data-theme='dark'] .mfc-mobile-select option {
+    background-color: #111827;
+    color: #f8fafc;
+  }
+
+  .mfc-select-chevron {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #94a3b8;
+  }
+
+  .mfc-mobile-theme-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 28px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    font-family: inherit;
+    outline: none;
+  }
+
+  .mfc-mobile-theme-name {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  :root[data-theme='dark'] .mfc-mobile-theme-name {
+    color: #f8fafc;
+  }
+
+  .mfc-theme-pill {
+    position: relative;
+    width: 34px;
+    height: 18px;
+    border-radius: 9999px;
+    background-color: #cbd5e1;
+    transition: background-color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    padding: 2px;
+    box-sizing: border-box;
+  }
+
+  .mfc-theme-pill.is-dark {
+    background-color: #0b75ff;
+  }
+
+  .mfc-pill-knob {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mfc-theme-pill.is-dark .mfc-pill-knob {
+    transform: translateX(16px);
+  }
 </style>
+
+<script>
+  // Mobile search trigger inside sidebar
+  const mobileSearchBtn = document.getElementById("mfcSidebarMobileSearchTrigger");
+  mobileSearchBtn?.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (typeof (window as any).openMfcSearchModal === "function") {
+      (window as any).openMfcSearchModal(e);
+      return;
+    }
+
+    // Fallback if header script has not registered yet
+    const sidebar = document.getElementById("starlight__sidebar");
+    if (sidebar && typeof (sidebar as any).hidePopover === "function") {
+      try {
+        if ((sidebar as any).matches(":popover-open")) {
+          (sidebar as any).hidePopover();
+        }
+      } catch {}
+    }
+
+    setTimeout(() => {
+      const starlightOpenBtn = document.querySelector(
+        "site-search button[data-open-modal]",
+      ) as HTMLButtonElement | null;
+      if (starlightOpenBtn) {
+        starlightOpenBtn.disabled = false;
+        starlightOpenBtn.click();
+      } else {
+        const dialog = document.querySelector(
+          "site-search dialog",
+        ) as HTMLDialogElement | null;
+        if (dialog && !dialog.open) {
+          dialog.showModal();
+          document.body.toggleAttribute("data-search-modal-open", true);
+        }
+      }
+
+      setTimeout(() => {
+        const input = document.querySelector("#starlight__search input") as HTMLInputElement | null;
+        input?.focus();
+      }, 50);
+    }, 15);
+  });
+
+  // Mobile theme toggle inside sidebar
+  const mobileThemeToggle = document.getElementById("mfcMobileThemeToggle");
+  const mobileThemeText = document.getElementById("mfcMobileThemeText");
+  const mobileThemePill = document.getElementById("mfcMobileThemePill");
+  const mobileSun = document.querySelector(".mfc-sidebar-mobile-prefs .mfc-icon-sun") as HTMLElement;
+  const mobileMoon = document.querySelector(".mfc-sidebar-mobile-prefs .mfc-icon-moon") as HTMLElement;
+  const headerThemeToggle = document.getElementById("mfcThemeToggle");
+
+  function syncMobileThemeUI(theme: string) {
+    if (mobileThemeText) {
+      mobileThemeText.textContent = theme === "dark" ? "Dark Mode" : "Light Mode";
+    }
+    if (mobileSun && mobileMoon) {
+      mobileSun.style.display = theme === "dark" ? "none" : "block";
+      mobileMoon.style.display = theme === "dark" ? "block" : "none";
+    }
+    if (mobileThemePill) {
+      mobileThemePill.classList.toggle("is-dark", theme === "dark");
+    }
+  }
+
+  // Initial sync
+  const curTheme = document.documentElement.dataset.theme || localStorage.getItem("starlight-theme") || "light";
+  syncMobileThemeUI(curTheme);
+
+  // Sync on toggle click
+  mobileThemeToggle?.addEventListener("click", () => {
+    if (headerThemeToggle) {
+      headerThemeToggle.click();
+      const updated = document.documentElement.dataset.theme || "light";
+      syncMobileThemeUI(updated);
+    } else {
+      const cur = document.documentElement.dataset.theme || "light";
+      const next = cur === "dark" ? "light" : "dark";
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem("starlight-theme", next); } catch {}
+      syncMobileThemeUI(next);
+    }
+  });
+
+  // Watch for theme changes from other sources (e.g. header button)
+  const themeObserver = new MutationObserver(() => {
+    const updated = document.documentElement.dataset.theme || "light";
+    syncMobileThemeUI(updated);
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+
+  // Mobile language select inside sidebar
+  const mobileLangSelect = document.getElementById("mfcMobileLangSelect") as HTMLSelectElement | null;
+  const headerLangText = document.getElementById("mfcCurrentLangText");
+  mobileLangSelect?.addEventListener("change", () => {
+    const val = mobileLangSelect.value;
+    if (headerLangText) {
+      headerLangText.textContent = val;
+    }
+  });
+
+  // Close sidebar popover when navigation links are clicked
+  const navLinks = document.querySelectorAll(".mfc-sidebar-link, .mfc-help-link");
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      const sidebar = document.getElementById("starlight__sidebar");
+      if (sidebar && typeof (sidebar as any).hidePopover === "function") {
+        try {
+          if ((sidebar as any).matches(":popover-open")) {
+            (sidebar as any).hidePopover();
+          }
+        } catch {}
+      }
+    });
+  });
+
+  // Desktop sidebar collapse / expand toggle
+  const collapseToggle = document.getElementById("mfcSidebarCollapseToggle");
+
+  function updateCollapseUI(isCollapsed: boolean) {
+    if (collapseToggle) {
+      collapseToggle.setAttribute("aria-expanded", String(!isCollapsed));
+      collapseToggle.setAttribute(
+        "title",
+        isCollapsed ? "Expand sidebar" : "Collapse sidebar",
+      );
+    }
+  }
+
+  // Initial check
+  const isCurrentlyCollapsed = document.documentElement.getAttribute("data-sidebar-collapsed") === "true";
+  updateCollapseUI(isCurrentlyCollapsed);
+
+  collapseToggle?.addEventListener("click", () => {
+    const isCollapsed = document.documentElement.getAttribute("data-sidebar-collapsed") === "true";
+    const nextState = !isCollapsed;
+
+    if (nextState) {
+      document.documentElement.setAttribute("data-sidebar-collapsed", "true");
+      try { localStorage.setItem("mfc-sidebar-collapsed", "true"); } catch {}
+    } else {
+      document.documentElement.removeAttribute("data-sidebar-collapsed");
+      try { localStorage.removeItem("mfc-sidebar-collapsed"); } catch {}
+    }
+    updateCollapseUI(nextState);
+
+    // Dispatch resize event so Hero and dynamic elements adapt to new available width
+    setTimeout(() => {
+      window.dispatchEvent(new Event("resize"));
+    }, 230);
+  });
+</script>

@@ -293,21 +293,25 @@ import Icon from './Icon.astro';
     const canvas = document.getElementById('mfcVisualCanvas');
     if (!visual || !scaler || !canvas) return;
 
-    const availableWidth = visual.clientWidth;
+    const containerWidth = visual.clientWidth || visual.getBoundingClientRect().width;
+    const availableWidth = Math.max(260, Math.min(containerWidth || window.innerWidth, window.innerWidth - 32));
     const baseWidth = 830;
     const baseHeight = 430;
 
     // Dynamically scales up to 1.05x on spacious screens or scales down smoothly on compact viewports
-    const scale = Math.min(1.05, availableWidth / baseWidth);
+    const scale = Math.min(1.05, Math.max(0.28, availableWidth / baseWidth));
     canvas.style.transform = `scale(${scale})`;
     canvas.style.transformOrigin = 'left top';
 
-    scaler.style.width = `${baseWidth * scale}px`;
-    scaler.style.height = `${baseHeight * scale}px`;
+    const scaledWidth = Math.round(baseWidth * scale);
+    const scaledHeight = Math.round(baseHeight * scale);
+    scaler.style.width = `${scaledWidth}px`;
+    scaler.style.height = `${scaledHeight}px`;
   }
 
   window.addEventListener('resize', updateHeroVisualScale, { passive: true });
   window.addEventListener('DOMContentLoaded', updateHeroVisualScale);
+  document.addEventListener('astro:page-load', updateHeroVisualScale);
   updateHeroVisualScale();
 </script>
 
@@ -474,19 +478,21 @@ import Icon from './Icon.astro';
      -------------------------------------------------------------------------- */
   .mfc-hero-visual {
     width: 100%;
+    max-width: 100%;
     position: relative;
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    overflow: hidden;
   }
 
   .mfc-visual-scaler {
     position: relative;
-    width: 830px;
-    height: 430px;
+    max-width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+    margin: 0 auto;
   }
 
   .mfc-visual-canvas {

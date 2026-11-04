@@ -5,25 +5,75 @@ import Search from "@astrojs/starlight/components/Search.astro";
 ---
 
 <header class="mfc-header-container">
-  <div class="mfc-header-inner">
-    <!-- Brand Logo -->
-    <a href="/" class="mfc-brand" aria-label="MyFormCapture Documentation Home">
-      <div class="mfc-brand-icon">
-        <img
-          src="/favicon.png"
-          alt="MyFormCapture Logo"
-          width="28"
-          height="28"
-          class="mfc-brand-img"
-        />
-      </div>
-      <div class="mfc-brand-text">
-        <span class="mfc-brand-name">MyFormCapture</span>
-      </div>
-      <span class="mfc-docs-badge">Docs</span>
-    </a>
+  <!-- Mounted Starlight Search for Dialog & Pagefind Modal (Global for Desktop & Mobile) -->
+  <div class="mfc-starlight-search-wrapper" aria-hidden="true">
+    <Search />
+  </div>
 
-    <!-- Center: Search Bar -->
+  <div class="mfc-header-inner">
+    <!-- Left: Mobile Hamburger Toggle + Brand Logo -->
+    <div class="mfc-header-left">
+      <!-- Mobile Hamburger Toggle (Left of product brand logo) -->
+      <button
+        type="button"
+        popovertarget="starlight__sidebar"
+        class="mfc-header-hamburger"
+        id="mfcHeaderHamburger"
+        aria-label="Toggle Navigation Menu"
+        aria-expanded="false"
+      >
+        <svg
+          class="mfc-hamburger-icon open-icon"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg
+          class="mfc-hamburger-icon close-icon"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Brand Logo -->
+      <a href="/" class="mfc-brand" aria-label="MyFormCapture Documentation Home">
+        <div class="mfc-brand-icon">
+          <img
+            src="/favicon.png"
+            alt="MyFormCapture Logo"
+            width="28"
+            height="28"
+            class="mfc-brand-img"
+          />
+        </div>
+        <div class="mfc-brand-text">
+          <span class="mfc-brand-name">MyFormCapture</span>
+        </div>
+        <span class="mfc-docs-badge">Docs</span>
+      </a>
+    </div>
+
+    <!-- Center: Search Bar (Desktop) -->
     <div class="mfc-header-search">
       <button
         type="button"
@@ -52,16 +102,11 @@ import Search from "@astrojs/starlight/components/Search.astro";
         >
         <kbd class="mfc-search-shortcut" aria-hidden="true">/</kbd>
       </button>
-
-      <!-- Mounted Starlight Search for Dialog & Pagefind Modal -->
-      <div class="mfc-starlight-search-wrapper">
-        <Search />
-      </div>
     </div>
 
     <!-- Right Side Actions: Language, Theme, Sign in, Create account -->
     <div class="mfc-actions">
-      <!-- Language Dropdown -->
+      <!-- Language Dropdown (Desktop) -->
       <div class="mfc-language-dropdown" id="mfcLanguageDropdown">
         <button
           type="button"
@@ -182,7 +227,7 @@ import Search from "@astrojs/starlight/components/Search.astro";
         </div>
       </div>
 
-      <!-- Theme Toggle Button -->
+      <!-- Theme Toggle Button (Desktop) -->
       <button
         type="button"
         class="mfc-theme-btn"
@@ -233,108 +278,8 @@ import Search from "@astrojs/starlight/components/Search.astro";
       <a href="#signin" class="mfc-signin-link">Sign in</a>
 
       <!-- Create Account CTA Button -->
-      <a href="#create-account" class="mfc-create-btn">Create account</a>
-
-      <!-- Mobile Menu Toggle Button -->
-      <button
-        type="button"
-        class="mfc-mobile-toggle"
-        id="mfcMobileToggle"
-        aria-label="Toggle Navigation Menu"
-        aria-expanded="false"
-      >
-        <svg
-          class="mfc-icon-menu"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-        <svg
-          class="mfc-icon-close"
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          style="display: none;"
-        >
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-
-      <!-- Starlight Docs Sidebar Toggle for Mobile -->
-      <button
-        popovertarget="starlight__sidebar"
-        class="mfc-sidebar-toggle"
-        aria-label="Toggle Documentation Sidebar"
-      >
-        <svg
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-          <line x1="9" y1="3" x2="9" y2="21"></line>
-        </svg>
-        <span>Docs Menu</span>
-      </button>
+      <a href="#create-account" class="mfc-create-btn">Sign Up</a>
     </div>
-  </div>
-
-  <!-- Mobile Dropdown Menu -->
-  <div class="mfc-mobile-drawer" id="mfcMobileDrawer">
-    <div class="mfc-mobile-search-row">
-      <button
-        type="button"
-        class="mfc-search-btn mfc-mobile-search-trigger"
-        id="mfcMobileSearchTrigger"
-      >
-        <svg
-          width="16"
-          height="16"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <span>Search documentation...</span>
-        <kbd>/</kbd>
-      </button>
-    </div>
-
-    <div class="mfc-mobile-controls-row">
-      <span class="mfc-mobile-label">Language: English</span>
-      <span class="mfc-mobile-label">Theme: Auto / System</span>
-    </div>
-
-    <div class="mfc-mobile-divider"></div>
-    <a href="#signin" class="mfc-mobile-link">Sign in</a>
-    <a href="#create-account" class="mfc-create-btn mfc-mobile-cta"
-      >Create account</a
-    >
   </div>
 </header>
 
@@ -347,32 +292,50 @@ import Search from "@astrojs/starlight/components/Search.astro";
       e.preventDefault();
       e.stopPropagation();
     }
-    const starlightOpenBtn = document.querySelector(
-      "site-search button[data-open-modal]",
-    ) as HTMLButtonElement | null;
-    if (starlightOpenBtn) {
-      starlightOpenBtn.disabled = false;
-      starlightOpenBtn.click();
-    } else {
-      const dialog = document.querySelector(
-        "site-search dialog",
-      ) as HTMLDialogElement | null;
-      if (dialog && !dialog.open) {
-        dialog.showModal();
-        document.body.toggleAttribute("data-search-modal-open", true);
-      }
+    // Close sidebar popover if open on mobile so search modal is clean and focused
+    const sidebar = document.getElementById("starlight__sidebar");
+    if (sidebar && typeof (sidebar as any).hidePopover === "function") {
+      try {
+        if ((sidebar as any).matches(":popover-open")) {
+          (sidebar as any).hidePopover();
+        }
+      } catch {}
     }
+
+    setTimeout(() => {
+      const starlightOpenBtn = document.querySelector(
+        "site-search button[data-open-modal]",
+      ) as HTMLButtonElement | null;
+      if (starlightOpenBtn) {
+        starlightOpenBtn.disabled = false;
+        starlightOpenBtn.click();
+      } else {
+        const dialog = document.querySelector(
+          "site-search dialog",
+        ) as HTMLDialogElement | null;
+        if (dialog && !dialog.open) {
+          dialog.showModal();
+          document.body.toggleAttribute("data-search-modal-open", true);
+        }
+      }
+
+      setTimeout(() => {
+        const input = document.querySelector(
+          "#starlight__search input",
+        ) as HTMLInputElement | null;
+        if (input) {
+          input.focus();
+        }
+      }, 50);
+    }, 15);
   }
 
+  // Expose globally for mobile sidebar search button
+  (window as any).openMfcSearchModal = openSearchModal;
+
   const searchTrigger = document.getElementById("mfcSearchTrigger");
-  const mobileSearchTrigger = document.getElementById("mfcMobileSearchTrigger");
 
   searchTrigger?.addEventListener("click", (e) => {
-    openSearchModal(e);
-  });
-  mobileSearchTrigger?.addEventListener("click", (e) => {
-    const mobileDrawer = document.getElementById("mfcMobileDrawer");
-    mobileDrawer?.classList.remove("is-open");
     openSearchModal(e);
   });
 
@@ -511,23 +474,16 @@ import Search from "@astrojs/starlight/components/Search.astro";
   });
 
   // ---------------------------------------------------------------------------
-  // 4. Mobile Drawer Toggle
+  // 4. Mobile Hamburger Button Sync with Starlight Sidebar Popover
   // ---------------------------------------------------------------------------
-  const toggleBtn = document.getElementById("mfcMobileToggle");
-  const drawer = document.getElementById("mfcMobileDrawer");
+  const hamburger = document.getElementById("mfcHeaderHamburger");
+  const sidebar = document.getElementById("starlight__sidebar");
 
-  if (toggleBtn && drawer) {
-    toggleBtn.addEventListener("click", () => {
-      const isOpen = drawer.classList.toggle("is-open");
-      toggleBtn.setAttribute("aria-expanded", String(isOpen));
-      const iconMenu = toggleBtn.querySelector(".mfc-icon-menu") as HTMLElement;
-      const iconClose = toggleBtn.querySelector(
-        ".mfc-icon-close",
-      ) as HTMLElement;
-      if (iconMenu && iconClose) {
-        iconMenu.style.display = isOpen ? "none" : "block";
-        iconClose.style.display = isOpen ? "block" : "none";
-      }
+  if (hamburger && sidebar) {
+    sidebar.addEventListener("toggle", (e: any) => {
+      const isOpen = e.newState === "open";
+      hamburger.classList.toggle("is-active", isOpen);
+      hamburger.setAttribute("aria-expanded", String(isOpen));
     });
   }
 </script>
@@ -564,6 +520,64 @@ import Search from "@astrojs/starlight/components/Search.astro";
     padding: 0 1.25rem;
     gap: 1rem;
     box-sizing: border-box;
+  }
+
+  /* --------------------------------------------------------------------------
+     Header Left Container & Mobile Hamburger Button
+     -------------------------------------------------------------------------- */
+  .mfc-header-left {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    flex-shrink: 0;
+  }
+
+  .mfc-header-hamburger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 7px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    color: #334155;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .mfc-header-hamburger:hover {
+    background-color: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #0f172a;
+  }
+
+  :root[data-theme="dark"] .mfc-header-hamburger {
+    background-color: #111827;
+    border-color: #263244;
+    color: #a1adbd;
+  }
+
+  :root[data-theme="dark"] .mfc-header-hamburger:hover {
+    background-color: #171e2b;
+    border-color: #0b75ff;
+    color: #f8fafc;
+  }
+
+  .mfc-header-hamburger .close-icon {
+    display: none;
+  }
+
+  .mfc-header-hamburger.is-active .open-icon,
+  :root:has(#starlight__sidebar:popover-open) .mfc-header-hamburger .open-icon {
+    display: none;
+  }
+
+  .mfc-header-hamburger.is-active .close-icon,
+  :root:has(#starlight__sidebar:popover-open) .mfc-header-hamburger .close-icon {
+    display: block;
   }
 
   /* --------------------------------------------------------------------------
@@ -729,6 +743,14 @@ import Search from "@astrojs/starlight/components/Search.astro";
     position: absolute;
     width: 0;
     height: 0;
+    top: 0;
+    left: 0;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  .mfc-starlight-search-wrapper :global(dialog) {
+    pointer-events: auto !important;
   }
 
   .mfc-starlight-search-wrapper :global(site-search > button[data-open-modal]) {
@@ -982,125 +1004,82 @@ import Search from "@astrojs/starlight/components/Search.astro";
   }
 
   /* --------------------------------------------------------------------------
-     Mobile & Responsive Elements
+     Mobile & Responsive Header Adaptations
      -------------------------------------------------------------------------- */
-  .mfc-sidebar-toggle {
-    display: none;
-    align-items: center;
-    gap: 0.35rem;
-    background: #f1f5f9;
-    color: #334155;
-    border: 1px solid #cbd5e1;
-    border-radius: 0.375rem;
-    padding: 0.4rem 0.65rem;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
   @media (max-width: 799px) {
-    .mfc-sidebar-toggle {
+    .mfc-header-hamburger {
       display: inline-flex;
     }
-  }
 
-  .mfc-mobile-toggle {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: 1px solid #e2e8f0;
-    border-radius: 0.375rem;
-    padding: 0.45rem;
-    color: #475569;
-    cursor: pointer;
-  }
-
-  @media (max-width: 960px) {
-    .mfc-mobile-toggle {
-      display: flex;
-    }
-
+    .mfc-header-search,
     .mfc-language-dropdown,
-    .mfc-theme-btn,
+    .mfc-theme-btn {
+      display: none !important;
+    }
+
+    .mfc-actions {
+      gap: 0.65rem;
+    }
+
     .mfc-signin-link {
-      display: none;
+      display: inline-block !important;
+      font-size: 0.8125rem;
+      padding: 0.35rem 0.35rem;
+    }
+
+    .mfc-create-btn {
+      font-size: 0.775rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
     }
   }
 
-  @media (max-width: 600px) {
-    .mfc-header-search {
-      display: none;
+  @media (max-width: 520px) {
+    .mfc-header-inner {
+      padding: 0 0.75rem;
+      gap: 0.45rem;
+    }
+
+    .mfc-header-left {
+      gap: 0.45rem;
+    }
+
+    .mfc-brand {
+      gap: 0.45rem;
+    }
+
+    .mfc-brand-name {
+      font-size: 0.95rem;
+    }
+
+    .mfc-docs-badge {
+      font-size: 0.625rem;
+      padding: 0.1rem 0.35rem;
+    }
+
+    .mfc-actions {
+      gap: 0.4rem;
+    }
+
+    .mfc-signin-link {
+      font-size: 0.76rem;
+      padding: 0.25rem 0.2rem;
+    }
+
+    .mfc-create-btn {
+      font-size: 0.73rem;
+      padding: 0.35rem 0.6rem;
+      border-radius: 5px;
     }
   }
 
-  /* Mobile Drawer */
-  .mfc-mobile-drawer {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: #ffffff;
-    border-bottom: 1px solid #e2e8f0;
-    padding: 1.25rem 1.5rem 1.75rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
-    flex-direction: column;
-    gap: 0.875rem;
-    z-index: 999;
-  }
+  @media (max-width: 370px) {
+    .mfc-header-inner {
+      padding: 0 0.5rem;
+    }
 
-  .mfc-mobile-drawer.is-open {
-    display: flex;
-  }
-
-  :root[data-theme="dark"] .mfc-mobile-drawer {
-    background: #080b12;
-    border-bottom-color: #263244;
-  }
-
-  .mfc-mobile-search-row {
-    width: 100%;
-  }
-
-  .mfc-mobile-search-trigger {
-    width: 100%;
-  }
-
-  .mfc-mobile-controls-row {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.8125rem;
-    color: #64748b;
-    padding: 0.25rem 0;
-  }
-
-  .mfc-mobile-link {
-    font-size: 0.925rem;
-    font-weight: 500;
-    color: #334155;
-    text-decoration: none;
-    padding: 0.4rem 0;
-  }
-
-  :root[data-theme="dark"] .mfc-mobile-link {
-    color: #cbd5e1;
-  }
-
-  .mfc-mobile-divider {
-    height: 1px;
-    background: #e2e8f0;
-    margin: 0.25rem 0;
-  }
-
-  :root[data-theme="dark"] .mfc-mobile-divider {
-    background: #263244;
-  }
-
-  .mfc-mobile-cta {
-    text-align: center;
-    padding: 0.75rem 1.25rem;
-    margin-top: 0.35rem;
-    font-size: 0.925rem;
+    .mfc-brand-name {
+      display: none;
+    }
   }
 </style>

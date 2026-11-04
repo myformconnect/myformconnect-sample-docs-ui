@@ -419,6 +419,48 @@ const Tag = isLink ? 'a' : 'div';
   }
 
   /* --------------------------------------------------------------------------
+     Responsive Breakpoints
+     -------------------------------------------------------------------------- */
+  @media (max-width: 640px) {
+    .mfc-card {
+      aspect-ratio: auto;
+      min-height: 135px;
+      padding: 0.85rem 0.75rem 0.75rem;
+    }
+
+    .mfc-card-title {
+      font-size: 0.825rem;
+    }
+
+    .mfc-card-desc {
+      font-size: 0.72rem;
+      line-height: 1.35;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+    }
+
+    .mfc-card-btn {
+      font-size: 0.7rem;
+      padding: 0.15rem 0.45rem;
+    }
+  }
+
+  @media (max-width: 440px) {
+    .mfc-card {
+      padding: 0.75rem 0.65rem 0.65rem;
+      min-height: 125px;
+    }
+
+    .mfc-card-title {
+      font-size: 0.78rem;
+    }
+
+    .mfc-card-desc {
+      font-size: 0.68rem;
+    }
+  }
+
+  /* --------------------------------------------------------------------------
      Dark Theme Styles
      -------------------------------------------------------------------------- */
   :root[data-theme="dark"] .mfc-card {
