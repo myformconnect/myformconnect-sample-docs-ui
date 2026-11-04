@@ -489,9 +489,7 @@ import Search from "@astrojs/starlight/components/Search.astro";
 </script>
 
 <style>
-  /* ==========================================================================
-     Header Container & Layout
-     ========================================================================== */
+  /* Header container */
   .mfc-header-container {
     width: 100%;
     height: 100%;
@@ -522,9 +520,7 @@ import Search from "@astrojs/starlight/components/Search.astro";
     box-sizing: border-box;
   }
 
-  /* --------------------------------------------------------------------------
-     Header Left Container & Mobile Hamburger Button
-     -------------------------------------------------------------------------- */
+  /* Left brand & mobile hamburger */
   .mfc-header-left {
     display: flex;
     align-items: center;
@@ -580,9 +576,7 @@ import Search from "@astrojs/starlight/components/Search.astro";
     display: block;
   }
 
-  /* --------------------------------------------------------------------------
-     Brand Logo
-     -------------------------------------------------------------------------- */
+  /* Brand */
   .mfc-brand {
     display: flex;
     align-items: center;
@@ -643,9 +637,7 @@ import Search from "@astrojs/starlight/components/Search.astro";
     border-color: rgba(37, 99, 235, 0.35);
   }
 
-  /* --------------------------------------------------------------------------
-     Center Search Bar
-     -------------------------------------------------------------------------- */
+  /* Center search bar */
   .mfc-header-search {
     flex: 1;
     max-width: 580px;
@@ -738,7 +730,7 @@ import Search from "@astrojs/starlight/components/Search.astro";
     color: #a1adbd;
   }
 
-  /* Starlight Search wrapper: visually hides only the default trigger button so modal dialog stays intact */
+  /* Hidden Starlight search trigger (keeps search dialog mounted) */
   .mfc-starlight-search-wrapper {
     position: absolute;
     width: 0;
@@ -757,9 +749,7 @@ import Search from "@astrojs/starlight/components/Search.astro";
     display: none !important;
   }
 
-  /* --------------------------------------------------------------------------
-     Right Actions: Language, Theme, Sign in, Create account
-     -------------------------------------------------------------------------- */
+  /* Right actions */
   .mfc-actions {
     display: flex;
     align-items: center;
@@ -914,9 +904,7 @@ import Search from "@astrojs/starlight/components/Search.astro";
     color: #0b75ff;
   }
 
-  /* --------------------------------------------------------------------------
-     Theme Toggle Button
-     -------------------------------------------------------------------------- */
+  /* Theme toggle */
   .mfc-theme-btn {
     display: inline-flex;
     align-items: center;
@@ -948,9 +936,7 @@ import Search from "@astrojs/starlight/components/Search.astro";
     color: #ffffff;
   }
 
-  /* --------------------------------------------------------------------------
-     Sign In & Create Account
-     -------------------------------------------------------------------------- */
+  /* Sign in & create account buttons */
   .mfc-signin-link {
     display: none;
     font-size: 0.845rem;
@@ -1003,9 +989,7 @@ import Search from "@astrojs/starlight/components/Search.astro";
     box-shadow: 0 3px 8px rgba(37, 99, 235, 0.3);
   }
 
-  /* --------------------------------------------------------------------------
-     Mobile & Responsive Header Adaptations
-     -------------------------------------------------------------------------- */
+  /* Responsive header */
   @media (max-width: 799px) {
     .mfc-header-hamburger {
       display: inline-flex;

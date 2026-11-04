@@ -1,0 +1,109 @@
+/*
+  tokens.css
+  Global design tokens, web fonts, and default light-mode theme variables.
+  Overrides Starlight's default color palette to match MyFormConnect branding.
+*/
+
+/* Web fonts: Inter for UI & JetBrains Mono for code */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+
+/* Font family stacks */
+:root {
+  --mfc-font-sans: 'Inter var', 'Inter', ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --mfc-font-mono: 'JetBrains Mono', monospace;
+}
+
+:root {
+  /* Brand colors (primary blue & navy text) */
+  --mfc-primary: #2563eb;
+  --mfc-primary-hover: #1d4ed8;
+  --mfc-primary-light: #eff6ff;
+  --mfc-primary-border: #bfdbfe;
+
+  --mfc-navy-dark: #0f172a;
+  --mfc-navy-text: #172554;
+  --mfc-body-text: #334155;
+  --mfc-muted-text: #64748b;
+
+  /* Light mode backgrounds & borders */
+  --mfc-bg-white: #ffffff;
+  --mfc-bg-light: #f8fafc;
+  --mfc-bg-alt: #f1f5f9;
+
+  --mfc-border-subtle: #e2e8f0;
+  --mfc-border-medium: #cbd5e1;
+
+  /* Card radius & shadow presets */
+  --mfc-radius-sm: 0.375rem;
+  --mfc-radius-md: 0.625rem;
+  --mfc-radius-lg: 0.75rem;
+
+  --mfc-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --mfc-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+  --mfc-shadow-card: 0 1px 3px rgba(15, 23, 42, 0.05), 0 1px 2px rgba(15, 23, 42, 0.03);
+  --mfc-shadow-hover: 0 10px 25px -5px rgba(37, 99, 235, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+
+  /* Starlight core theme variable overrides */
+  --sl-color-accent-low: #eff6ff;
+  --sl-color-accent: #2563eb;
+  --sl-color-accent-high: #1d4ed8;
+  --sl-color-white: #0f172a;
+  --sl-color-gray-1: #1e293b;
+  --sl-color-gray-2: #334155;
+  --sl-color-gray-3: #64748b;
+  --sl-color-gray-4: #94a3b8;
+  --sl-color-gray-5: #cbd5e1;
+  --sl-color-gray-6: #e2e8f0;
+  --sl-color-black: #ffffff;
+
+  --sl-color-bg: #ffffff;
+  --sl-color-bg-nav: #ffffff;
+  --sl-color-bg-sidebar: #f1f5f9;
+  --sl-color-hairline: #e2e8f0;
+  --sl-color-hairline-shade: #e2e8f0;
+  --sl-color-hairline-light: #f1f5f9;
+
+  /* Layout dimensions */
+  --sl-nav-height: 4rem;
+  --sl-content-width: 56rem;
+  --sl-sidebar-width: 17.5rem;
+
+  /* Font size scale */
+  --sl-text-2xs: 0.7rem;
+  --sl-text-xs: 0.775rem;
+  --sl-text-sm: 0.825rem;
+  --sl-text-base: 0.925rem;
+  --sl-text-body: 0.925rem;
+  --sl-text-body-sm: 0.825rem;
+}
+
+/* Base body styling & font smoothing */
+body {
+  font-family: var(--mfc-font-sans);
+  color: var(--mfc-body-text);
+  background-color: var(--mfc-bg-white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}
+
+/* Force Starlight components to use our Inter and JetBrains Mono stack */
+:root {
+  --sl-font: var(--mfc-font-sans) !important;
+  --sl-font-mono: var(--mfc-font-mono) !important;
+}
+
+/* Inline code tags in markdown (e.g. `backtick code`) */
+.sl-markdown-content code:not(pre code) {
+  font-family: var(--mfc-font-mono) !important;
+  font-size: 0.85em;
+  background: #f1f5f9;
+  color: #0969da;
+  padding: 0.2em 0.45em;
+  border-radius: 0.375rem;
+  border: 1px solid #d0d7de;
+  font-weight: 500;
+  word-break: break-word;
+}

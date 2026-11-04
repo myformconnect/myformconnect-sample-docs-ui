@@ -1,0 +1,200 @@
+/*
+  docs.css
+  Documentation page styling: right "On this page" sidebar (Table of Contents),
+  active heading highlights on scroll, and markdown article typography.
+*/
+
+/* Two-column layout on wide screens: main content on left, TOC on right */
+@media (min-width: 60rem) {
+  html[data-has-toc] .lg\:sl-flex {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    position: relative !important;
+  }
+
+  html[data-has-toc] .right-sidebar-container {
+    display: block !important;
+    order: 2 !important;
+    width: 16rem !important;
+    min-width: 16rem !important;
+    flex-shrink: 0 !important;
+    position: relative !important;
+  }
+
+  html[data-has-toc] .right-sidebar {
+    display: block !important;
+    position: fixed !important;
+    top: var(--sl-nav-height) !important;
+    right: 0 !important;
+    width: 16rem !important;
+    height: calc(100vh - var(--sl-nav-height)) !important;
+    padding: 2rem 1.25rem 2.5rem 1.5rem !important;
+    border-inline-start: 1px solid var(--mfc-border-subtle) !important;
+    background: #ffffff !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+    z-index: 10 !important;
+  }
+
+  html[data-has-toc] .right-sidebar-panel {
+    display: block !important;
+    padding: 0 !important;
+  }
+
+  html[data-has-toc] .right-sidebar-panel .sl-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Main content beside right sidebar */
+  html[data-has-toc] .main-pane {
+    order: 1 !important;
+    flex: 1 1 auto !important;
+    width: calc(100% - 16rem) !important;
+    max-width: calc(100% - 16rem) !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  html[data-has-toc] .main-pane .content-panel:first-of-type {
+    padding: 2.25rem 2.5rem 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  html[data-has-toc] .main-pane .content-panel+.content-panel {
+    border-top: none !important;
+    padding: 0 2.5rem 3.5rem !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  html[data-has-toc] .main-pane .sl-container {
+    max-width: 50rem !important;
+    margin-inline: 0 auto !important;
+    width: 100% !important;
+  }
+}
+
+/* "On this page" TOC heading and link list */
+.right-sidebar-panel h2#starlight__on-this-page {
+  font-size: 0.775rem !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em !important;
+  color: #64748b !important;
+  margin: 0 0 0.85rem 0 !important;
+  padding: 0 !important;
+  border-bottom: none !important;
+}
+
+.right-sidebar-panel ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.2rem !important;
+  border-inline-start: 1.5px solid #e2e8f0 !important;
+}
+
+.right-sidebar-panel li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.right-sidebar-panel a {
+  display: block !important;
+  font-size: 0.825rem !important;
+  line-height: 1.45 !important;
+  color: #64748b !important;
+  text-decoration: none !important;
+  padding: 0.35rem 0.75rem !important;
+  border-inline-start: 2px solid transparent !important;
+  margin-inline-start: -1.5px !important;
+  transition: all 0.15s ease !important;
+  border-radius: 0 0.375rem 0.375rem 0 !important;
+}
+
+.right-sidebar-panel a:hover {
+  color: #0f172a !important;
+  background-color: #f8fafc !important;
+}
+
+/* Active heading highlight (blue border and tint on current scroll section) */
+.right-sidebar-panel a[aria-current="true"] {
+  color: #2563eb !important;
+  font-weight: 600 !important;
+  border-inline-start: 2px solid #2563eb !important;
+  background-color: #eff6ff !important;
+}
+
+.right-sidebar-panel a[aria-current="true"] span {
+  color: #2563eb !important;
+}
+
+/* Markdown typography (headings, paragraphs, lists) */
+.sl-markdown-content {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--mfc-body-text);
+  width: 100%;
+}
+
+.sl-markdown-content h1 {
+  font-size: clamp(1.6rem, 1.5rem + 0.35vw, 1.85rem);
+  font-weight: 700;
+  color: var(--mfc-navy-dark);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+.sl-markdown-content h2:not(.mfc-section-title):not([class*='mfc-']) {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: var(--mfc-navy-dark);
+  letter-spacing: -0.015em;
+  margin-top: 2rem;
+  margin-bottom: 0.65rem;
+  border-bottom: 1px solid var(--mfc-border-subtle);
+  padding-bottom: 0.4rem;
+}
+
+.sl-markdown-content h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--mfc-navy-dark);
+  letter-spacing: -0.01em;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.sl-markdown-content h4 {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--mfc-navy-dark);
+  margin-top: 1.25rem;
+  margin-bottom: 0.45rem;
+}
+
+.sl-markdown-content p {
+  margin-bottom: 1.25rem;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.sl-markdown-content ul,
+.sl-markdown-content ol {
+  font-size: inherit;
+  line-height: 1.75;
+  margin-bottom: 1.25rem;
+}
+
+.sl-markdown-content li {
+  margin-bottom: 0.4rem;
+}

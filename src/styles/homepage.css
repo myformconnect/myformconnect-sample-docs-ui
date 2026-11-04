@@ -1,0 +1,390 @@
+/*
+  homepage.css
+  Landing page section layouts: light-theme hero gradient, section wrappers,
+  feature grids, and category links.
+*/
+
+/* Hero section with light blue gradient background */
+.mfc-hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3.5rem 1.5rem 2.5rem;
+  background:
+    radial-gradient(ellipse 65% 75% at 84% 18%, rgba(180, 215, 255, 0.88) 0%, rgba(204, 228, 255, 0.55) 35%, rgba(224, 242, 254, 0.2) 60%, transparent 80%),
+    radial-gradient(ellipse 45% 55% at 16% 12%, rgba(224, 242, 254, 0.45) 0%, rgba(239, 246, 255, 0.18) 45%, transparent 70%),
+    linear-gradient(180deg, #f2f7ff 0%, #f9fbff 40%, #ffffff 100%);
+  border: none;
+  border-radius: 0;
+  margin: 0 0 2rem 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Pill badge above hero title */
+.mfc-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.725rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #2563eb;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 0.24rem 0.85rem;
+  border-radius: 9999px;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 1px 2px rgba(37, 99, 235, 0.05);
+}
+
+/* Hero heading & description */
+.mfc-hero-title {
+  font-size: clamp(1.85rem, 1.65rem + 1vw, 2.3rem);
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.035em;
+  line-height: 1.18;
+  max-width: 44rem;
+  margin: 0 auto 0.45rem auto;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .mfc-hero-section {
+    padding: 2rem 1.25rem 1.5rem;
+  }
+  .mfc-hero-title {
+    font-size: 1.55rem;
+  }
+}
+
+.mfc-hero-desc {
+  font-size: clamp(0.9rem, 0.88rem + 0.1vw, 0.975rem);
+  color: #475569;
+  max-width: 38rem;
+  margin: 0 auto !important;
+  padding: 0;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* Reset default markdown margins inside hero */
+.mfc-hero-section p {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* Reusable section container wrappers */
+.mfc-section {
+  margin: 2.25rem 0;
+  width: 100%;
+}
+
+.mfc-section-header {
+  margin-bottom: 1.15rem;
+}
+
+.mfc-section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.35rem;
+}
+
+.mfc-section-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 0.4rem;
+  background: #eff6ff;
+  color: #2563eb;
+  border: 1px solid #dbeafe;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mfc-section-icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.mfc-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--mfc-navy-dark);
+  letter-spacing: -0.02em;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.mfc-section-subtitle {
+  font-size: 0.85rem;
+  color: var(--mfc-muted-text);
+  margin: 0 0 0 calc(1.75rem + 0.65rem);
+  line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+  .mfc-section-subtitle {
+    margin-left: 0;
+    margin-top: 0.25rem;
+  }
+}
+
+.sl-markdown-content .mfc-section-title-wrap h2 {
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  color: var(--mfc-navy-dark) !important;
+  letter-spacing: -0.02em !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-bottom: none !important;
+  line-height: 1.75rem !important;
+}
+
+/* Getting Started 3-card horizontal grid */
+.mfc-grid-getting-started {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+}
+
+@media (max-width: 960px) {
+  .mfc-grid-getting-started {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .mfc-grid-getting-started {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Reset margins inside grid cards to prevent uneven vertical alignment */
+.mfc-grid-getting-started>*,
+.mfc-grid-4>*,
+.mfc-grid-3>*,
+.mfc-grid-compact>*,
+.mfc-card,
+.sl-markdown-content .mfc-card,
+.sl-markdown-content .mfc-grid-getting-started>*,
+.sl-markdown-content .mfc-grid-4>*,
+.sl-markdown-content .mfc-grid-3>*,
+.sl-markdown-content .mfc-grid-compact>* {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* 4-column card grid (Getting Started, Website Builders) */
+.mfc-grid-4 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+@media (min-width: 580px) {
+  .mfc-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 980px) {
+  .mfc-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* 3-column card grid (Features, CMS, Frameworks) */
+.mfc-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+@media (min-width: 600px) {
+  .mfc-grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .mfc-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Compact grid for tools, deployment and AI */
+.mfc-grid-compact {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+}
+
+@media (min-width: 540px) {
+  .mfc-grid-compact {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 860px) {
+  .mfc-grid-compact {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* AI & No-backend feature highlight box */
+.mfc-ai-section-box {
+  background: linear-gradient(180deg, #f0f7ff 0%, #fbfdff 100%);
+  border: 1px solid #bfdbfe;
+  border-radius: 0.875rem;
+  padding: 1.75rem 1.5rem;
+  margin: 3rem 0;
+  box-shadow: 0 4px 20px -2px rgba(37, 99, 235, 0.05);
+}
+
+.mfc-ai-section-box .mfc-section-header {
+  margin-bottom: 1.25rem;
+}
+
+/* Toast message shown when clicking preview cards */
+.mfc-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #0f172a;
+  color: #ffffff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: 0 12px 28px -4px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+}
+
+.mfc-toast.is-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.mfc-toast-icon {
+  display: flex;
+  align-items: center;
+  color: #60a5fa;
+}
+
+/* Featured integration preview card */
+.mfc-preview-box {
+  background: #f8fafc;
+  border: 1px solid var(--mfc-border-subtle);
+  border-radius: var(--mfc-radius-md);
+  padding: 1.15rem;
+  margin-top: 0.875rem;
+}
+
+.mfc-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.875rem;
+}
+
+.mfc-preview-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: #166534;
+  background: #dcfce7;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  border: 1px solid #bbf7d0;
+}
+
+.mfc-preview-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #16a34a;
+}
+
+/* Categories grid */
+.mfc-categories-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 600px) {
+  .mfc-categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 960px) {
+  .mfc-categories-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.mfc-category-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.95rem;
+  background: var(--mfc-bg-white);
+  border: 1px solid var(--mfc-border-subtle);
+  border-radius: var(--mfc-radius-md);
+  text-decoration: none;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mfc-category-item:hover {
+  border-color: #93c5fd;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.06);
+  transform: translateY(-1px);
+}
+
+.mfc-category-icon {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.4rem;
+  background: var(--mfc-primary-light);
+  color: var(--mfc-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mfc-category-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.mfc-category-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--mfc-navy-dark);
+  margin: 0 0 0.15rem 0;
+}
+
+.mfc-category-desc {
+  font-size: 0.775rem;
+  color: var(--mfc-muted-text);
+  margin: 0;
+  line-height: 1.4;
+}

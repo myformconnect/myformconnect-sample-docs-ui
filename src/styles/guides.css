@@ -1,0 +1,178 @@
+/*
+  guides.css
+  Components specific to documentation guides (HTML Form, React SDK, etc.):
+  back link buttons, callout boxes, file trees, step badges, and image figures.
+*/
+
+/* "Back to documentation" pill link */
+.mfc-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--mfc-muted-text);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--mfc-radius-sm);
+  background: var(--mfc-bg-light);
+  border: 1px solid var(--mfc-border-subtle);
+  transition: all 0.15s ease;
+}
+
+.mfc-back-link:hover {
+  color: var(--mfc-primary);
+  border-color: var(--mfc-primary-border);
+  background: var(--mfc-primary-light);
+}
+
+/* Callout / note / warning message boxes */
+.mfc-callout {
+  display: flex;
+  gap: 0.875rem;
+  padding: 1rem 1.25rem;
+  border-radius: var(--mfc-radius-md);
+  margin: 1.5rem 0;
+  border: 1px solid;
+  font-size: clamp(0.975rem, 0.95rem + 0.12vw, 1.025rem);
+  line-height: 1.65;
+}
+
+.mfc-callout-info {
+  background-color: #f0f7ff;
+  border-color: #bfdbfe;
+  color: #1e40af;
+}
+
+.mfc-callout-warning {
+  background-color: #fffbeb;
+  border-color: #fde68a;
+  color: #92400e;
+}
+
+.mfc-callout-icon {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.mfc-callout-body strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  font-size: 1.05rem;
+}
+
+/* Dark visual file tree container */
+.mfc-file-tree {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: var(--mfc-radius-md);
+  padding: 1.125rem 1.35rem;
+  font-family: var(--mfc-font-mono);
+  font-size: clamp(0.875rem, 0.85rem + 0.12vw, 0.925rem);
+  line-height: 1.65;
+  margin: 1.5rem 0;
+  border: 1px solid #1e293b;
+}
+
+.mfc-file-tree-header {
+  font-size: 0.775rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid #334155;
+}
+
+/* Numbered step badges for step-by-step tutorials */
+.mfc-step-item {
+  display: flex;
+  gap: 1.125rem;
+  margin-bottom: 1.75rem;
+}
+
+.mfc-step-num {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--mfc-primary);
+  color: #ffffff;
+  font-size: 0.925rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.mfc-step-content {
+  flex: 1;
+}
+
+.mfc-step-title {
+  font-size: clamp(1.1rem, 1.05rem + 0.2vw, 1.25rem);
+  font-weight: 700;
+  color: var(--mfc-navy-dark);
+  margin: 0 0 0.35rem 0;
+}
+
+.mfc-step-content p {
+  font-size: clamp(0.975rem, 0.95rem + 0.12vw, 1.025rem);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Documentation screenshots & figures with captions */
+.mfc-doc-figure {
+  margin: 1.75rem 0;
+  border: 1px solid var(--mfc-border-subtle);
+  border-radius: var(--mfc-radius-lg);
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+}
+
+.mfc-doc-figure img,
+.mfc-doc-figure svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.mfc-doc-figure.is-centered {
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mfc-doc-caption {
+  padding: 0.65rem 1rem;
+  font-size: 0.825rem;
+  font-weight: 500;
+  color: var(--mfc-muted-text);
+  background: #f8fafc;
+  border-top: 1px solid var(--mfc-border-subtle);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mfc-doc-caption svg {
+  width: 14px;
+  height: 14px;
+  color: var(--mfc-primary);
+  flex-shrink: 0;
+}
+
+/* Hide previous/next doc pagination buttons at page bottom */
+.pagination-links,
+footer .pagination-links,
+[class*='pagination-links'] {
+  display: none !important;
+}

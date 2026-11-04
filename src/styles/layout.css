@@ -1,0 +1,267 @@
+/*
+  layout.css
+  Starlight outer shell layout: header height, sidebar width, mobile drawer,
+  desktop sidebar collapse/expand toggle, and main content panel framing.
+*/
+
+/* Fixed header bar at top */
+header.header {
+  height: var(--sl-nav-height) !important;
+  background-color: #ffffff !important;
+  border-bottom: 1px solid var(--mfc-border-subtle) !important;
+  padding: 0 !important;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+}
+
+/* Hide Starlight's default hamburger (we built a custom one in Header.astro) */
+.sl-menu-button {
+  display: none !important;
+}
+
+[data-has-sidebar] .header,
+header.header {
+  padding-inline-end: 0 !important;
+}
+
+/* Sidebar rail styling */
+.sidebar-pane {
+  background-color: #f1f5f9 !important;
+  border-inline-end: 1px solid #e2e8f0 !important;
+}
+
+:root[data-theme='dark'] .sidebar-pane {
+  background-color: #0d111b !important;
+  border-inline-end-color: #263244 !important;
+}
+
+.sidebar-content {
+  padding: 0 !important;
+  gap: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 100% !important;
+}
+
+/* Mobile sidebar drawer (slide-out menu on screens < 800px) */
+@media (max-width: 799px) {
+  .sidebar-pane {
+    top: var(--sl-nav-height) !important;
+    height: calc(100vh - var(--sl-nav-height)) !important;
+    max-height: calc(100dvh - var(--sl-nav-height)) !important;
+    background-color: #f1f5f9 !important;
+    padding: 0 !important;
+    border-inline-end: none !important;
+  }
+
+  :root[data-theme='dark'] .sidebar-pane {
+    background-color: #0d111b !important;
+  }
+
+  .sidebar-content {
+    height: 100% !important;
+    min-height: 100% !important;
+    padding: 0 !important;
+  }
+}
+
+/* Desktop sidebar collapse state (shrinks sidebar to 3.75rem rail on screens >= 800px) */
+@media (min-width: 800px) {
+  html[data-sidebar-collapsed="true"] {
+    --sl-sidebar-width: 3.75rem !important;
+  }
+
+  html[data-sidebar-collapsed="true"] .sidebar-pane {
+    width: 3.75rem !important;
+    overflow-x: hidden !important;
+  }
+
+  html[data-sidebar-collapsed="true"] [data-has-sidebar] .main-frame {
+    padding-inline-start: 3.75rem !important;
+  }
+
+  /* Prevent landing cards from expanding into tall empty squares when sidebar collapses */
+  html[data-sidebar-collapsed="true"] .mfc-building-card,
+  html[data-sidebar-collapsed="true"] .mfc-explore-card {
+    aspect-ratio: auto !important;
+    min-height: 165px !important;
+    max-height: 195px !important;
+  }
+
+  /* Smooth sliding animation when collapsing or expanding sidebar */
+  .sidebar-pane,
+  [data-has-sidebar] .main-frame {
+    transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+                padding-inline-start 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Reset mobile layout so desktop collapse rules never affect mobile drawer */
+@media (max-width: 799px) {
+  html[data-sidebar-collapsed="true"] .sidebar-pane {
+    width: 100% !important;
+  }
+  html[data-sidebar-collapsed="true"] [data-has-sidebar] .main-frame {
+    padding-inline-start: 0 !important;
+  }
+}
+
+/* Main content frame background */
+.main-frame {
+  background-color: #ffffff;
+}
+
+/* Full-width container adjustments for pages without right TOC */
+html:not([data-has-toc]) .main-pane {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100% !important;
+}
+
+html:not([data-has-toc]):not(:has(.mfc-hero-section)):not(:has(.mfc-home-hero)) .sl-container {
+  max-width: var(--sl-content-width, 56rem) !important;
+  margin-inline: auto !important;
+  width: 100% !important;
+}
+
+/* Homepage layout overrides: makes hero stretch edge-to-edge flush with header */
+body:has(.mfc-hero-section) .main-pane,
+body:has(.mfc-home-hero) .main-pane,
+html body:has(.mfc-hero-section) .main-pane,
+html body:has(.mfc-home-hero) .main-pane {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body:has(.mfc-hero-section) main,
+body:has(.mfc-home-hero) main,
+html body:has(.mfc-hero-section) main,
+html body:has(.mfc-home-hero) main,
+main:has(.mfc-hero-section),
+main:has(.mfc-home-hero) {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Hide duplicate default page title container on the homepage */
+body:has(.mfc-hero-section) main>.content-panel:first-of-type,
+body:has(.mfc-home-hero) main>.content-panel:first-of-type,
+html body:has(.mfc-hero-section) main>.content-panel:first-of-type,
+html body:has(.mfc-home-hero) main>.content-panel:first-of-type,
+main:has(.mfc-hero-section)>.content-panel:first-of-type,
+main:has(.mfc-home-hero)>.content-panel:first-of-type {
+  display: none !important;
+}
+
+/* Reset padding on homepage main panel so hero has full bleed */
+body:has(.mfc-hero-section) main>.content-panel,
+body:has(.mfc-home-hero) main>.content-panel,
+html body:has(.mfc-hero-section) main>.content-panel,
+html body:has(.mfc-home-hero) main>.content-panel,
+main:has(.mfc-hero-section)>.content-panel,
+main:has(.mfc-home-hero)>.content-panel {
+  padding: 0 !important;
+  margin: 0 !important;
+  border-top: none !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+body:has(.mfc-hero-section) .sl-container,
+body:has(.mfc-home-hero) .sl-container,
+html body:has(.mfc-hero-section) .sl-container,
+html body:has(.mfc-home-hero) .sl-container,
+main:has(.mfc-hero-section) .sl-container,
+main:has(.mfc-home-hero) .sl-container {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+body:has(.mfc-hero-section) .sl-markdown-content,
+body:has(.mfc-home-hero) .sl-markdown-content,
+html body:has(.mfc-hero-section) .sl-markdown-content,
+html body:has(.mfc-home-hero) .sl-markdown-content,
+main:has(.mfc-hero-section) .sl-markdown-content,
+main:has(.mfc-home-hero) .sl-markdown-content {
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Keep content sections below the hero centered with max-width */
+body:has(.mfc-hero-section) .mfc-section,
+body:has(.mfc-hero-section) .mfc-support-banner,
+body:has(.mfc-home-hero) .mfc-section,
+body:has(.mfc-home-hero) .mfc-support-banner,
+html body:has(.mfc-hero-section) .mfc-section,
+html body:has(.mfc-hero-section) .mfc-support-banner,
+html body:has(.mfc-home-hero) .mfc-section,
+html body:has(.mfc-home-hero) .mfc-support-banner,
+main:has(.mfc-hero-section) .mfc-section,
+main:has(.mfc-hero-section) .mfc-support-banner,
+main:has(.mfc-home-hero) .mfc-section,
+main:has(.mfc-home-hero) .mfc-support-banner {
+  max-width: 86rem !important;
+  margin-inline: auto !important;
+  padding-inline: 2rem !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 1024px) {
+  body:has(.mfc-hero-section) .mfc-section,
+  body:has(.mfc-hero-section) .mfc-support-banner,
+  html body:has(.mfc-hero-section) .mfc-section,
+  html body:has(.mfc-hero-section) .mfc-support-banner,
+  main:has(.mfc-hero-section) .mfc-section,
+  main:has(.mfc-hero-section) .mfc-support-banner {
+    padding-inline: 3rem !important;
+  }
+}
+
+@media (max-width: 640px) {
+  body:has(.mfc-hero-section) .mfc-section,
+  body:has(.mfc-hero-section) .mfc-support-banner,
+  html body:has(.mfc-hero-section) .mfc-section,
+  html body:has(.mfc-hero-section) .mfc-support-banner,
+  main:has(.mfc-hero-section) .mfc-section,
+  main:has(.mfc-hero-section) .mfc-support-banner {
+    padding-inline: 1.25rem !important;
+  }
+}
+
+/* Regular padding for documentation guide pages */
+html:not(:has(.mfc-hero-section)) .content-panel {
+  padding: 2.25rem 2rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (min-width: 1024px) {
+  html:not(:has(.mfc-hero-section)) .content-panel {
+    padding: 2.5rem 3rem !important;
+  }
+
+  html body:has(.mfc-hero-section) main>.content-panel {
+    padding: 0 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  html:not(:has(.mfc-hero-section)) .content-panel {
+    padding: 1.5rem 1.25rem !important;
+  }
+
+  html body:has(.mfc-hero-section) main>.content-panel {
+    padding: 0 !important;
+  }
+}

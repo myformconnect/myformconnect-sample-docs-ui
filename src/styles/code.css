@@ -1,0 +1,103 @@
+/*
+  code.css
+  Styles for code snippets, Expressive Code frames, and markdown pre blocks.
+  Uses a dark developer theme even in light mode so code is always crisp and readable.
+*/
+
+/* Expressive Code color variables (dark background, border, and tab styles) */
+:root,
+:root:not([data-theme='dark']),
+:root[data-theme='light'] {
+  --ec-codeBg: #0d1117 !important;
+  --ec-codeFg: #e6edf3 !important;
+  --ec-codeSelBg: #264f78 !important;
+  --ec-brdCol: #30363d !important;
+  --ec-frm-edBg: #0d1117 !important;
+  --ec-frm-trmBg: #0d1117 !important;
+  --ec-frm-edTabBarBg: #161b22 !important;
+  --ec-frm-edActTabBg: #0d1117 !important;
+  --ec-frm-edActTabFg: #f0f6fc !important;
+  --ec-frm-edActTabBrdCol: #30363d !important;
+  --ec-frm-edTabBarBrdCol: #30363d !important;
+  --ec-frm-edTabBarBrdBtmCol: #30363d !important;
+  --ec-frm-trmTtbBg: #161b22 !important;
+  --ec-frm-trmTtbFg: #c9d1d9 !important;
+  --ec-frm-trmTtbBrdBtmCol: #30363d !important;
+  --ec-sbThumbCol: #30363d !important;
+  --ec-sbThumbHoverCol: #8b949e !important;
+}
+
+/* Base styling for code pre blocks */
+.expressive-code,
+.expressive-code .frame,
+.expressive-code pre,
+.sl-markdown-content pre {
+  background-color: #0d1117 !important;
+  color: #e6edf3 !important;
+  border-color: #30363d !important;
+  font-family: var(--mfc-font-mono) !important;
+}
+
+/* Frame wrapper with rounded corners and subtle shadow */
+.expressive-code figure.frame {
+  background-color: #0d1117 !important;
+  border: 1px solid #30363d !important;
+  border-radius: 0.625rem !important;
+  overflow: hidden !important;
+  margin: 1.5rem 0 !important;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08) !important;
+}
+
+/* Top file header & tab bar in code snippets */
+.expressive-code .frame .header,
+.expressive-code figcaption.header {
+  background-color: #161b22 !important;
+  border-bottom: 1px solid #30363d !important;
+  color: #8b949e !important;
+}
+
+/* Code block scrolling & padding */
+.expressive-code pre {
+  background-color: #0d1117 !important;
+  padding: 1rem 1.25rem !important;
+  max-height: 28rem !important;
+  overflow: auto !important;
+  scrollbar-width: thin;
+  scrollbar-color: #30363d #161b22;
+}
+
+/* Code text typography */
+.expressive-code pre>code {
+  background-color: transparent !important;
+  color: #e6edf3 !important;
+  font-family: var(--mfc-font-mono) !important;
+}
+
+.expressive-code .ec-line .code span {
+  color: var(--0, #e6edf3);
+}
+
+/* Custom slim scrollbars for code blocks */
+.sl-markdown-content pre::-webkit-scrollbar,
+.expressive-code pre::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.sl-markdown-content pre::-webkit-scrollbar-track,
+.expressive-code pre::-webkit-scrollbar-track {
+  background: #161b22;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+.sl-markdown-content pre::-webkit-scrollbar-thumb,
+.expressive-code pre::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 4px;
+  border: 2px solid #161b22;
+}
+
+.sl-markdown-content pre::-webkit-scrollbar-thumb:hover,
+.expressive-code pre::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}

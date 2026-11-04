@@ -43,7 +43,7 @@ function hasActiveChild(entry: any): boolean {
 </script>
 
 <div class="mfc-custom-sidebar">
-  <!-- Mobile Search Bar at Top of Drawer with Separator & Shadow (Only visible on mobile < 800px) -->
+  <!-- Mobile search bar -->
   <div class="mfc-sidebar-mobile-search-section">
     <button
       type="button"
@@ -74,7 +74,7 @@ function hasActiveChild(entry: any): boolean {
     </button>
   </div>
 
-  <!-- Desktop Sidebar Collapse/Expand Toggle Header (Only visible on desktop >= 800px) -->
+  <!-- Desktop sidebar toggle -->
   <div class="mfc-sidebar-desktop-header">
     <span class="mfc-sidebar-desktop-tag">MENU</span>
     <button
@@ -84,7 +84,7 @@ function hasActiveChild(entry: any): boolean {
       aria-label="Collapse sidebar"
       title="Collapse sidebar"
     >
-      <!-- Close/Collapse Icon (panel-left-close) -->
+      <!-- Collapse icon -->
       <svg
         class="mfc-collapse-icon is-close"
         width="18"
@@ -101,7 +101,7 @@ function hasActiveChild(entry: any): boolean {
         <path d="M9 3v18"></path>
         <path d="m16 15-3-3 3-3"></path>
       </svg>
-      <!-- Open/Expand Icon (panel-left-open) -->
+      <!-- Expand icon -->
       <svg
         class="mfc-collapse-icon is-open"
         width="18"
@@ -390,7 +390,7 @@ function hasActiveChild(entry: any): boolean {
     })}
   </nav>
 
-  {/* Always-visible "NEED HELP?" horizontal section at the end of sidebar menu */}
+  {/* Help section */}
   <div class="mfc-sidebar-help-section">
     <div class="mfc-help-heading">NEED HELP?</div>
     <a
@@ -408,7 +408,7 @@ function hasActiveChild(entry: any): boolean {
     </a>
   </div>
 
-  <!-- Mobile Drawer Preferences: Language & Theme (Only visible on mobile < 800px) -->
+  <!-- Mobile preferences (language & theme) -->
   <div class="mfc-sidebar-mobile-prefs">
     <div class="mfc-mobile-pref-heading">PREFERENCES</div>
 
@@ -525,11 +525,7 @@ function hasActiveChild(entry: any): boolean {
 </div>
 
 <style>
-  /* --------------------------------------------------------------------------
-     Sidebar Container & Navigation
-     Matches the reference image: light slate background, bold category headers,
-     subtle hover, and clean left active indicator.
-     -------------------------------------------------------------------------- */
+  /* Sidebar navigation */
   .mfc-custom-sidebar {
     width: 100%;
     min-height: 100%;
@@ -759,10 +755,7 @@ function hasActiveChild(entry: any): boolean {
     border-top-color: #263244;
   }
 
-  /* --------------------------------------------------------------------------
-     Always-Visible "NEED HELP?" Sticky Bottom Section
-     Small horizontal section at the end of the sidebar menu
-     -------------------------------------------------------------------------- */
+  /* Sticky help section */
   .mfc-sidebar-help-section {
     position: sticky;
     bottom: 0;
@@ -851,9 +844,7 @@ function hasActiveChild(entry: any): boolean {
     color: #f8fafc;
   }
 
-  /* --------------------------------------------------------------------------
-     Desktop Collapse/Expand Header (Only visible on desktop >= 800px)
-     -------------------------------------------------------------------------- */
+  /* Desktop header */
   .mfc-sidebar-desktop-header {
     display: none;
     align-items: center;
@@ -920,9 +911,7 @@ function hasActiveChild(entry: any): boolean {
     color: #f8fafc;
   }
 
-  /* --------------------------------------------------------------------------
-     Sidebar Collapsed State (Desktop)
-     -------------------------------------------------------------------------- */
+  /* Desktop collapsed state */
   :global(html[data-sidebar-collapsed="true"]) .mfc-custom-sidebar {
     padding: 0.85rem 0.25rem 0.85rem !important;
     align-items: center !important;
@@ -997,9 +986,7 @@ function hasActiveChild(entry: any): boolean {
     }
   }
 
-  /* --------------------------------------------------------------------------
-     Mobile Search Bar Section (Top of Drawer with Separator & Shadow)
-     -------------------------------------------------------------------------- */
+  /* Mobile search */
   .mfc-sidebar-mobile-search-section {
     display: none;
     position: sticky;
@@ -1107,9 +1094,7 @@ function hasActiveChild(entry: any): boolean {
     color: #a1adbd;
   }
 
-  /* --------------------------------------------------------------------------
-     Mobile Drawer Preferences: Language & Theme
-     -------------------------------------------------------------------------- */
+  /* Mobile drawer preferences */
   .mfc-sidebar-mobile-prefs {
     display: none;
     flex-direction: column;
